@@ -2,9 +2,13 @@
     font-family: myFirstFont;
     src: url(/media/font/Open_Sans_Condensed/OpenSansCondensed-Light.ttf);
 }
+@font-face {
+    font-family: Source Sans Pro;
+    src: url(/media/font/Source_Sans_Pro/SourceSansPro-Regular.ttf);
+}
 
 html * {
-    font-family: "Source Sans Pro",myFirstFont;
+    font-family: "Source Sans Pro",myFirstFont, sans-serif;
     letter-spacing: 1px;
    
 }
