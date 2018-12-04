@@ -1,0 +1,87 @@
+<h2>Start {{%__setting,file|basename}}</h2>
+
+
+<div class="block">
+	<pre class="code">
+&lt;form id="myForm"&gt;
+		&lt;label&gt;Email:&lt;/label&gt;
+    &lt;input type="text" name="email" data-validation="required,email" / &gt;
+
+    &lt;label&gt;Age:&lt;/label&gt;
+    &lt;input type="text" name="age" data-validation="required,/^\d+$/i" / &gt;
+
+    &lt;label&gt;
+    	&lt;input type="checkbox" value="1" data-validation="required" name="terms" / &gt;
+    	You must agree my terms
+    &lt;/label&gt;
+    &lt;input type="submit" name="save" value="Submit" /&gt;
+&lt;/form&gt;
+
+
+	</pre>
+
+<!-- standard validation 
+//			'address'=>"/[\-|\/|\,|\.|\'|a-z|A-Z|\x81-\xFE]+/",
+//			'email'=>"/[0-9|a-z|A-Z|\.|\-|_]+@([0-9|a-z|A-Z|\-|_]+\.)+([a-z|A-Z]{2,4})/",
+//			'name'=>"/[\s|\'|a-z|A-Z|\x81-\xFE]+/",
+//			'number'=>"/[0-9]+/",
+//			'number1'=>"/[0-9|\s]+/",
+//			'cc_number'=>"/[0-9|\s]+/",
+//			'phone'=>"/[0-9|\-|\s|\(|\)]+/",
+//			'title'=>"/[\-|\(|\)|\/|\'|a-z|A-Z|0-9|\s|\x81-\xFE]+/",
+//			'zip'=>"/[0-9]+/",
+//			'id'=>"/[\_|\-|\.|\@|a-z|A-Z|0-9|\x81-\xFE]+/",
+//			'time'=>"/([0-9]|[0-1][0-9]|[2][0-3]):([0-5][0-9])/",
+//			'date.au'=>"/[0-9]{2}-[0-9]{2}-[0-9]{4}/",
+//			'date.iso'=>"/[0-9]{4}-[0-9]{2}-[0-9]{2}/",
+//			'money'=>"/(\-)?[0-9]+(\.[0-9]{0,2}){0,1}/",
+//			'url'=>'/(https?|ftp|gopher|telnet)\:\/\/[^\/]*?(\..+)*([\/]?.*|$)/i',
+//			'ascii_display'=>'/[\[|\~|\!|\@|\#|\$|\%|\^|\&|\*|\(|\)|\_|\+|\||\\|\=|\-|\`|\{|\}|\"|\?|\>|\<|\[|\]|\'|\;|\,|\.|\/|\||0-9a-zA-Z|\t|\x20]+/',
+//			'chinese'=>'/[\u4e00-\u9fa5]*/',
+//			'readable'=>'/^\w+$/',
+//			'????????????'=>'/^[\u4e00-\u9fa5_a-zA-Z0-9]+$/',
+//			'??QQ?'=>'/^[1-9]*[1-9][0-9]*$/',
+//			'password'=>'/.{3,}/',	
+//			'have'=>'has="12,33"',
+//			'nothave'=>'',
+//			'length' =>'',//check
+//			'required'=>'',//check
+//			'not_null'=>'',//check 
+//			*not'if'=>'>15,<=2,like',//not //
+//			range=(12,13);	
+//			'in'=>'in=(12,23,45)'
+-->	
+	<div>
+		<div class="alert {{$v_msg?alert-warning:alert-info}}">{{$v_msg?Validation failed @ : Validation Message Here}} {{$v_msg|strtoupper}}</div>
+	  <form class="form-horizontal" role="form" id="myForm">
+	    <div class="form-group">
+	      <label class="control-label col-sm-2" for="email">Email:</label>
+	      <div class="col-sm-10">
+	        <input type="text" class="form-control" name="email" id="email" placeholder="Enter email" data-validation="required,email" value="{{email}}">
+	      </div>
+	    </div>
+	    <div class="form-group">
+	      <label class="control-label col-sm-2" for="pwd">Age:</label>
+	      <div class="col-sm-10">          
+	        <input type="text" class="form-control" id="age" name="age" placeholder="Enter your age here" data-validation="required,/^\d+$/i" value="{{age}}">
+	      </div>
+	    </div>
+	    <div class="form-group">        
+	      <div class="col-sm-offset-2 col-sm-10">
+	        <div class="checkbox">
+	          <label><input type="checkbox" value="1" data-validation="required" name="terms">You must agree my terms</label>
+	        </div>
+	      </div>
+	    </div>
+	    <div class="form-group">        
+	      <div class="col-sm-offset-2 col-sm-10">
+	        <input type="submit" name="save" class="btn btn-default" value="Submit" />
+	      </div>
+	    </div>
+	  </form>
+	</div>
+</div>
+
+
+
+<h2>End {{%__setting,file|basename}}</h2>

@@ -1,0 +1,44 @@
+
+	<h3>An example of ".htaccess" file.</h3>
+	<p>
+		([ROOT]/public/.htaccess)
+	</p>
+	<b class="code">
+		#AuthType Basic
+		#AuthName "Protected Area"
+		#AuthUserFile /var/www/.htpasswd
+		#Require valid-user
+
+		#Options +FollowSymlinks
+		#this may not work for some v-host!!!!!!!!!!
+
+		#php_flag register_globals Off
+		#php_flag magic_quotes_gpc Off
+		#php_flag short_open_tag on
+
+		RewriteEngine on
+
+
+
+		##### MAINTENANCE PAGE ##################
+		#RewriteRule ^(.*)$ maintenance.html [L]
+		#########################################
+
+		#RewriteBase /
+
+		RewriteRule ^media/ - [L]
+		RewriteRule ^package/ - [L]
+
+		# everything to index.php ecxept those ..
+		RewriteRule .*\.(swf|flv|mov|xml|mxml|css|js|jpg|JPG|jpeg|JPEG|png|PNG|gif|GIF|doc|DOC|docx|DOCX|pdf|PDF|html|HTML|xls|XLS|xlsx|XLSX|ico|rot|ttf|svg|woff|woff2)$ - [L]
+
+		#follow may not work for some v-host
+		#RewriteCond %{QUERY_STRING}  ^(.*)$
+
+		RewriteRule .* index.php [QSA,L]
+
+
+	</b>
+
+	</li>
+	</ol>

@@ -1,0 +1,287 @@
+
+<h3>Class xpPdo </h3>
+
+
+<ul class="list-unstyled">
+	<li>This is a pdo class wraper<br>
+		<h4>Config</h4>
+	
+	<pre>
+	$cfg = array(
+		'host'   =>'localhost';
+		'user'    => 'peter',
+		'password'   => 'wang',
+		'database'   => 'magento_drupal_wordpress';
+		['driver'   => 'mysql',]	//use 'dblib' for mssql ; default = mysql
+		['prefix'   => 'wp',]	
+		['port'   => '3307',]
+			)
+	OR
+	$cfg['dsn'] = '...' ; 
+	</pre>	
+	</li>
+	
+	<li>Create new class
+	<pre><i><b>
+	$pdo = new xpPdo($cfg);
+	$pdo = xpPdo::conn([$cfg]);	//singleton
+	//you don't need pass $cfg, it will look for global vars (array)$cfg, (array)$xp_config, (stdClass)$CFG;
+	 </b></i></pre>
+	</li>
+	
+	<li>
+        <button  class="btn btn-info btn-lg btn-block" data-toggle="collapse" data-target="#_query">query($q, $data=array(), $option=array())</button>
+        <div id="_query" class="collapse">
+	<pre><i><b>
+	/**
+	 * query  database using perpare(), execute(),  and fetchAll() 
+	 * @param string 	$q		: query string
+	 * @param array 	$data		: perparing data
+	 * @param array	 $option	: driver_options; check pdo perpare() 
+	 * @return  fetchAll(PDO::FETCH_ASSOC);
+	 */
+	<u>$rs= $pdo->query("select * from wp_test where id = ? ", array(6));</u>
+	return =>{
+	1..........0=>[
+	2................id=>6
+	2................name=>bbbbpopdasdasdaso1438308139
+	2................data=>
+	2................date=>2015-07-31 12:02:19
+	2................lock=>
+	2................lock_ttl=>0
+	2................lock_type=>
+	1..........]
+	}
+	 </b></i></pre>
+	 </div>
+	</li>
+	
+	<li>
+        <button  class="btn btn-info btn-lg btn-block" data-toggle="collapse" data-target="#_q">q($q, $raw=false)</button>
+        <div id="_q" class="collapse">
+	<pre><i><b>
+	/**
+	 * get result 
+	 * @param string $q
+	 * @param string $decode	: 1 = decode array
+	 * @return array of  records
+	 */
+	$rs= $pdo->q("select * from wp_test where id = 2 ");
+	return =>{
+	1..........0=>[
+	2................id=>2
+	2................name=>bbbbpopdasdasdaso1438308075
+	2................data=>[
+	3......................a=>15
+	3......................b=>[
+	4............................0=>abc
+	4............................c=>ss0nn
+	3......................]
+	2................]
+	2................date=>2015-07-31 12:01:15
+	2................lock=>
+	2................lock_ttl=>0
+	2................lock_type=>
+	1..........]
+	}
+	
+	$rs= $pdo->q("select * from wp_test where id = 2 ", 1);
+	{
+	1..........0=>[
+	2................id=>2
+	2................name=>bbbbpopdasdasdaso1438308075
+	2................data=>a:2:{s:1:"a";i:15;s:1:"b";a:2:{i:0;s:3:"abc";s:1:"c";s:5:"ss0nn";}}
+	2................date=>2015-07-31 12:01:15
+	2................lock=>
+	2................lock_ttl=>0
+	2................lock_type=>
+	1..........]
+	}
+	 </b></i></pre>
+	 </div>
+	</li>	
+	
+	<li>
+        <button  class="btn btn-info btn-lg btn-block" data-toggle="collapse" data-target="#_get">get($table, $cond=' 1 ', $fields='' , $order='')</button>
+        <div id="_get" class="collapse">
+	<pre><i><b>
+	/**
+	 * query and get result for one record
+	 *
+	 * @param  string $table: table name
+	 * @param mic $cond : condition
+	 * @param mix  $fields : fileds to get
+	 * @param mix  $order : if query return multi-record 
+	 * @return array
+	 */
+	$rs= $pdo->get("wp_test", array('id >2', 'name like bbb%', 'lock_ttl'=>0), 'id,name,lock_ttl');
+	return =>{
+	1..........id=>3
+	1..........name=>bbbbpopdasdasdaso1438308078
+	1..........lock_ttl=>0
+	}
+	
+	$rs= $pdo->get("wp_test", array('id >2', 'name like bbb%', 'lock_ttl'=>0), 'id,name,lock_ttl', '-id');
+	return =>{
+	1..........id=>35
+	1..........name=>bbbbpopdasdasdaso1438308924
+	1..........lock_ttl=>0
+	}
+	 </b></i></pre>
+	 </div>
+	</li>	
+		
+
+	<li>
+        <button  class="btn btn-info btn-lg btn-block" data-toggle="collapse" data-target="#_gets">gets($table,$cond=' 1 ',$fields='',$order='',$limit='' )</button>
+        <div id="_gets" class="collapse">
+	<pre><i><b>
+	/**
+	 * query and get results
+	 *
+	 * @param  string $table: table name
+	 * @param mic $cond : condition
+	 * @param mix  $fields : fileds to get
+	 * @param mix  $order : if query return multi-record 
+	 * @param mix  $limit : limit 
+	 * @return array
+	 * condition array : [ a,b,c ] : a and b and c ; [[a],[b,c]] : a OR (b and c) ;  [a,[[b],[c]]] : a and (b or c) ;
+	 */
+	$rs= $pdo->gets("wp_test", array(array('id <3'),array('id >30')), 'id,name,lock_ttl', '-id,name', '4')
+	return =>{
+	1..........0=>[
+	2................id=>43
+	2................name=>asdfasdf
+	2................lock_ttl=>0
+	1..........]
+	1..........1=>[
+	2................id=>42
+	2................name=>asdfasdf
+	2................lock_ttl=>0
+	1..........]
+	1..........2=>[
+	2................id=>41
+	2................name=>asdfasdf
+	2................lock_ttl=>0
+	1..........]
+	1..........3=>[
+	2................id=>40
+	2................name=>asdfasdf
+	2................lock_ttl=>0
+	1..........]
+	}
+	 </b></i></pre>
+	 </div>
+	</li>	
+		
+	<li>
+        <button  class="btn btn-info btn-lg btn-block" data-toggle="collapse" data-target="#_deletes">deletes($table,$cond, $order='', $limit=null)</button>
+        <div id="_deletes" class="collapse">
+	<pre><i><b>
+	/**
+	 * delete reocrds
+	 *
+	 * @param string $table
+	 * @param mix $cond
+	 * @return int
+	 */
+	 $n = $pdo->deletes('log', array('date' => '2011-01-23', 'id <3304'), '-modified', '2,3');
+	 return = 3;	//3 record deleted
+	 </b></i></pre>
+	 </div>
+	</li>	
+		
+	<li>
+        <button  class="btn btn-info btn-lg btn-block" data-toggle="collapse" data-target="#_insert">insert($table, $data) </button>
+        <div id="_insert" class="collapse">
+	<pre><i><b>
+	/**
+	 * insert a record
+	 *
+	 * @param string $table : name
+	 * @param array $data	: data array
+	 * @return boolean
+	 */
+	 $arr = array(
+	 	'name'=>'peter www',
+	 	'email'=>'xpw360@gmail.com',
+	 	'IQ'=>'-12',
+	 );
+	 $n = $pdo->insert('user', $arr);
+	 return 1
+	 </b></i></pre>
+	 </div>
+	</li>	
+		
+	<li>
+        <button  class="btn btn-info btn-lg btn-block" data-toggle="collapse" data-target="#_updates">updates($table,$data,$cond, $order='', $limit='')</button>
+        <div id="_updates" class="collapse">
+	<pre><i><b>
+	/**
+	* update records
+	*
+	* @param string $table	: table name
+	* @param array $data	: data array
+	* @param mix $cond		: conditions
+	* @return boolen
+	*/
+	 $arr = array(
+	 	'name'=>'peter www',
+	 	'email'=>'xpw360@gmail.com',
+	 	'IQ'=>'-12',
+	 );
+	 $crr = array(
+	 	'id'=>20031
+	 );	 	
+	 $n = updates('uuis', $arr, $crr); 
+	 </b></i></pre>
+	 </div>
+	</li>	
+		
+	<li>
+        <button  class="btn btn-info btn-lg btn-block" data-toggle="collapse" data-target="#_write">write($table, $data, $cond = null)</button>
+        <div id="_write" class="collapse">
+	<pre><i><b>
+	/** 
+	 * write record back or create new one if no exist;
+	 *  return insert or update(first one) primary key
+	 */
+	 $arr = array(
+	 	'name'=>'peter www',
+	 	'email'=>'xpw360@gmail.com',
+	 	'IQ'=>'-12',
+	 );
+	 $crr = array(
+	 	'id'=>20031
+	 );	 	
+	 $id = write('uuis', $arr, $crr);
+	 return $id //insert id.
+	 </b></i></pre>
+	 </div>
+	</li>
+		
+	<li>
+        <button  class="btn btn-info btn-lg btn-block" data-toggle="collapse" data-target="#_transaction">transaction</button>
+        <div id="_transaction" class="collapse">
+	<pre><i><b>
+	/**
+	 * satrt transaction
+	 *
+	 */
+	function Tstart();
+	/**
+	 * commit data
+	 *
+	 * @return  boolean
+	 */
+	function Tcommit();
+	/**
+	 * roll back data
+	 *
+	 * @return  boolean
+	 */
+	function Trollback()
+	 </b></i></pre>
+	 </div>
+	</li>	
+</ul>

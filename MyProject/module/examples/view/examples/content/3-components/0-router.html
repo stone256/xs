@@ -1,0 +1,56 @@
+<h3>Routers</h3>
+
+<ul>
+	<li><h4>File : ".router.php" </h4><p>[ROOT]/module/mymodule/<b>.router.php</b> </p>
+		<b class="code">
+   Each module contains a key file ".router.php". this file contains all routes for current module.
+   e.g.
+	&lt;?php
+	$routers = array(
+	     /**[KEY] 	=> [VALUE]**/
+		'/demo' => '/demo/demo@index',
+		'/demo/high-light' => '/demo/demo@hilite',
+		);
+	?&gt;
+	 /** http[s]://yoursite.com.au<u>/demo</u> ==&gt' [ROOT]/module/<u>demo/demoController.php::indexAction()</u> **/
+	</b>
+	</li>
+	<li><h4>Rule of router</h4>
+	<ol type="A">
+		<li>The key in router defination array is the absolute url path.<br>
+		e.g. "/demo"=>"xxxx" will be used as http[s]://yoursite.net.au<b>/demo</b></li>
+		<li>if url requested can not be found, system will try to resolve to it's parent.<br>
+		e.g. "/demo/nothing-here/there" => "xxxxxxx", if there isn't router "/demo/nothing-here/there",<br>
+		system will try to find path in follow order:
+			<ol type="a">
+				<li>/demo/nothing-here</li>
+				<li>/demo</li>
+				<li>/</li>
+			</ol>
+		</li>
+		<li>The value in router defination array indicates the controller path.<br>
+		e.g. "/demo"=>"/demo/demo@index" will resolve to [ROOT]/module/<u>demo/democontroller.php::indexAction()</u>
+		</li>
+		<li>
+			when you have a router like: "<b>/demo/abc</b>"<br>
+			when you use <b>/dome/abc/</b><u>a=12/b=13</u> this will results value add to $_REQUEST Array;<br>
+			<b class="code">
+				$_REQUEST = [
+					..
+					a=>12,
+					b=>13,
+				]
+			</b>
+			when you use <b>/dome/abc/</b><u>Australia/NSW</u> this will results value add to $_REQUEST Array;<br>
+			<b class="code">
+				$_REQUEST = [
+					..
+					Australia=>'',
+					NSW=>'',
+				]
+			</b>
+
+		</li>
+	</ol></li>
+
+</ul>

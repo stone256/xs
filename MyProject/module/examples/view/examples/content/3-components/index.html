@@ -1,0 +1,80 @@
+<h3>Module Components</h3>
+<table>
+	<tr>
+		<td valign="top">
+			<h3>MVC Control flows</h3>
+<ul>
+<li>domian: www.myproject.com
+</li>
+<li>
+module: mymodule
+</li>
+<li>
+url: myurl
+</li>
+<li>
+controller: /mymodule/indexControll.php
+</li>
+<li>
+	/config/enabled/mymodule.php
+	<b class="code">
+	 &lt;?php
+	 	$modules[] = '/mymodule'
+	</b>
+</li>
+<li>
+	/mymodule/.router.php
+	<b class="code">
+	 &lt;?php
+	 $routers=[
+	 '/myurl' => '/mymodule/<i>index@myfunction</i>',
+	 ];
+	</b>
+</li>
+<li>	/mymodule/indexController.php
+	<b class="code">
+	 &lt;?php
+	 class <i>mymodule_index</i>Controller extends sitemin_loginController {
+ 		function <i>myfunction</i>Action() {
+			$rs = _factory('mymodule_model_mymodel')->get_data();
+			return array('data' => array('rs' => $rs));
+		}
+	}
+	</b>
+</li>
+<li>	/mymodule/model/mymodel.php
+	<b class="code">
+	 &lt;?php
+	 class <i>mymodule_model_mymodel</i> {
+ 		function <i>get_data</i>() {
+			$rs = array('greeting'=>'Hello', 'user'=>'Peter');
+		}
+	}
+	</b>
+</li>
+<li>	/mymodule/view/index/myfunction.phtml
+	<b class="code">
+		&lt;h1&gt;&lt?=$rs['greeting'];?&gt;
+			&lt;i&gt;
+				&lt;?=$rs['user']; ?&gt;
+			&lt;/i&gt;
+		&lt;/h1&gt;
+	</b>
+
+</li>
+<li>
+	<h4>http://www.myproject.com/myurl</h4>
+	output
+	<p>
+		<img src="/sitemin/img/greeting.png" />
+	</p>
+
+</li>
+
+</ul>
+		</td>
+		<td>
+			<img src="/sitemin/img/flow.png" />
+		</td>
+	</tr>
+</table>

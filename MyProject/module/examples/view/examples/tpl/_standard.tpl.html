@@ -1,0 +1,33 @@
+<h2>Start {{%__setting,file|basename}}</h2>
+
+
+
+<h4>standard type 1</h4>
+
+
+	<div class="block"><i class="code">{{*$bbb*}} &rarr;  variable $TEMPLATE_DATA[bbb]. *you can omit $ , just use {{*bbb*}} when in the first position</i>{{$bbb}}</div>
+	<div class="block"><i class="code">{{*ccc*}} &rarr;  variable is array, $TEMPLATE_DATA[ccc] = ['c1','c2','c3',5=>'bbb']  </i>{{ccc}}</div>
+	<div class="block"><i class="code">{{*ccc,<b>5</b>*}} &rarr;  array element, $TEMPLATE_DATA[ccc] = ['c1','c2','c3',<b>5</b>=>'bbb'], so $TEMPLATE_DATA[ccc][<b>5</b>] = bbb </i>{{ccc,5}}</div>
+	<div class="block"><i class="code">{{*abcd:<b>this is default value</b>*}} &rarr;  default value</i>{{abcd:this is default value}}</div>
+	<div class="block"><i class="code">{{*abcd:<b>$n</b>,<b>4</b>*}} &rarr;  use variable $TEMPLATE_DATA[<b>n</b>][<b>4</b>] as default</i>{{abcd:$n,4}}</div>
+	<div class="block"><i class="code">{{*abcd:<b>$n,m</b>*}} &rarr;  use variable $TEMPLATE_DATA[<b>n</b>][<b>m</b>] as default</i>{{abcd:$n,m}}</div>
+	<div class="block"><i class="code">{{**dddd**}} &rarr;  comments</i>{{*dddd*}}</div>
+
+
+
+<h4>standard type 2</h4>
+<div class="block"><i class="code">{{*bbb==bbb?<b>bbb is eq  bbb</b>:bbb is not eq bbb*}} &rarr;  if $TEMPLATE_DATA[bbb] == 'bbb' </i>{{bbb==bbb?bbb is eq  bbb:bbb is not eq bbb}}</div>
+<div class="block"><i class="code">{{*ddd?has ddd:<b> dddd is not existed</b> |<b>strtoupper</b>*}} &rarr;  if($TEMPLATE_DATA[ddd]) and apply function strtoupper to result </i>{{ddd?has ddd: dddd is not existed |strtoupper}}</div>
+<div class="block"><i class="code">{{*$n,m,2>5?gt 5:<b>$n,0</b>*}} &rarr;   if($TEMPLATE_DATA[<b>n</b>][<b>m</b>][<b>2</b>]>5) 'gt 5' else $TEMPLATE_DATA[<b>n</b>][<b>0</b>] </i>{{$n,m,2>5?gt 5:$n,0}}</div>
+<div class="block"><i class="code">{{*$n,m,2<5?<b>lt 5</b>:$n,0*}} &rarr;   if($TEMPLATE_DATA[<b>n</b>][<b>m</b>][<b>2</b>]<5) 'lt 5' else $TEMPLATE_DATA[<b>n</b>][<b>0</b>] </i>{{$n,m,2<5?lt 5:$n,0}}</div>
+
+<h4>standard type 3</h4>
+<div class="block"><i class="code">{{*$n,m,0#000:111:222:333:5=555:a=$bbb*}} &rarr; [000,111,222,333,5=>555,a=>$bbb][$TEMPLATE_DATA[n][m][0]] &rarr; [000,111,222,333,5=555,a=$bbb][1] as $TEMPLATE_DATA[<b>n</b>][<b>m</b>][<b>0</b>]=1</i>{{$n,m,0#000:111:222:333:5=555:a=$bbb}}</div>
+<div class="block"><i class="code">{{*$n,m,2#000:111:222:333:5=555:a=$bbb*}} &rarr; [000,111,222,333,5=>555,a=>$bbb][$TEMPLATE_DATA[$TEMPLATE_DATA[<b>n</b>]][<b>m</b>][<b>2</b>]] &rarr; [000,111,222,333,5=555,<b>a</b>=>$bbb][<b>3</b>]</i>{{$n,m,2#000:111:222:333:5=555:a=$bbb}}</div>
+<div class="block"><i class="code">{{*$n,m,<b>22</b>#000:111:222:333:5=555:a=$ccc,<b>2</b>*}} &rarr; since $TEMPLATE_DATA[<b>n</b>][<b>m</b>][<b>22</b>] = '<b>a</b>',  $TEMPLATE_DATA[ccc] = ['c1','c2','c3',5=>'bbb'] this translate to [000,111,222,333,5=>555,<b>a</b>=><b>$ccc</b>,<b>2</b>][<b>a</b>][<b>2</b>] = c3 </i>{{$n,m,22#000:111:222:333:5=555:a=$ccc,2}}</div>
+
+<div class="block"><i class="code">{{*$n,5#$n,m*}} &rarr; $TEMPLATE_DATA[n][5] = 5,  $TEMPLATE_DATA[n][m] = [1,2,3,4, 5=>'this is 5', 22=>'a'] this translate to [1,2,3,4, 5=>'this is 5', 22=>'a'][<b>5</b>] </i>{{$n,5#$n,m}}</div>
+
+
+<h2>End {{%__setting,file|basename}}</h2>
+

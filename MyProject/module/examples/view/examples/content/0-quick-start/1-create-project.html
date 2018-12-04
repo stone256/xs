@@ -1,0 +1,47 @@
+<h3>Create your first project</h3>
+
+<ul>
+	<li>Create your own module: "mymodule"
+		<ol>
+			<li>rename [ROOT]/.local.sample to [ROOT]/.local and check/modify it.</li>
+			<li>rename [ROOT]/config/global.php.sample to [ROOT]/config/global.php and check/modify it.</li>
+			<li>create a module folder: <u>[ROOT]/module/mymodule</u></li>
+			<li>create router file: <u>[ROOT]/module/mymodule/.router.php</u><br>
+			<b class="code">
+			&lt;?php
+				$routers = array(
+					'/mymodule/hello' => '/mymoudel/index@index',
+				);
+			?&gt;
+			</b>
+			</li>
+			<li>create controller: [ROOT]/module/mymodule/indexController.php
+			<b class="code">
+			&lt;?php
+				class  mymodule_indexController extends _system_defaultController{
+					function indexActive(){
+						$str = "Hello World";
+						return array(/** use default **/  'data'=>array('var1'=>$str));
+					}
+				}
+			?&gt;
+			</b>
+			</li>
+			<li>create view: [ROOT]/module/mymodule/<u>view/index/index.phtml</u>
+			<b  class="code">
+			&lt;h1&gt;My Modules&lt;/h1&gt;
+
+			&lt;p&gt;&lt;?php echo $var1; ?&gt;&lt;/p&gt;
+			</b>
+			</li>
+			<li>Enable you module, add [ROOT]/config/enabled/mymodule.php<br>
+			<b  class="code">
+			&lt;?php
+				$modules[] = '/mymodule'; // this name is referred to [ROOT]/module/<u>mymodule</u>
+			?&gt;
+			</b>
+			</li>
+
+		</ol>
+	</li>
+</ul>

@@ -1,0 +1,20 @@
+<?php
+
+/**
+ * @author peter wang <stone256@hotmail.com>
+ * @copyright MIT
+ * project cli enter point
+ *  e.g. $php x2cli.php /mytest/show/info
+ */
+include "config/x2cli.php";
+
+define('_X_CLI_CALL', true);
+
+$_SERVER['REDIRECT_URL'] = $_SERVER['REQUEST_URI'] = $argv[1];
+parse_str(implode('&', array_slice($argv, 2)), $_REQUEST);
+
+
+$_SERVER['REQUEST_TIME'] = time();
+$_SERVER['REQUEST_TIME_FLOAT'] = microtime(true);
+
+include "public/index.php";

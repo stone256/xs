@@ -1,0 +1,37 @@
+<h2>Start {{%__setting,file|basename}}</h2>
+
+
+<div class="block">
+	
+<!--	<h4>Block Data</h4>
+	{{$rc-data}}
+	
+	<h4>Recursive Template</h4>
+-->
+	<pre class="code">
+	
+	&lt;!--recursion start $rc--&gt;
+	&lt;ul class="recursive"&gt;
+		&lt;li&gt;
+			&lt;p&gt;&lt;b&gt;{{*$title*}}&lt;/b&gt; - {{*$text*}}&lt;/p&gt;
+			
+			&lt;!-- recursion $rc--&gt;
+		
+		&lt;/li&gt;
+	&lt;/ul&gt;
+	&lt;!--recursion end $rc--&gt;
+	</pre>
+
+<!--	<h4>Rendered</h4>-->
+	<!--recursion start $rc-->
+	<ul class="recursive">
+		<li>
+			<p><b>{{$title}}</b> - {{$text}}</p>
+			<!-- recursion $rc-->
+		</li>
+	</ul>
+	<!--recursion end $rc-->
+</div>
+
+
+<h2>End {{%__setting,file|basename}}</h2>

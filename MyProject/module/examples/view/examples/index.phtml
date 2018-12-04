@@ -1,0 +1,74 @@
+<?php $page_title = 'X-FRAME | examples | INDEX'; ?>
+<?php if(_X_SITEMIN  === true):?>
+	<?php include _X_LAYOUT . "/sitemin/header.phtml"; ?>
+	<?php include _X_LAYOUT . '/sitemin/nav.phtml'; ?>
+<?php else: ?>
+	<?php include _X_LAYOUT . "/examples/header.phtml"; ?>
+<?php endif;?>
+
+<script src="/examples/js.js"></script>
+<link href="/examples/css.css" rel="stylesheet">
+<style>
+.active{
+    padding: 8px 18px 8px 0px;
+background:#eff7d3;
+}
+pre{
+padding:3px 6px;
+border:1px solid #d3d3f5;
+background: #f8f8ff;
+}
+.header-space, .footer-space{
+background:#cedcc3;
+}
+.header-space{
+height:44px;
+}
+.right-content h3 {
+padding-top:12px;
+}
+*{
+color:#535a3b;
+}
+a {
+color:#3b577d;
+}
+/*
+eff7d3
+cedcc3
+a7b99e
+535a3b
+*/
+</style>
+<div class=""> &nbsp;</div>
+
+<div class="container-fluid">
+	<div class="right-content row row-offcanvas row-offcanvas-left">
+		<div class="col-6 col-md-3 sidebar-offcanvas" id="sidebar">
+			<div class="list-group level-0">
+				<?php
+					$menu = $rs['menu'];
+					foreach ($menu as $k=>$v)
+						//if(!$v['link']) unset($menu[$k]);
+					$html = _factory('examples_model')->rendering($menu);
+					echo $html;
+
+				?>
+			</div>
+		</div>
+		<div class="col-12 col-md-9">
+			<p class="float-left d-md-none">
+				<button type="button" class="btn btn-info btn-sm" data-toggle="offcanvas"><i class="fa fa-exchange" aria-hidden="true"></i>
+                </button>
+			</p>
+			<?php  if(file_exists($rs['root'].$_REQUEST['in'])): echo file_get_contents($rs['root'].$_REQUEST['in']); endif; ?>
+		</div>
+	</div>
+	<button onclick="topFunction()" id="gotop" title="Go to top">Top</button>
+</div>
+
+<?php if(_X_SITEMIN  === true):?>
+	<?php include _X_LAYOUT . "/sitemin/footer.phtml"; ?>
+<?php else: ?>
+	<?php include _X_LAYOUT . "/examples/footer.phtml"; ?>
+<?php endif;?>

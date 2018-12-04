@@ -1,0 +1,33 @@
+<h3>Apache (LAMP STACK)</h3>
+
+<p>* although there ar better "performance" server, Apache are preferred for it's reliability and wide supports </p>
+<p>to set up apache </p>
+<ul>
+	<li>standard LAMP STACK. please check [<a href="http://howtoubuntu.org/how-to-install-lamp-on-ubuntu"><u>here</u></a>] </li>
+	<li>Apache friend XAMPP, please check [<a href="https://www.apachefriends.org/index.html"><u>here</u></a>]</li>
+	<li>AWS EC2 server's bitnami image, please check [<a href="https://aws.amazon.com/marketplace/seller-profile?id=dbe6480c-fd0d-4625-9bd0-44606ed33fa6" ><u>here</u></a>] </li>
+</ul>
+		<p>for set "myfirstproject" you local server.</p>
+		<p>create myfirstproject.conf under your apache config folder.
+			<b class="code">
+	&lt;VirtualHost *:80&gt;
+	    ServerAdmin iamadminnow@thisismysite.com
+	    DocumentRoot "/var/www/<b class="_Red">myfirstproject</b>/public"
+	    ServerName  myfirstproject.thisismysite.com #or localhost
+	    #ServerAlias localhost
+	        &lt;Directory "/var/www/<b class="_Red">myfirstproject</b>/public"&gt;
+	                Options All
+	                AllowOverride All
+	                &lt;IfVersion &lt; 2.3 &gt;
+	                        Order allow,deny
+	                        Allow from all
+	                &lt;/IfVersion>
+	                &lt;IfVersion &gt;= 2.3&gt;
+	                        Require all granted
+	                &lt;/IfVersion&gt;
+	        &lt;/Directory&gt;
+	    ErrorLog "logs/myfirstproject-error_log"
+	    CustomLog "logs/myfirstproject-access_log" common
+	&lt;/VirtualHost&gt;
+
+			</b>

@@ -1,0 +1,160 @@
+h4{ font-weight:900;}
+
+
+/*
+ * Off Canvas
+ * --------------------------------------------------
+ */
+@media screen and (max-width: 767px) {
+  .row-offcanvas {
+    position: relative;
+    -webkit-transition: all .25s ease-out;
+         -o-transition: all .25s ease-out;
+            transition: all .25s ease-out;
+  }
+
+  .row-offcanvas-right {
+    right: 0;
+  }
+
+  .row-offcanvas-left {
+    left: 0;
+  }
+
+  .row-offcanvas-right
+  .sidebar-offcanvas {
+    right: -100%; /* 12 columns */
+  }
+
+  .row-offcanvas-right.active
+  .sidebar-offcanvas {
+    right: -50%; /* 6 columns */
+  }
+
+  .row-offcanvas-left
+  .sidebar-offcanvas {
+    left: -100%; /* 12 columns */
+  }
+
+  .row-offcanvas-left.active
+  .sidebar-offcanvas {
+    left: -50%; /* 6 columns */
+  }
+
+  .row-offcanvas-right.active {
+    right: 50%; /* 6 columns */
+  }
+
+  .row-offcanvas-left.active {
+    left: 50%; /* 6 columns */
+  }
+
+  .sidebar-offcanvas {
+    position: absolute;
+    top: 0;
+    width: 50%; /* 6 columns */
+  }
+}
+
+    .doc:before {
+
+     font-family: FontAwesome;
+   content: "\f016";
+   display: inline-block;
+   padding-right: 3px;
+   vertical-align: middle;
+    }
+
+     .folder{
+     height:18px;
+     overflow:hidden;
+     }
+     .folder:before {
+ cursor:pointer;
+     font-family: FontAwesome;
+   content: "\f07b";
+   display: inline-block;
+   padding-right: 3px;
+   vertical-align: middle;
+    }
+     .folder.open{
+     height:auto;
+     }
+     .folder.open:before {
+ cursor:pointer;
+     font-family: FontAwesome;
+   content: "\f07c";
+   display: inline-block;
+   padding-right: 3px;
+   vertical-align: middle;
+    }
+ #gotop {
+  display: none;
+  position: fixed;
+  bottom: 20px;
+  right: 30px;
+  z-index: 99;
+  border: none;
+  outline: none;
+  background-color: orange;
+  color: #333;
+  cursor: pointer;
+  padding: 12px;
+  border-radius: 10px;
+
+}
+
+#gotop:hover {
+  background-color: #777;
+  color: #ccc;
+}
+
+li { margin-top: 6px;}
+
+#sidebar { border-right:  dotted #eee; margin-top: 10px;}
+#sidebar h4{ padding: 5px 0 5px 10px;}
+
+.list-group  ul
+{
+ list-style-type: none;
+}
+
+.h1,h2,h3,h4,h5{
+margin-bottom:0;
+}
+
+.ac{
+display:inline-block;
+border-radius:20px;
+border:4px #eee solid;
+width:40px;
+height:40px;
+line-height:30px;
+}
+
+.include-block{
+padding:8px;
+margin:4px;
+border:2px dashed #777;
+}
+
+.block{
+padding:8px;
+margin:5px;
+border:2px solid #888;
+}
+
+.code{
+background:#222;
+color: #ecf;
+white-space: pre;
+padding:8px;
+display:block;
+font-size: 14px;
+font-weight: 200;
+}
+.recursive li{
+padding:8px;
+border:1px dotted #999;
+}
+.right-content li .btn-block { text-align: left;}

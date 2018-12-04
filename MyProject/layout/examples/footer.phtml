@@ -1,0 +1,42 @@
+
+<footer class="footer container-fluid mt-5">
+	<div class="justify-content-center row ">
+		<ul class="">
+			<li class="list-inline-item"><p class="text-center text-muted">&copy; 2016 All rights reserved</p></li>
+			<li class="list-inline-item">
+				<a href="/about">About Us</a>
+			</li>
+			<li class="list-inline-item">
+				<a href="/privacy">Privacy Policy</a>
+			</li>
+			<li class="list-inline-item">
+				<a href="/terms">Terms And Conditions</a>
+			</li>
+			<li class="list-inline-item">
+				<a href="/disclaimer">Disclaimer</a>
+			</li>
+			<li class="list-inline-item">
+				<a href="/contact">Contact Us</a>
+			</li>
+		</ul>
+
+	</div>
+</footer>
+
+<script>
+$(document).ready(function(){
+	var p = 1*$('.footer.container-fluid').offset().top
+	var s = 1*$('.footer.container-fluid').height()
+	var h = 1*$(window).height();
+	if(p+s+30 < h){
+		$('.footer.container-fluid').css({"padding-top":h-s-p-20})
+	}
+})
+</script>
+
+<style>
+html { height:101%;}
+</style>
+
+</body>
+</html>

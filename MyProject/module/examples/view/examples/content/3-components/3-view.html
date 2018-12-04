@@ -1,0 +1,49 @@
+<h3>Views</h3>
+
+<ol type="A">
+	<li>all view are under view folder.<br>
+	by default, controller will use default name to find corresponding view unless specified otherwise<br>
+	e.g.<br>
+		<b class="code">
+		&lt;?php
+			class demo_redController extends _system_defaultController {
+				function powerAction() {
+					.....
+					return array('data' => array('rs' => $rs));
+				}
+			}
+		?&gt;
+		default "view" will be [ROOT]/module/<u>demo/view/red/power.phtml</u>
+		</b>
+
+	</li>
+	<li>
+	specified none default view.<br>
+	e.g. <br>
+		<b class="code">
+		&lt;?php
+			class demo_redController extends _system_defaultController {
+				function powerAction() {
+					.....
+					return array('view' => 'index.tpl.html', 'data' => array('rs' => $_SERVER));
+				}
+			}
+		?&gt;
+		default "view" will be [ROOT]/module/<u>demo/view/red/index.tpl.html</u>
+		</b>
+	</li>
+	<li>all data will be passed to the view in return array's 'data' field from controller<br>
+	e.g. <br>
+		<b class="code">
+		&lt;?php
+			class demo_redController extends _system_defaultController {
+				function powerAction() {
+					.....
+					return array('data' => array('rs' => array(a=>1,b=>2);
+				}
+			}
+		?&gt;
+		will show in [ROOT]/module/<u>demo/view/red/power.phtml</u> as variable $rs /** $rs = array(a=>1,b=>2) **/
+		</b>
+	</li>
+</ol>

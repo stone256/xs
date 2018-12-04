@@ -1,0 +1,25 @@
+
+<h3>Class xpTable </h3>
+
+
+<ol>
+	<li>This class is xpPod extension mainly to deal with single table, it use same config as xpPdo<br>
+		<ol type='A'>
+			<li>$tb = new xpTable($cfg); </li>
+			<li>$tb = xpTable::load('table_name', [$cfg]);	//singleton</li>
+		</ol>
+	<br>
+	
+	<li>Some usage compare with xpPdo except you don't need pass table name at method level.
+	<pre><i><b>
+	
+	$rs = xpPdo::conn()->gets('local', array('lat'>25.002102));
+	
+	$rs = xpTable::load('local', $cfg)->gets(array('lat'>25.002102));
+	
+	</b></i></pre>
+	</li>
+	
+
+	
+</ol>

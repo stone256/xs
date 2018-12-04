@@ -1,0 +1,29 @@
+<h3>Models</h3>
+
+<ol type="A">
+	<li>all model are under folder "model", as the result it has "model" attached<br>
+	e.g.<br>
+	[ROOT]/module/<u>demo/model/light.php</u> will has class name "demo_model_light"
+	<b class="code">
+	&lt;?php
+	class demo_model_light  {
+		function get_number_of_lights_on($color='red') {
+			.....
+			return $_status['on'][$color];
+		}
+	}
+	?&gt;
+	</b>
+	</li>
+	<li>model can be called use system shart cut "$myclass = _factory('demo_model_light')" as singleton<br>
+	e.g.
+	<b class="code">
+	&lt;?php
+		..
+		..
+		echo _factory('demo_model_light')->get_number_of_lights_on('yellow');
+		..
+	?&gt;
+	</b>
+	</li>
+</ol>

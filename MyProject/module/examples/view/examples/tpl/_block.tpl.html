@@ -1,0 +1,49 @@
+<h2>Start {{%__setting,file|basename}}</h2>
+
+
+<div class="block">
+<pre class="code">
+&lt;ul&gt;
+< !--start of <b>$ak</b>-- >
+	&lt;li&gt;value=={{*$_self*}}&lt;/li&gt;
+< !--end of <b>$ak</b>-- >
+&lt;/ul&gt;
+</pre>
+<b>use $TEMPLATE_DATA[<b>ak</b>]</b>
+
+
+<pre>
+&lt;ul &gt;<!--start of $ak-->	&lt;li&gt;value=={{$_self}} &lt;/li&gt;<!--end of $ak-->
+&lt;/ul&gt;
+</pre>
+</div>
+
+<div class="block">
+<pre class="code" >
+&lt;ul&gt;
+&lt;!-- start of $<b>bk</b> --&gt;
+	&lt;li&gt;
+		{{*%NAME*}}[{{*%K*}}]
+		&lt;ol&gt;
+			&lt;!-- start of ages--&gt;
+			&lt;li&gt;age:{{*$age*}}&lt;/li&gt;
+			&lt;!--end of ages --&gt;
+		&lt;/ol&gt;
+	&lt;/li&gt;
+&lt;!-- end of <b>$bk</b> --&gt;
+&lt;/ul&gt;
+</pre>
+
+<b>use $TEMPLATE_DATA[<b>bk</b>]</b>
+<pre>
+&lt;ul &gt;<!-- start of $bk -->	&lt;li&gt;
+		{{%NAME}}[{{%K}}]
+		&lt;ol&gt;<!-- start of ages-->		&lt;li&gt;age:{{$age}}&lt;/li&gt;<!--end of ages -->
+		&lt;/ol&gt;
+	&lt;/li&gt;
+<!-- end of $bk -->
+&lt;/ul&gt;
+</pre>
+</div>
+
+<h2>End {{%__setting,file|basename}}</h2>

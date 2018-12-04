@@ -1,0 +1,703 @@
+
+<h3>Class xpAS </h3>
+
+
+<ul class="list-unstyled">
+	<li>This class is mainly to deal with array and string<br>
+		<ol type='A'>
+			<li>The system are heavily depends on the class to function</li>
+			<li>All method can called statically by xpAS::METHOD_NAME()</li>
+			<li>Some method are great to deal with mysql returned rows</li>
+			<li>Note, you are not required to use those, they are just here to helpa</li>
+		</ol>
+	<br>
+	
+	<li>
+        <button  class="btn btn-info btn-lg btn-block" data-toggle="collapse" data-target="#_get"> get($arr, $irr = null, $dm = ',', $level = 50, $current = 0)</button>
+        <div id="_get" class="collapse">
+	<pre><i><b>
+	/**
+	 * go in deep to get value from an array
+	 *
+	 * @param array  $arr :  source array
+	 * @param array or string  $irr : index array or string in format  "i1,i2,i3,i4.. " - ix name of index
+	 * @param  char  $dm :  column delimiter default: ","
+	 * @return node of array
+	 */
+	$data =>[
+	1..........0=>[
+	2................id=>6
+	2................name=>bbbbpopdasdasdaso1438308139
+	1..........]
+	1..........1=>[
+	2................id=>9
+	2................name=>cssdsdfsdf4569
+	1..........]
+	]	
+	<b>$r = xpAS::get($data, '0,id');</b>
+	return = 6
+	
+	<b>$r = xpAS::get($data, '*,id');</b>
+	return =>[6,9]; 	
+	 </b></i></pre>
+	 </div>
+	</li>
+	
+	<li>
+        <button  class="btn btn-info btn-lg btn-block" data-toggle="collapse" data-target="#_set">set(&$arr, $irr, $value, $dm = ',', $level = 50, $current = 0) </button>
+        <div id="_set" class="collapse">
+	<pre><i><b>
+	/**
+	 * setting value to an  array
+	 *  note this one call by refs!!!
+	 *
+	 * @param array  $arr :  source array
+	 * @param array or string  $irr : index array or string in format  "i1,i2,i3,i4.. " - ix name of index
+	 * @param  max  $value : need set value
+	 * @param  char  $dm :  column delimiter default: ","
+	 * @param int	$level		: max recurring level
+	 * @param int $current		: !do not set !!, current recurring level
+	 */
+	$data =>[
+	1..........0=>[
+	2................id=>6
+	2................name=>bbbbpopdasdasdaso1438308139
+	1..........]
+	1..........1=>[
+	2................id=>9
+	2................name=>cssdsdfsdf4569
+	1..........]
+	]	
+	<b>$r = xpAS::set($data, '0,name', 'new name');</b>
+	$data =>[
+	1..........0=>[
+	2................id=>6
+	2................name=><u>'new name'</u>
+	1..........]
+	1..........1=>[
+	2................id=>9
+	2................name=>cssdsdfsdf4569
+	1..........]
+	]	
+	 </b></i></pre>
+	 </div>
+	</li>
+	
+	
+	
+	<li>
+        <button  class="btn btn-info btn-lg btn-block" data-toggle="collapse" data-target="#_round_up">round_up($arr, $names, $dm = ',')</button>
+        <div id="_round_up" class="collapse">
+	
+	<pre><i><b>
+	/**
+	 * round up those element from a array
+	 *
+	 * @param array $arr			: data pool
+	 * @param array/string $names	: names of element to be extracted
+	 * @param char $dm	: delima
+	 * @return array 	:return array of those elements;
+	 */
+	$data =>[
+	1..........0=>[
+	2................id=>6
+	2................name=>'abc'
+	2................value=>123</u>
+	1..........]
+	1..........1=>[
+	2................id=>9
+	2................name=>def
+	2................value=>456
+	1..........]
+	]	
+	<b>$r= xpAS::round_up($rows, 'name,value');</b>
+	return  =>[
+	1..........0=>[
+	2................name=>'abc'
+	2................value=>123</u>
+	1..........]
+	1..........1=>[
+	2................name=>def
+	2................value=>456
+	1..........]
+	]	
+	 </b></i></pre>
+	 </div>
+	</li>
+	
+	<li>
+        <button  class="btn btn-info btn-lg btn-block" data-toggle="collapse" data-target="#_round_off">round_off($arr, $names, $dm = ',')</button>
+        <div id="_round_off" class="collapse">
+	
+	<pre><i><b>
+	/**
+	 * round off those element from a array
+	 *
+	 * @param array $arr			: data pool
+	 * @param array/string $names	: names of element to be extracted
+	 * @param char $dm	: delima
+	 * @return array 	:return array of those elements;
+	 */
+	$data =>[
+	1..........0=>[
+	2................id=>6
+	2................name=>'abc'
+	2................value=>123</u>
+	1..........]
+	1..........1=>[
+	2................id=>9
+	2................name=>def
+	2................value=>456
+	1..........]
+	]	
+	<b>$r= xpAS::round_off($rows, 'id');</b>
+	return  =>[
+	1..........0=>[
+	2................name=>'abc'
+	2................value=>123</u>
+	1..........]
+	1..........1=>[
+	2................name=>def
+	2................value=>456
+	1..........]
+	]
+	</b></i></pre>
+	</div>
+	</li>
+
+	
+	<li>
+        <button  class="btn btn-info btn-lg btn-block" data-toggle="collapse" data-target="#_dissolve">dissolve($str, $d1 = '=', $d2 = '&', $decode = true)</button>
+        <div id="_dissolve" class="collapse">
+	
+	<pre><i><b>
+	/**
+	 * dissolve string to array
+	 * e.g.  array(a=>5,b=>12) <== a=5&b=12
+	 * @param string $str
+	 * @param str $d1
+	 * @param str $d2
+	 */
+	</b></i></pre>
+	</div>
+	</li>	
+	
+	<li>
+        <button  class="btn btn-info btn-lg btn-block" data-toggle="collapse" data-target="#_ring">ring($arr, $value, $size = 12)</button>
+        <div id="_ring" class="collapse">
+	
+	<pre><i><b>
+	/**
+	 * put element in a ring pipe
+	 * 	if element more than count;
+	 * 	 1st element will poped out
+	 *
+	 * @param  $arr	: the ring
+	 * @param  $value	: element
+	 * @param  $size 	: number of element will hold
+	 * @return array of the pipe
+	 */
+	</b></i></pre>
+	</div>
+	</li>
+		
+	<li>
+        <button  class="btn btn-info btn-lg btn-block" data-toggle="collapse" data-target="#_key">key($arr, $name, $dm = ',')</button>
+        <div id="_key" class="collapse">
+	
+	<pre><i><b>
+	/**
+	 * set key to array, use a column as key
+	 *
+	 * @param array $arr		:  array
+	 * @param string $name	: key field name
+	 * @return array
+	 */
+	</b></i></pre>
+	</div>
+	</li>	
+	
+	
+	<li>
+        <button  class="btn btn-info btn-lg btn-block" data-toggle="collapse" data-target="#_key_on">key_on($arr, $name, $dm = ',')</button>
+        <div id="_key_on" class="collapse">
+	
+	<pre><i><b>
+	/**
+	 * key on multi-dimension array
+	 *	eg. $r = self::key_on($r,'*,attr,Code');
+	 * @param array $arr
+	 * @param string $name :xp array (',')
+	 * @return $array with  k0 =  name;
+	 */
+	</b></i></pre>
+	</div>
+	</li>	
+	
+	<li>
+        <button  class="btn btn-info btn-lg btn-block" data-toggle="collapse" data-target="#_trim">trim($arr, $level = 50, $current = 0)</button>
+        <div id="_trim" class="collapse">
+	
+	<pre><i><b>
+	/**
+	 * apply trim to each array element
+	 *
+	 * @param array $arr
+	 * @param int	$level		: max recurring level
+	 * @param int $current		: !do not set !!, current recurring level
+	 * @return array
+	 */
+	</b></i></pre>
+	</div>
+	</li>		
+	
+	<li>
+        <button  class="btn btn-info btn-lg btn-block" data-toggle="collapse" data-target="#_clean">clean($arr, $deep = 50, $level = 0)</button>
+        <div id="_clean" class="collapse">
+	
+	<pre><i><b>
+	/**
+	 * clean empty element
+	 *
+	 * @param array $arr		:array to clean
+	 * @param int $deep		:deapth of array
+	 * @param int $level		: no not set this
+	 * @return array
+	 */
+	</b></i></pre>
+	</div>
+	</li>		
+	
+	<li>
+        <button  class="btn btn-info btn-lg btn-block" data-toggle="collapse" data-target="#_strip">strip($arr, $keep = '', $level = 50, $current = 0)</button>
+        <div id="_strip" class="collapse">
+	
+	<pre><i><b>
+	/**
+	 * strip tag within array
+	 *
+	 * @param array  $arr	:array or single element
+	 * @param string $keep: tag to be keept
+	 * @param int	$level		: max recurring level
+	 * @param int $current		: !do not set !!, current recurring level
+	 * @return array
+	 */
+	</b></i></pre>
+	</div>
+	</li>		
+	
+	<li>
+        <button  class="btn btn-info btn-lg btn-block" data-toggle="collapse" data-target="#_preg_get">preg_get($str, $regx, $pos = 0)</button>
+        <div id="_preg_get" class="collapse">
+	
+	<pre><i><b>
+	/**
+	 * get string from content using preg
+	 * the name may bite on the ass
+	 *
+	 * @param string $regx		: pattern
+	 * @param string $str		: string
+	 * @param string $pos		: which tmp to return
+	 * @return string
+	 */
+	</b></i></pre>
+	</div>
+	</li>		
+	
+	<li>
+        <button  class="btn btn-info btn-lg btn-block" data-toggle="collapse" data-target="#_preg_gets">preg_gets($str, $regx, $pos = 0)</button>
+        <div id="_preg_gets" class="collapse">
+	
+	<pre><i><b>
+	/**
+	 * get all matched string from content using preg
+	 * the name may bite on the ass
+	 *
+	 * @param string $regx		: pattern
+	 * @param string $str		: string
+	 * @param string $pos		: which tmp to return
+	 * @return array
+	 */
+	</b></i></pre>
+	</div>
+	</li>		
+	
+	<li>
+        <button  class="btn btn-info btn-lg btn-block" data-toggle="collapse" data-target="#_priority_get">priority_get()</button>
+        <div id="_priority_get" class="collapse">
+	
+	<pre><i><b>
+	/**
+	 * return data by input order
+	 *
+	 * @param list of vars as priority_get($a,$b,$c...)..
+	 * @return unknown
+	 */
+	 $c= 20;
+	 $r = xpAS::priority_get($a, $b, $c);
+	 $r => 20;
+	</b></i></pre>
+	</div>
+	</li>		
+	
+	<li>
+        <button  class="btn btn-info btn-lg btn-block" data-toggle="collapse" data-target="#_encode">encode($str, $key = 'default key', $cipher = MCRYPT_BLOWFISH, $mode = MCRYPT_MODE_ECB, $source = MCRYPT_RAND)</button>
+        <div id="_encode" class="collapse">
+	
+	<pre><i><b>
+	/**
+	 * encode a string
+	 *
+	 * @param string $str
+	 * @param string $key
+	 * @param php flag $cipher
+	 * @param php flag $mode
+	 * @param php flag $source
+	 * @return string
+	 */
+	</b></i></pre>
+	</div>
+	</li>		
+	
+	<li>
+        <button  class="btn btn-info btn-lg btn-block" data-toggle="collapse" data-target="#_decode">decode($str, $key = 'default key', $cipher = MCRYPT_BLOWFISH, $mode = MCRYPT_MODE_ECB, $source = MCRYPT_RAND)</button>
+        <div id="_decode" class="collapse">
+	
+	<pre><i><b>
+	/**
+	 * decode a string
+	 *
+	 * @param string $str
+	 * @param string $key
+	 * @param php flag $cipher
+	 * @param php flag $mode
+	 * @param php flag $source
+	 * @return string
+	 */
+	</b></i></pre>
+	</div>
+	</li>		
+	
+	<li>
+        <button  class="btn btn-info btn-lg btn-block" data-toggle="collapse" data-target="#_go">go($location)</button>
+        <div id="_go" class="collapse">
+	
+	<pre><i><b>
+	/**
+	 * go to a new url
+	 * @param string $location
+	 */
+	 </b></i></pre>
+	</div>
+	</li>		
+	
+	<li>
+        <button  class="btn btn-info btn-lg btn-block" data-toggle="collapse" data-target="#_get_globals">get_globals($part = null)</button>
+        <div id="_get_globals" class="collapse">
+	 
+	<pre><i><b>
+	/**
+	 * get global variable
+	 *
+	 * @param string $part : which part of global var such as user_data, _SESSION, _COOKIE
+	 * @return array
+	 */
+	</b></i></pre>
+	</div>
+	</li>		
+		
+	
+
+	<li>
+        <button  class="btn btn-info btn-lg btn-block" data-toggle="collapse" data-target="#_get_client_ip">get_client_ip() </button>
+        <div id="_get_client_ip" class="collapse">
+	
+	<pre><i><b>
+	/**
+	 * get client ip
+	 *
+	 * @return ip address (iv.4)
+	 */
+	 </b></i></pre>
+	</div>
+	</li>		
+	
+	<li>
+        <button  class="btn btn-info btn-lg btn-block" data-toggle="collapse" data-target="#_get_user_agent">get_user_agent() </button>
+        <div id="_get_user_agent" class="collapse">
+	
+	<pre><i><b>
+	/**
+	 * get user agent
+	 *
+	 * @return string
+	 */
+	</b></i></pre>
+	</div>
+	</li>		
+	
+	<li>
+        <button  class="btn btn-info btn-lg btn-block" data-toggle="collapse" data-target="#_curlOut">curlOut($server, $buff = null, $timeout = 300, $header = null, $backheader = false)</button>
+        <div id="_curlOut" class="collapse">
+	
+	<pre><i><b>
+	/**
+	 * use curl to get a web page
+	 *
+	 * @param string $server
+	 * @param string $buff
+	 * @param int $timeout
+	 * @param string  $header
+	 * @param string $backheader
+	 * @return string
+	 */
+	</b></i></pre>
+	</div>
+	</li>		
+	
+	<li>
+        <button  class="btn btn-info btn-lg btn-block" data-toggle="collapse" data-target="#_curlOutAuth">curlOutAuth($server, $buff = null, $id, $pwd, $timeout = 300, $header = null, $backheader = false)</button>
+        <div id="_curlOutAuth" class="collapse">
+	
+	<pre><i><b>
+	/**
+	 * get page except id/password for authentication.
+	 *
+	 * @param string $server
+	 * @param string $buff
+	 * @param string $id
+	 * @param string $pwd
+	 * @param int $timeout
+	 * @param string $header
+	 * @param string $backheader
+	 * @return string
+	 */
+	</b></i></pre>
+	</div>
+	</li>		
+	
+	<li>
+        <button  class="btn btn-info btn-lg btn-block" data-toggle="collapse" data-target="#_curl">curl($arr=array())</button>
+        <div id="_curl" class="collapse">
+	
+	<pre><i><b>
+	/**
+	 * curl with all options
+	 *
+	 * @param  array $arr : all options e.g.[POSTFIELDS=>'...', CURLOPT_TIMEOUT=>500]
+	 * @return array of result;
+	 */
+	</b></i></pre>
+	</div>
+	</li>		
+	
+	<li>
+        <button  class="btn btn-info btn-lg btn-block" data-toggle="collapse" data-target="#_camel2_">camel2_($name)</button>
+        <div id="_camel2_" class="collapse">
+	
+	<pre><i><b>
+	/**
+	 * return _ name from camel case
+	 *   getAbcFromDef => get_abc_from_def
+	 * @param string $name
+	 * @return string
+	 */
+	</b></i></pre>
+	</div>
+	</li>		
+	
+	<li>
+        <button  class="btn btn-info btn-lg btn-block" data-toggle="collapse" data-target="#_enHash">enHash($arr, $key = null)</button>
+        <div id="_enHash" class="collapse">
+	
+	<pre><i><b>
+	/**
+	 * create hash code string from array 
+	 *
+	 * @param array $arr
+	 * @param string $key
+	 * @return string
+	 */
+	</b></i></pre>
+	</div>
+	</li>		
+	
+	<li>
+        <button  class="btn btn-info btn-lg btn-block" data-toggle="collapse" data-target="#_deHash">deHash($str, $key = null)</button>
+        <div id="_deHash" class="collapse">
+	
+	<pre><i><b>
+	/**
+	 * reverse hash coded string to array
+	 *
+	 * @param string $str
+	 * @param string $key
+	 * @return array
+	 */
+	</b></i></pre>
+	</div>
+	</li>		
+
+	<li>
+        <button  class="btn btn-info btn-lg btn-block" data-toggle="collapse" data-target="#_least_less">least_less($arr, $value, $eq = true)</button>
+        <div id="_least_less" class="collapse">
+	
+	<pre><i><b>
+	/**
+	 * return item from array least less than (or eq, if equ=true) $value
+	 *
+	 * @param mix $arr
+	 * @param string $value
+	 * @param boolean $eq
+	 */
+	</b></i></pre>
+	</div>
+	</li>		
+	
+	<li>
+        <button  class="btn btn-info btn-lg btn-block" data-toggle="collapse" data-target="#_least_great">least_great($arr, $value, $eq = true)</button>
+        <div id="_least_great" class="collapse">
+	
+	<pre><i><b>
+	/**
+	 * return item from array least great than (or eq, if equ=true) $value
+	 *
+	 * @param mix $arr
+	 * @param string $value
+	 * @param boolean $eq
+	 */
+	</b></i></pre>
+	</div>
+	</li>		
+	
+	<li>
+        <button  class="btn btn-info btn-lg btn-block" data-toggle="collapse" data-target="#_flat2tree">flat2tree($arr, $id_name = 'id', $parent_id_name = 'parent_id', $child_name = 'children')</button>
+        <div id="_flat2tree" class="collapse">
+	
+	<pre><i><b>
+	/**
+	 * change back flaten tree from database;
+	 *	note orphan child will be omitted
+	 *  method : fruit picking,
+	 * @param mix $arr		flat table
+	 * @param string $id	name of id
+	 * @param string $parent_id name of parent id
+	 * @return array of tree or forest if multiple top level nodes
+	 */
+	</b></i></pre>
+	</div>
+	</li>		
+	
+	<li>
+        <button  class="btn btn-info btn-lg btn-block" data-toggle="collapse" data-target="#_tree2flat">tree2flat($arr, $parent_id = 'root', $parent = 'parent', $child_name = 'children', $level = 50, $currtnt = 0)</button>
+        <div id="_tree2flat" class="collapse">
+	
+	<pre><i><b>
+	/**
+	 * reserve tree to flat
+	 *
+	 * @param array $arr
+	 * @param string $child_name : name of child (key)
+	 * @param int $level	: max recurrsive level
+	 * @param int $current	: current level of recurrsive, do not set
+	 */
+	</b></i></pre>
+	</div>
+	</li>		
+	
+	<li>
+        <button  class="btn btn-info btn-lg btn-block" data-toggle="collapse" data-target="#_mapping">mapping($arr, $map_name)</button>
+        <div id="_mapping" class="collapse">
+	
+	<pre><i><b>
+	/**
+	 * use key word mapping to change column name
+	 *	$arr =	array(
+	 * 		array(a=>10, b=>20),
+	 * 		array(a=>11, b=>90),
+	 * 		)
+	 * 
+	 * 	$k = array(age=>a, point=>b)
+	 * => 
+	 *	$arr =	array(
+	 * 		array(age=>10, point=>20),
+	 * 		array(age=>11, point=>90),
+	 * 		)
+	 * 
+	 * 
+	 * @param array  $arr
+	 * @param array $map_name
+	 * @return array
+	 */
+	</b></i></pre>
+	</div>
+	</li>		
+	
+	<li>
+        <button  class="btn btn-info btn-lg btn-block" data-toggle="collapse" data-target="#_first">first($arr, $value = true)</button>
+        <div id="_first" class="collapse">
+	
+	<pre><i><b>
+	/**
+	 * first element of array
+	 * @param array $arr
+	 */
+	</b></i></pre>
+	</div>
+	</li>		
+	
+	<li>
+        <button  class="btn btn-info btn-lg btn-block" data-toggle="collapse" data-target="#_last">last($arr, $value = true)</button>
+        <div id="_last" class="collapse">
+	
+	<pre><i><b>
+	/**
+	 * last element of array
+	 * @param array $arr
+	 */
+	</b></i></pre>
+	</div>
+	</li>		
+	
+	<li>
+        <button  class="btn btn-info btn-lg btn-block" data-toggle="collapse" data-target="#_item">item($arr, $i = 1) </button>
+        <div id="_item" class="collapse">
+	
+	<pre><i><b>
+	/**
+	 * get number i item from array
+	 *
+	 * @param mix $arr
+	 * @param int $i, 	count from back if i <0
+	 * @return mix
+	 */
+	</b></i></pre>
+	</div>
+	</li>		
+	
+	<li>
+        <button  class="btn btn-info btn-lg btn-block" data-toggle="collapse" data-target="#_pack">pack($arr, $return=false, $level = 50, $current = 0)</button>
+        <div id="_pack" class="collapse">
+	
+	<pre><i><b>
+	/**
+	 * pack multi-dimensional array to one level with flat key e.g. ['ab,cd']
+	 *
+	 * @param array $arr
+	 * @param string $return :  false= return one level key=>value array, 'key' : return its' keys; 'value' : return its' values
+	 * @param int $level	: max depth
+	 * @param int $current	: do not set
+	 * @return mix
+	 */
+	</b></i></pre>
+	</div>
+	</li>		
+
+	<li>
+	<pre><i><b>
+	</b></i></pre>
+	</li>		
+	
+	
+	
+</ul>

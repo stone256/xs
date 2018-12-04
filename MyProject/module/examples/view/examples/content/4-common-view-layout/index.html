@@ -1,0 +1,36 @@
+
+<h3>Common Views</h3>
+<h4></h4>
+<p>
+[ROOT]:/layout<br>
+This is the place for you website structure file, which will be shared by all pages
+</p>
+<p>
+E.g.
+</p>
+<ul>
+	<li class="folder open">layout
+		<ul>
+			<li class="folder open">demo
+				<ul>
+					<li class="doc">header.phtml</li>
+					<li class="doc">footer.phtml</li>
+					<li class="doc">nav.phtml</li>
+				</ul>
+			</li>
+		</ul>
+	</li>
+	<li></li>
+	<li></li>
+	<li>
+		<h4>your module template:</h4>
+		<b class="code">
+		&lt;?php $page_title = 'X-FRAME | DEMO | INDEX'; ?&gt;
+		&lt;?php include _X_LAYOUT . '/demo/header.phtml'; ?&gt;
+			&lt;p&gt;...
+			&lt;/p&gt;
+
+		&lt;?php include _X_LAYOUT . '/demo/footer.phtml'; ?&gt;
+		</b>
+	</li>
+</ul>

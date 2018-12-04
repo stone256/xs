@@ -1,0 +1,40 @@
+<h3>Controllers</h3>
+<ol type="A">
+	<li>all controller will have controller attached to it.<br>
+	e.g. demo controller will be "demoController.php"
+	</li>
+	<li>controller class name<br>
+	special character "_" (under score) used in class name<br>
+	e.g. [ROOT]/module/<u>demo/2ndController.php</u> has class name "demo_2ndController"<br>
+	     [ROOT]/module/<u>demo/undergroung/darkController.php</u> has class name "demo_undergroung_darkController"<br>
+	</li>
+	<li>controller enter point method has "Action" attached it<br>
+	<b class="code">
+	e.g.
+	"/demo/demo@index" will point to [ROOT]/module/<u>demo/demoController.php</u>'s method indexAction()
+	&lt;?php
+		class demo_demoController extends _system_defaultController {
+			function indexAction() {
+				.....
+				return array('data' => array('rs' => $rs));
+			}
+		}
+	?&gt;
+	</b>
+	</li>
+	<li>controller will only works when you put it in the .router.php<br>
+	<b class="code">
+	e.g.
+	&lt;?php
+	$routers = array(
+		'/demo/high/light' => '/demo/high/light@hilite',
+		);
+	?&gt;
+
+	will activated controller :
+	[ROOT]/module/<u>demo/high/lightController.php</u>, when page "/demo/high/light" requested
+	and method :<u>hilite</u>Action() in the controller will be called
+	</b>
+
+	</li>
+</ol>

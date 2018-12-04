@@ -1,0 +1,30 @@
+<h3>Module setup and setup script.</h3>
+
+<ol type="A">
+	<li>
+		setup and update script are set in the module's root folder. <br>
+		e.g. [ROOT]/module/demo/<b>.setup.1.0.0.0.php</b><br/>
+	</li>
+	<li>
+		all setup/update scripts are named like:<br>
+		<b>.setup.x.x.x.x.php</b>  <br>
+		e.g. : <b>".setup.2.2.1.2.php"</b><br/>
+	</li>
+	<li>
+		scripts ara executed in ascent order. <br>
+		e.g. script will be executed in the order :<br>
+		<b>".setup.1.0.0.1.php"</b><br/>
+		<b>".setup.1.0.0.2.php"</b><br/>
+		<b>".setup.1.0.0.3.php"</b><br/>
+	</li>
+	<li>
+		after the script has been executed, ".done" will be attached to the file name to provent script running again. <br/>
+		<b>".setup.1.0.0.3.php.done"</b>
+	</li>
+	<li>
+		You must give apache permission change the file name. <br/>
+	</li>
+	<li>
+		to maintain system integrity, we strongly recommend do not output anything other than logs. <br/>
+	</li>
+</ol>

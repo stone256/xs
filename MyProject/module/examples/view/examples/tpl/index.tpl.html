@@ -1,0 +1,129 @@
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+
+<!-- jQuery library -->
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+
+<!-- Latest compiled JavaScript -->
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+
+<!-- test root tpl file -->
+
+<style>
+.h1,h2,h3,h4,h5{
+margin-bottom:0;
+}
+
+.ac{
+display:inline-block;
+border-radius:20px;
+border:4px #eee solid;
+width:40px;
+height:40px;
+line-height:30px;
+}
+
+.include-block{
+padding:8px;
+margin:4px;
+border:2px dashed #777;
+}
+
+.block{
+padding:8px;
+margin:5px;
+border:2px solid #888;
+}
+
+.code{
+background:#ddd;
+padding:8px;
+display:block;
+}
+.recursive li{
+padding:8px;
+border:1px dotted #999;
+}
+</style>
+
+<div class="contain-fluid">
+	<div class="row">
+		<div class="col-sm-10 col-sm-offset-1">
+		
+			<h2 class="text-center">Template usages</h2>
+			<i class="code">
+	<pre>
+	//instantiate
+	$tpl = new xpTpl(array('file'=>'tpl/index.tpl.html')); 
+	OR 	
+	$tpl = new xpTpl(array('string'=>'&lt;p&gt;this is &lt;b&gt;{{who}}&lt;/b&gt; template&lt;/p&gt;'));
+	..
+	$tpl=>sets($data);	//template data
+	$tpl->html(1);		//rendering 
+	
+	<b><u><div>E.g. (this file)</div></u></b>
+	<b>$tpl = new xpTpl(array('file'=>'test/_test.tpl.html'));</b>
+	$q = $_REQUEST;
+	$brr = array( ... .... ..); 			//template data: refer section #1
+	$brr['data'] = xpDebug::tree($brr,'Template Data',0); 	//display example data array in template
+	if($q['save'])
+		if($err = <b>$tpl->form_validation('myForm',$q)</b>)	//refer section 5
+			$brr['v_msg'] = $err;
+	$brr = xpAS::merge($brr,$q);
+	<b>$tpl->sets($brr)</b>;
+	<b>$tpl->html(1,1)</b>;	//(true,true) = (direct output, reload template before rendering)			
+	</pre> 
+			
+			</i>
+			<p>
+				 
+				<div id="_data" >
+				<h3>Template data </h3>
+				<i class="code">$data : 
+				<pre>
+					$tpl->sets($data);
+				</pre>
+				 {{data}}</i>
+				<span>- note: <b>this data is used for all follow examples</b> </span>
+				</div>
+				<br/>
+			</p>
+			
+			
+			
+			<p>
+				<button  class="btn btn-info btn-lg btn-block" data-toggle="collapse" data-target="#_standard"><span class="ac">1</span> &lt;!-- include of ?bbb==$ccc,5 _standard.tpl.html --&gt; </button>
+				<div id="_standard" class="collapse">
+				<!-- include of ?bbb==$ccc,5 _standard.tpl.html -->
+				</div>
+			</p>
+			
+			
+			<p>
+				<hr>
+				<button  class="btn btn-info btn-lg btn-block" data-toggle="collapse" data-target="#_block"><span class="ac">2</span> &lt;!-- include of  _block.tpl.html --&gt; </button>
+				<div id="_block" class="collapse">
+				<!-- include of  _block.tpl.html -->
+				</div>
+			</p>
+			
+			<p>
+				<hr>
+				<button  class="btn btn-info btn-lg btn-block" data-toggle="collapse" data-target="#_recursive"><span class="ac">3</span> &lt;!-- include of  _recursive.tpl.html --&gt;</button>
+				<div id="_recursive" class="collapse">
+				<!-- include of  _recursive.tpl.html -->
+				</div>
+			</p>
+			
+			<p>
+				<hr>
+				<button  class="btn btn-info btn-lg btn-block" data-toggle="collapse" data-target="#_form"><span class="ac">4</span> &lt;!-- include of  _form.tpl.html --&gt;</button>
+				<div id="_form" class="collapse">
+				<!-- include of  _form.tpl.html -->
+				</div>
+			</p>			
+			
+		</div>
+	</div>
+
+</div>

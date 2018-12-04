@@ -1,0 +1,25 @@
+<h3>File structure</h3>
+[ROOT] - your project root folder. e.g. /var/www/MyProject
+<table>
+	<tr>
+		<td valign="top">
+			<ol>
+				<li>all call will go through <b>/public/index.php</b></li>
+				<li>index.php will call <b>/.system/app.php</b></li>
+				<li>app.php will 1st load <b>/config/_system_config.php</b></li>
+				<li>and <b>/config/config.php</b></li>
+				<li>then <b>/.local</b></li>
+				<li>after config loaded app will start <b>/.system/loader.php</b></li>
+				<li>all enabled modules info will loaded from <b>/config/enabled/...</b></li>
+				<li>followed by load all module's <b>/module/mymodule/.router.php</b></li>
+				<li>app will analyse url and routers and before calling controller <b>/config/init.php</b> will be loaded</li>
+				<li>and call the <b>/module/mymodule/xxxxController.php</b></li>
+				<li>inside control you can call <b>/module/mymodule/model/xxxx.php</b></li>
+				<li><b>/module/mymodule/view/index/myxxxx.phtml</b> will be called if the view indicated</li>
+			</ol>
+		</td>
+		<td valign="top">
+			<img src="/sitemin/img/flow3.png" />
+		</td>
+	</tr>
+</table>

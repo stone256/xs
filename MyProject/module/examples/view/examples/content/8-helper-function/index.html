@@ -1,0 +1,41 @@
+
+<h3>Some Helpers </h3>
+<h4></h4>
+<p>
+	[ROOT]:/_system<br>
+	<br>
+	<b>Important system file</b>
+	<ul>
+		<li class="doc">app.php - this is the main file for the system it handle routers and views</li>
+		<li class="doc">_system_config.php - pre-defined system constants.
+			<ul>
+				<li class="b">_X_ROOT</li>
+				<li class="b">_X_MODULE</li>
+				<li class="b">_X_DATA</li>
+				<li class="b">_X_CACHE</li>
+				<li class="b">_X_LOG</li>
+				<li class="b">_X_LAYOUT</li>
+				<li class="b">_X_PUBLIC</li>
+				<li class="b">..</li>
+				<li class="b">_X_URL</li>
+				<li class="">you can list those value by call system function:<br> _defined(1); or $arr = _defined(0);  </li>
+			</ul>
+		</li>
+		<li class="doc">defalutHelper.php -  some system helper functions
+			<ul>
+				<li><b>_cg($k, $ttl = 300)</b> -  cache get</li>
+				<li><b>_cp($k, $value)</b> -  cache put </li>
+				<li><b>_config('database,demo,user')</b> -  return value from global $config array </li>
+				<li><b>_controller()</b> - return current controller</li>
+				<li><b>_defined()</b> -  return user and system defined constants</li>
+				<li><b>_dv()</b> -  print out value only if __X_DEBUG === true</li>
+				<li><b>_factory('model_name')</b> -  return model singleton instance </li>
+				<li><b>_log($data)</b> - data to [ROOT]/_data/log/log.txt</li>
+				<li><b>_mapper()</b> -  return current url mapped route</li>
+				<li><b>_rp('/var/www/MyProject/a/b/c')</b> -  return reletive path to project root "/a/b/c"</li>
+				<li><b>_url()</b> -  return current url</li>
+			</ul>
+		</li>
+		<li class="doc">defaultController.php - can be extand to user controllers</li>
+	</ul>
+</p>

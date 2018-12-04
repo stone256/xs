@@ -1,0 +1,33 @@
+<?php
+
+/**
+ * send to front in block
+ *
+function dump_chunk($chunk){
+    echo $chunk;
+    flush();
+    ob_flush();
+}
+
+//header('Content-Type: text/html; charset=UTF-8');
+
+flush();
+
+for ($i = 0; $i < 6; $i++) {
+    dump_chunk('Sending data chunk ' . ($i + 1) . ' of 1000 <br />');
+    sleep(1);
+}
+
+*/
+?>
+<html>
+    <!-- TEST on VUE2.js -->
+    <head>
+    </head>
+
+<body>
+    <div>You're in test area:</div>
+    <h3>Controller: <?=$rs['controller'];?><h3>
+    <h3>Default View: <?=_rp(__FILE__)?></h3>
+</body>
+</html>

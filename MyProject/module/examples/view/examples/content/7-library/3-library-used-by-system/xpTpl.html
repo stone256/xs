@@ -1,0 +1,374 @@
+<div class="contain-fluid">
+    <div class="row">
+        <div class="col-sm-10 col-sm-offset-1">
+
+            <h2 class="text-center">Template usages</h2>
+            <b class="code">
+
+	//instantiate
+	$tpl = new xpTpl(array('file'=>'tpl/index.tpl.html'));
+	OR
+	$tpl = new xpTpl(array('string'=>'&lt;p&gt;this is &lt;b&gt;&lt;/b&gt; template&lt;/p&gt;'));
+	..
+	$tpl=>sets($data);	//template data
+	$tpl->html(1);		//rendering
+
+	<b><u><div>E.g. (this file)</div></u></b>
+            <b>$tpl = new xpTpl(array('file'=>'test/_test.tpl.html'));</b> $q = $_REQUEST; $brr = array( ... .... ..); //template data: refer section #1 $brr['data'] = xpDebug::tree($brr,'Template Data',0); //display example data array in template if($q['save'])
+            if($err = <b>$tpl->form_validation('myForm',$q)</b>) //refer section 5 $brr['v_msg'] = $err; $brr = xpAS::merge($brr,$q);
+            <b>$tpl->sets($brr)</b>;
+            <b>$tpl->html(1,1)</b>; //(true,true) = (direct output, reload template before rendering)
+            </b>
+
+            </i>
+            <p>
+
+                <div id="_data">
+                    <h3>Template data </h3>
+                    <b class="code">$data :
+
+					$tpl->sets($data);
+				</b>
+                    <style type="text/css">
+                        ul.folder-tree b{margin:0 3px 0 0;} .bbb{color:#ddd;font-size:0.6em;} ul.folder-tree sup,ul.folder-tree sub{color:#bbb; font-size:0.6em;} ul.folder-tree sub{ margin-left:-5px;} .symbol{height:0.8em;font-size:0.8em;padding:3px 3px 4px 10px;margin: 0 3px; background:#fff0b0;border:#eee solid 1px;border-right:#ddd solid 2px;border-bottom:#ddd solid 2px;} ul.folder-tree {font-family: courier new;margin-left:40px;padding-top:0;display:block;list-style-type:none;} ul.folder-tree li{margin:7px 0;} ul.folder-tree a{text-decoration:none;}
+                    </style>
+                    <ul class="folder-tree">
+                        <li style="border-bottom:dotted 1px #eee;"><a href="javascript:void(0)" onclick="this.blur(); var e=document.getElementById('591cee801784a0'); var d=e.style.display; if(d){e.style.display='';this.childNodes[0].childNodes[0].innerHTML='-';}else{e.style.display='none';this.childNodes[0].childNodes[0].innerHTML='+';}"><span class="symbol"><b>+</b><sup>0</sup><sub>6</sub>Template Data</span></a>                            <span> &rarr;</li><li id="591cee801784a0" style="display:none"><ul ><li id="591cee80179081"><div><div style="float:left;margin-right:12px;"> </b> bbb &rarr; </div><div style="float:left">bbb</div><div style="clear:both;" ></div></div></li><li style="border-bottom:dotted 1px #eee;"><a href="javascript:void(0)" onclick="this.blur(); var e=document.getElementById('591cee80179991'); var d=e.style.display; if(d){e.style.display='';this.childNodes[0].childNodes[0].innerHTML='-';}else{e.style.display='none';this.childNodes[0].childNodes[0].innerHTML='+';}"><span class="symbol"><b>+</b><sup>1</sup><sub>4</sub>ccc</span></a>
+                            <span> &rarr;</li><li id="591cee80179991" style="display:none"><ul ><li id="591cee8017a062"><div><div style="float:left;margin-right:12px;"> </b> 0 &rarr; </div><div style="float:left">c1</div><div style="clear:both;" ></div></div></li><li id="591cee8017a7d2"><div><div style="float:left;margin-right:12px;"> </b> 1 &rarr; </div><div style="float:left">c2</div><div style="clear:both;" ></div></div></li><li id="591cee8017aed2"><div><div style="float:left;margin-right:12px;"> </b> 2 &rarr; </div><div style="float:left">c3</div><div style="clear:both;" ></div></div></li><li id="591cee8017b5c2"><div><div style="float:left;margin-right:12px;"> </b> 5 &rarr; </div><div style="float:left">bbb</div><div style="clear:both;" ></div></div></li></ul></li><li style="border-bottom:dotted 1px #eee;"><a href="javascript:void(0)" onclick="this.blur(); var e=document.getElementById('591cee8017bd11'); var d=e.style.display; if(d){e.style.display='';this.childNodes[0].childNodes[0].innerHTML='-';}else{e.style.display='none';this.childNodes[0].childNodes[0].innerHTML='+';}"><span class="symbol"><b>+</b><sup>1</sup><sub>7</sub>n</span></a>
+                            <span> &rarr;</li><li id="591cee8017bd11" style="display:none"><ul ><li id="591cee8017c3a2"><div><div style="float:left;margin-right:12px;"> </b> 0 &rarr; </div><div style="float:left">111</div><div style="clear:both;" ></div></div></li><li id="591cee8017ca92"><div><div style="float:left;margin-right:12px;"> </b> 1 &rarr; </div><div style="float:left">1</div><div style="clear:both;" ></div></div></li><li id="591cee8017d162"><div><div style="float:left;margin-right:12px;"> </b> 2 &rarr; </div><div style="float:left">2</div><div style="clear:both;" ></div></div></li><li id="591cee8017d842"><div><div style="float:left;margin-right:12px;"> </b> 3 &rarr; </div><div style="float:left">3</div><div style="clear:both;" ></div></div></li><li style="border-bottom:dotted 1px #eee;"><a href="javascript:void(0)" onclick="this.blur(); var e=document.getElementById('591cee8017df02'); var d=e.style.display; if(d){e.style.display='';this.childNodes[0].childNodes[0].innerHTML='-';}else{e.style.display='none';this.childNodes[0].childNodes[0].innerHTML='+';}"><span class="symbol"><b>+</b><sup>2</sup><sub>6</sub>m</span></a>
+                            <span> &rarr;</li><li id="591cee8017df02" style="display:none"><ul ><li id="591cee8017e5a3"><div><div style="float:left;margin-right:12px;"> </b> 0 &rarr; </div><div style="float:left">1</div><div style="clear:both;" ></div></div></li><li id="591cee8017ece3"><div><div style="float:left;margin-right:12px;"> </b> 1 &rarr; </div><div style="float:left">2</div><div style="clear:both;" ></div></div></li><li id="591cee8017f3c3"><div><div style="float:left;margin-right:12px;"> </b> 2 &rarr; </div><div style="float:left">3</div><div style="clear:both;" ></div></div></li><li id="591cee8017fa93"><div><div style="float:left;margin-right:12px;"> </b> 3 &rarr; </div><div style="float:left">4</div><div style="clear:both;" ></div></div></li><li id="591cee80180163"><div><div style="float:left;margin-right:12px;"> </b> 5 &rarr; </div><div style="float:left">this is 5</div><div style="clear:both;" ></div></div></li><li id="591cee80180843"><div><div style="float:left;margin-right:12px;"> </b> 22 &rarr; </div><div style="float:left">a</div><div style="clear:both;" ></div></div></li></ul></li><li id="591cee80180f92"><div><div style="float:left;margin-right:12px;"> </b> 4 &rarr; </div><div style="float:left">4.4</div><div style="clear:both;" ></div></div></li><li id="591cee80181732"><div><div style="float:left;margin-right:12px;"> </b> 5 &rarr; </div><div style="float:left">5</div><div style="clear:both;" ></div></div></li></ul></li><li style="border-bottom:dotted 1px #eee;"><a href="javascript:void(0)" onclick="this.blur(); var e=document.getElementById('591cee80181eb1'); var d=e.style.display; if(d){e.style.display='';this.childNodes[0].childNodes[0].innerHTML='-';}else{e.style.display='none';this.childNodes[0].childNodes[0].innerHTML='+';}"><span class="symbol"><b>+</b><sup>1</sup><sub>3</sub>ak</span></a>
+                            <span> &rarr;</li><li id="591cee80181eb1" style="display:none"><ul ><li id="591cee80182522"><div><div style="float:left;margin-right:12px;"> </b> 0 &rarr; </div><div style="float:left">7</div><div style="clear:both;" ></div></div></li><li id="591cee80182bf2"><div><div style="float:left;margin-right:12px;"> </b> 1 &rarr; </div><div style="float:left">8</div><div style="clear:both;" ></div></div></li><li id="591cee801832b2"><div><div style="float:left;margin-right:12px;"> </b> 2 &rarr; </div><div style="float:left">9</div><div style="clear:both;" ></div></div></li></ul></li><li style="border-bottom:dotted 1px #eee;"><a href="javascript:void(0)" onclick="this.blur(); var e=document.getElementById('591cee80183c11'); var d=e.style.display; if(d){e.style.display='';this.childNodes[0].childNodes[0].innerHTML='-';}else{e.style.display='none';this.childNodes[0].childNodes[0].innerHTML='+';}"><span class="symbol"><b>+</b><sup>1</sup><sub>2</sub>bk</span></a>
+                            <span> &rarr;</li><li id="591cee80183c11" style="display:none"><ul ><li style="border-bottom:dotted 1px #eee;"><a href="javascript:void(0)" onclick="this.blur(); var e=document.getElementById('591cee80184272'); var d=e.style.display; if(d){e.style.display='';this.childNodes[0].childNodes[0].innerHTML='-';}else{e.style.display='none';this.childNodes[0].childNodes[0].innerHTML='+';}"><span class="symbol"><b>+</b><sup>2</sup><sub>2</sub>0</span></a>
+                            <span> &rarr;</li><li id="591cee80184272" style="display:none"><ul ><li id="591cee801848b3"><div><div style="float:left;margin-right:12px;"> </b> name &rarr; </div><div style="float:left">abc</div><div style="clear:both;" ></div></div></li><li style="border-bottom:dotted 1px #eee;"><a href="javascript:void(0)" onclick="this.blur(); var e=document.getElementById('591cee80184f73'); var d=e.style.display; if(d){e.style.display='';this.childNodes[0].childNodes[0].innerHTML='-';}else{e.style.display='none';this.childNodes[0].childNodes[0].innerHTML='+';}"><span class="symbol"><b>+</b><sup>3</sup><sub>3</sub>ages</span></a>
+                            <span> &rarr;</li><li id="591cee80184f73" style="display:none"><ul ><li style="border-bottom:dotted 1px #eee;"><a href="javascript:void(0)" onclick="this.blur(); var e=document.getElementById('591cee801855c4'); var d=e.style.display; if(d){e.style.display='';this.childNodes[0].childNodes[0].innerHTML='-';}else{e.style.display='none';this.childNodes[0].childNodes[0].innerHTML='+';}"><span class="symbol"><b>+</b><sup>4</sup><sub>1</sub>0</span></a>
+                            <span> &rarr;</li><li id="591cee801855c4" style="display:none"><ul ><li id="591cee80185c25"><div><div style="float:left;margin-right:12px;"> </b> age &rarr; </div><div style="float:left">3</div><div style="clear:both;" ></div></div></li></ul></li><li style="border-bottom:dotted 1px #eee;"><a href="javascript:void(0)" onclick="this.blur(); var e=document.getElementById('591cee80186384'); var d=e.style.display; if(d){e.style.display='';this.childNodes[0].childNodes[0].innerHTML='-';}else{e.style.display='none';this.childNodes[0].childNodes[0].innerHTML='+';}"><span class="symbol"><b>+</b><sup>4</sup><sub>1</sub>1</span></a>
+                            <span> &rarr;</li><li id="591cee80186384" style="display:none"><ul ><li id="591cee801869d5"><div><div style="float:left;margin-right:12px;"> </b> age &rarr; </div><div style="float:left">6</div><div style="clear:both;" ></div></div></li></ul></li><li style="border-bottom:dotted 1px #eee;"><a href="javascript:void(0)" onclick="this.blur(); var e=document.getElementById('591cee801870d4'); var d=e.style.display; if(d){e.style.display='';this.childNodes[0].childNodes[0].innerHTML='-';}else{e.style.display='none';this.childNodes[0].childNodes[0].innerHTML='+';}"><span class="symbol"><b>+</b><sup>4</sup><sub>1</sub>2</span></a>
+                            <span> &rarr;</li><li id="591cee801870d4" style="display:none"><ul ><li id="591cee80187715"><div><div style="float:left;margin-right:12px;"> </b> age &rarr; </div><div style="float:left">9</div><div style="clear:both;" ></div></div></li></ul></li></ul></li></ul></li><li style="border-bottom:dotted 1px #eee;"><a href="javascript:void(0)" onclick="this.blur(); var e=document.getElementById('591cee80187ee2'); var d=e.style.display; if(d){e.style.display='';this.childNodes[0].childNodes[0].innerHTML='-';}else{e.style.display='none';this.childNodes[0].childNodes[0].innerHTML='+';}"><span class="symbol"><b>+</b><sup>2</sup><sub>2</sub>1</span></a>
+                            <span> &rarr;</li><li id="591cee80187ee2" style="display:none"><ul ><li id="591cee80188523"><div><div style="float:left;margin-right:12px;"> </b> name &rarr; </div><div style="float:left">def</div><div style="clear:both;" ></div></div></li><li style="border-bottom:dotted 1px #eee;"><a href="javascript:void(0)" onclick="this.blur(); var e=document.getElementById('591cee80188bd3'); var d=e.style.display; if(d){e.style.display='';this.childNodes[0].childNodes[0].innerHTML='-';}else{e.style.display='none';this.childNodes[0].childNodes[0].innerHTML='+';}"><span class="symbol"><b>+</b><sup>3</sup><sub>3</sub>ages</span></a>
+                            <span> &rarr;</li><li id="591cee80188bd3" style="display:none"><ul ><li style="border-bottom:dotted 1px #eee;"><a href="javascript:void(0)" onclick="this.blur(); var e=document.getElementById('591cee80189224'); var d=e.style.display; if(d){e.style.display='';this.childNodes[0].childNodes[0].innerHTML='-';}else{e.style.display='none';this.childNodes[0].childNodes[0].innerHTML='+';}"><span class="symbol"><b>+</b><sup>4</sup><sub>1</sub>0</span></a>
+                            <span> &rarr;</li><li id="591cee80189224" style="display:none"><ul ><li id="591cee80189845"><div><div style="float:left;margin-right:12px;"> </b> age &rarr; </div><div style="float:left">1</div><div style="clear:both;" ></div></div></li></ul></li><li style="border-bottom:dotted 1px #eee;"><a href="javascript:void(0)" onclick="this.blur(); var e=document.getElementById('591cee80189f34'); var d=e.style.display; if(d){e.style.display='';this.childNodes[0].childNodes[0].innerHTML='-';}else{e.style.display='none';this.childNodes[0].childNodes[0].innerHTML='+';}"><span class="symbol"><b>+</b><sup>4</sup><sub>1</sub>1</span></a>
+                            <span> &rarr;</li><li id="591cee80189f34" style="display:none"><ul ><li id="591cee8018a565"><div><div style="float:left;margin-right:12px;"> </b> age &rarr; </div><div style="float:left">3</div><div style="clear:both;" ></div></div></li></ul></li><li style="border-bottom:dotted 1px #eee;"><a href="javascript:void(0)" onclick="this.blur(); var e=document.getElementById('591cee8018ac54'); var d=e.style.display; if(d){e.style.display='';this.childNodes[0].childNodes[0].innerHTML='-';}else{e.style.display='none';this.childNodes[0].childNodes[0].innerHTML='+';}"><span class="symbol"><b>+</b><sup>4</sup><sub>1</sub>2</span></a>
+                            <span> &rarr;</li><li id="591cee8018ac54" style="display:none"><ul ><li id="591cee8018b295"><div><div style="float:left;margin-right:12px;"> </b> age &rarr; </div><div style="float:left">5</div><div style="clear:both;" ></div></div></li></ul></li></ul></li></ul></li></ul></li><li style="border-bottom:dotted 1px #eee;"><a href="javascript:void(0)" onclick="this.blur(); var e=document.getElementById('591cee8018bb31'); var d=e.style.display; if(d){e.style.display='';this.childNodes[0].childNodes[0].innerHTML='-';}else{e.style.display='none';this.childNodes[0].childNodes[0].innerHTML='+';}"><span class="symbol"><b>+</b><sup>1</sup><sub>2</sub>rc</span></a>
+                            <span> &rarr;</li><li id="591cee8018bb31" style="display:none"><ul ><li style="border-bottom:dotted 1px #eee;"><a href="javascript:void(0)" onclick="this.blur(); var e=document.getElementById('591cee8018c172'); var d=e.style.display; if(d){e.style.display='';this.childNodes[0].childNodes[0].innerHTML='-';}else{e.style.display='none';this.childNodes[0].childNodes[0].innerHTML='+';}"><span class="symbol"><b>+</b><sup>2</sup><sub>3</sub>0</span></a>
+                            <span> &rarr;</li><li id="591cee8018c172" style="display:none"><ul ><li id="591cee8018c7b3"><div><div style="float:left;margin-right:12px;"> </b> title &rarr; </div><div style="float:left">t1</div><div style="clear:both;" ></div></div></li><li id="591cee8018ce73"><div><div style="float:left;margin-right:12px;"> </b> text &rarr; </div><div style="float:left">tx1</div><div style="clear:both;" ></div></div></li><li style="border-bottom:dotted 1px #eee;"><a href="javascript:void(0)" onclick="this.blur(); var e=document.getElementById('591cee8018d533'); var d=e.style.display; if(d){e.style.display='';this.childNodes[0].childNodes[0].innerHTML='-';}else{e.style.display='none';this.childNodes[0].childNodes[0].innerHTML='+';}"><span class="symbol"><b>+</b><sup>3</sup><sub>1</sub>rc</span></a>
+                            <span> &rarr;</li><li id="591cee8018d533" style="display:none"><ul ><li style="border-bottom:dotted 1px #eee;"><a href="javascript:void(0)" onclick="this.blur(); var e=document.getElementById('591cee8018db64'); var d=e.style.display; if(d){e.style.display='';this.childNodes[0].childNodes[0].innerHTML='-';}else{e.style.display='none';this.childNodes[0].childNodes[0].innerHTML='+';}"><span class="symbol"><b>+</b><sup>4</sup><sub>2</sub>0</span></a>
+                            <span> &rarr;</li><li id="591cee8018db64" style="display:none"><ul ><li id="591cee8018e065"><div><div style="float:left;margin-right:12px;"> </b> title &rarr; </div><div style="float:left">t11</div><div style="clear:both;" ></div></div></li><li id="591cee8018e9f5"><div><div style="float:left;margin-right:12px;"> </b> text &rarr; </div><div style="float:left">tx11</div><div style="clear:both;" ></div></div></li></ul></li></ul></li></ul></li><li style="border-bottom:dotted 1px #eee;"><a href="javascript:void(0)" onclick="this.blur(); var e=document.getElementById('591cee8018f282'); var d=e.style.display; if(d){e.style.display='';this.childNodes[0].childNodes[0].innerHTML='-';}else{e.style.display='none';this.childNodes[0].childNodes[0].innerHTML='+';}"><span class="symbol"><b>+</b><sup>2</sup><sub>3</sub>1</span></a>
+                            <span> &rarr;</li><li id="591cee8018f282" style="display:none"><ul ><li id="591cee8018f903"><div><div style="float:left;margin-right:12px;"> </b> title &rarr; </div><div style="float:left">t2</div><div style="clear:both;" ></div></div></li><li id="591cee8018ffb3"><div><div style="float:left;margin-right:12px;"> </b> text &rarr; </div><div style="float:left">tx2</div><div style="clear:both;" ></div></div></li><li style="border-bottom:dotted 1px #eee;"><a href="javascript:void(0)" onclick="this.blur(); var e=document.getElementById('591cee80190c03'); var d=e.style.display; if(d){e.style.display='';this.childNodes[0].childNodes[0].innerHTML='-';}else{e.style.display='none';this.childNodes[0].childNodes[0].innerHTML='+';}"><span class="symbol"><b>+</b><sup>3</sup><sub>1</sub>rc</span></a>
+                            <span> &rarr;</li><li id="591cee80190c03" style="display:none"><ul ><li style="border-bottom:dotted 1px #eee;"><a href="javascript:void(0)" onclick="this.blur(); var e=document.getElementById('591cee80191264'); var d=e.style.display; if(d){e.style.display='';this.childNodes[0].childNodes[0].innerHTML='-';}else{e.style.display='none';this.childNodes[0].childNodes[0].innerHTML='+';}"><span class="symbol"><b>+</b><sup>4</sup><sub>3</sub>0</span></a>
+                            <span> &rarr;</li><li id="591cee80191264" style="display:none"><ul ><li id="591cee80191865"><div><div style="float:left;margin-right:12px;"> </b> title &rarr; </div><div style="float:left">t21</div><div style="clear:both;" ></div></div></li><li id="591cee80191ee5"><div><div style="float:left;margin-right:12px;"> </b> text &rarr; </div><div style="float:left">tx21</div><div style="clear:both;" ></div></div></li><li style="border-bottom:dotted 1px #eee;"><a href="javascript:void(0)" onclick="this.blur(); var e=document.getElementById('591cee80192565'); var d=e.style.display; if(d){e.style.display='';this.childNodes[0].childNodes[0].innerHTML='-';}else{e.style.display='none';this.childNodes[0].childNodes[0].innerHTML='+';}"><span class="symbol"><b>+</b><sup>5</sup><sub>1</sub>rc</span></a>
+                            <span> &rarr;</li><li id="591cee80192565" style="display:none"><ul ><li style="border-bottom:dotted 1px #eee;"><a href="javascript:void(0)" onclick="this.blur(); var e=document.getElementById('591cee80192b66'); var d=e.style.display; if(d){e.style.display='';this.childNodes[0].childNodes[0].innerHTML='-';}else{e.style.display='none';this.childNodes[0].childNodes[0].innerHTML='+';}"><span class="symbol"><b>+</b><sup>6</sup><sub>3</sub>0</span></a>
+                            <span> &rarr;</li><li id="591cee80192b66" style="display:none"><ul ><li id="591cee80193117"><div><div style="float:left;margin-right:12px;"> </b> title &rarr; </div><div style="float:left">t211</div><div style="clear:both;" ></div></div></li><li id="591cee80193817"><div><div style="float:left;margin-right:12px;"> </b> text &rarr; </div><div style="float:left">tx211</div><div style="clear:both;" ></div></div></li><li style="border-bottom:dotted 1px #eee;"><a href="javascript:void(0)" onclick="this.blur(); var e=document.getElementById('591cee80193eb7'); var d=e.style.display; if(d){e.style.display='';this.childNodes[0].childNodes[0].innerHTML='-';}else{e.style.display='none';this.childNodes[0].childNodes[0].innerHTML='+';}"><span class="symbol"><b>+</b><sup>7</sup><sub>2</sub>rc</span></a>
+                            <span> &rarr;</li><li id="591cee80193eb7" style="display:none"><ul ><li style="border-bottom:dotted 1px #eee;"><a href="javascript:void(0)" onclick="this.blur(); var e=document.getElementById('591cee801944c8'); var d=e.style.display; if(d){e.style.display='';this.childNodes[0].childNodes[0].innerHTML='-';}else{e.style.display='none';this.childNodes[0].childNodes[0].innerHTML='+';}"><span class="symbol"><b>+</b><sup>8</sup><sub>2</sub>0</span></a>
+                            <span> &rarr;</li><li id="591cee801944c8" style="display:none"><ul ><li id="591cee80194b09"><div><div style="float:left;margin-right:12px;"> </b> title &rarr; </div><div style="float:left">t2111</div><div style="clear:both;" ></div></div></li><li id="591cee80195209"><div><div style="float:left;margin-right:12px;"> </b> text &rarr; </div><div style="float:left">tx2111</div><div style="clear:both;" ></div></div></li></ul></li><li style="border-bottom:dotted 1px #eee;"><a href="javascript:void(0)" onclick="this.blur(); var e=document.getElementById('591cee801958d8'); var d=e.style.display; if(d){e.style.display='';this.childNodes[0].childNodes[0].innerHTML='-';}else{e.style.display='none';this.childNodes[0].childNodes[0].innerHTML='+';}"><span class="symbol"><b>+</b><sup>8</sup><sub>2</sub>1</span></a>
+                            <span> &rarr;</li><li id="591cee801958d8" style="display:none"><ul ><li id="591cee80195ec9"><div><div style="float:left;margin-right:12px;"> </b> title &rarr; </div><div style="float:left">t2112</div><div style="clear:both;" ></div></div></li><li id="591cee80197839"><div><div style="float:left;margin-right:12px;"> </b> text &rarr; </div><div style="float:left">tx2112</div><div style="clear:both;" ></div></div></li></ul></li></ul></li></ul></li></ul></li></ul></li></ul></li></ul></li></ul></li></ul></li></ul></i>
+				<span>- note: <b>this data is used for all follow examples</b> </span>
+                </div>
+                <br/>
+            </p>
+
+
+
+            <p>
+                <button class="btn btn-info btn-lg btn-block" data-toggle="collapse" data-target="#_standard"> &lt;!-- include of ?bbb==$ccc,5 _standard.tpl.html --&gt; </button>
+                <div id="_standard" class="collapse">
+                    <h3>Start _standard.tpl.html</h3>
+
+
+
+                    <h4>standard type 1</h4>
+
+
+                    <div class="block"><i class="code">{{$bbb}} &rarr;  variable $TEMPLATE_DATA[bbb]. *you can omit $ , just use {{bbb}} when in the first position</i>bbb</div>
+                    <div class="block"><i class="code">{{ccc}} &rarr;  variable is array, $TEMPLATE_DATA[ccc] = ['c1','c2','c3',5=>'bbb']  </i>c1,c2,c3,bbb</div>
+                    <div class="block"><i class="code">{{ccc,<b>5</b>}} &rarr;  array element, $TEMPLATE_DATA[ccc] = ['c1','c2','c3',<b>5</b>=>'bbb'], so $TEMPLATE_DATA[ccc][<b>5</b>] = bbb </i>bbb</div>
+                    <div class="block"><i class="code">{{abcd:<b>this is default value</b>}} &rarr;  default value</i>this is default value</div>
+                    <div class="block"><i class="code">{{abcd:<b>$n</b>,<b>4</b>}} &rarr;  use variable $TEMPLATE_DATA[<b>n</b>][<b>4</b>] as default</i>4.4</div>
+                    <div class="block"><i class="code">{{abcd:<b>$n,m</b>}} &rarr;  use variable $TEMPLATE_DATA[<b>n</b>][<b>m</b>] as default</i>1,2,3,4,this is 5,a</div>
+                    <div class="block"><i class="code">{{*dddd*}} &rarr;  comments</i>{{dddd}}</div>
+
+
+
+                    <h4>standard type 2</h4>
+                    <div class="block"><i class="code">{{bbb==bbb?<b>bbb is eq  bbb</b>:bbb is not eq bbb}} &rarr;  if $TEMPLATE_DATA[bbb] == 'bbb' </i>bbb is eq bbb</div>
+                    <div class="block"><i class="code">{{ddd?has ddd:<b> dddd is not existed</b> |<b>strtoupper</b>}} &rarr;  if($TEMPLATE_DATA[ddd]) and apply function strtoupper to result </i> DDDD IS NOT EXISTED </div>
+                    <div class="block"><i class="code">{{$n,m,2>5?gt 5:<b>$n,0</b>}} &rarr;   if($TEMPLATE_DATA[<b>n</b>][<b>m</b>][<b>2</b>]>5) 'gt 5' else $TEMPLATE_DATA[<b>n</b>][<b>0</b>] </i>111</div>
+                    <div class="block"><i class="code">{{$n,m,2<5?<b>lt 5</b>:$n,0}} &rarr;   if($TEMPLATE_DATA[<b>n</b>][<b>m</b>][<b>2</b>]<5) 'lt 5' else $TEMPLATE_DATA[<b>n</b>][<b>0</b>] </i>lt 5</div>
+
+                    <h4>standard type 3</h4>
+                    <div class="block"><i class="code">{{$n,m,0#000:111:222:333:5=555:a=$bbb}} &rarr; [000,111,222,333,5=>555,a=>$bbb][$TEMPLATE_DATA[n][m][0]] &rarr; [000,111,222,333,5=555,a=$bbb][1] as $TEMPLATE_DATA[<b>n</b>][<b>m</b>][<b>0</b>]=1</i>111</div>
+                    <div class="block"><i class="code">{{$n,m,2#000:111:222:333:5=555:a=$bbb}} &rarr; [000,111,222,333,5=>555,a=>$bbb][$TEMPLATE_DATA[$TEMPLATE_DATA[<b>n</b>]][<b>m</b>][<b>2</b>]] &rarr; [000,111,222,333,5=555,<b>a</b>=>$bbb][<b>3</b>]</i>333</div>
+                    <div class="block"><i class="code">{{$n,m,<b>22</b>#000:111:222:333:5=555:a=$ccc,<b>2</b>}} &rarr; since $TEMPLATE_DATA[<b>n</b>][<b>m</b>][<b>22</b>] = '<b>a</b>',  $TEMPLATE_DATA[ccc] = ['c1','c2','c3',5=>'bbb'] this translate to [000,111,222,333,5=>555,<b>a</b>=><b>$ccc</b>,<b>2</b>][<b>a</b>][<b>2</b>] = c3 </i>c3</div>
+
+                    <div class="block"><i class="code">{{$n,5#$n,m}} &rarr; $TEMPLATE_DATA[n][5] = 5,  $TEMPLATE_DATA[n][m] = [1,2,3,4, 5=>'this is 5', 22=>'a'] this translate to [1,2,3,4, 5=>'this is 5', 22=>'a'][<b>5</b>] </i>this is 5</div>
+
+
+                    <h3>End _standard.tpl.html</h3>
+
+
+                </div>
+            </p>
+
+
+            <p>
+                <hr>
+                <button class="btn btn-info btn-lg btn-block" data-toggle="collapse" data-target="#_block"> &lt;!-- include of  _block.tpl.html --&gt; </button>
+                <div id="_block" class="collapse">
+                    <h3>Start _block.tpl.html</h3>
+
+
+                    <div class="block">
+                        <pre class="code">
+&lt;ul&gt;
+< !--start of <b>$ak</b>-- >
+	&lt;li&gt;value=={{$_self}}&lt;/li&gt;
+< !--end of <b>$ak</b>-- >
+&lt;/ul&gt;
+</pre>
+                        <b>use $TEMPLATE_DATA[<b>ak</b>]</b>
+
+
+                        <pre>
+&lt;ul &gt;<!--block $ak -->
+	&lt;li&gt;value==7 &lt;/li&gt;
+	&lt;li&gt;value==8 &lt;/li&gt;
+	&lt;li&gt;value==9 &lt;/li&gt;
+&lt;/ul&gt;
+</pre>
+                    </div>
+
+                    <div class="block">
+                        <pre class="code">
+&lt;ul&gt;
+&lt;!-- start of $<b>bk</b> --&gt;
+	&lt;li&gt;
+		{{%NAME}}[{{%K}}]
+		&lt;ol&gt;
+			&lt;!-- start of ages--&gt;
+			&lt;li&gt;age:{{$age}}&lt;/li&gt;
+			&lt;!--end of ages --&gt;
+		&lt;/ol&gt;
+	&lt;/li&gt;
+&lt;!-- end of <b>$bk</b> --&gt;
+&lt;/ul&gt;
+</pre>
+
+                        <b>use $TEMPLATE_DATA[<b>bk</b>]</b>
+                        <pre>
+&lt;ul &gt;<!--block $bk -->
+	&lt;li&gt;
+		$bk[0]
+		&lt;ol&gt;<!--block ages -->
+		&lt;li&gt;age:3&lt;/li&gt;
+		&lt;li&gt;age:6&lt;/li&gt;
+		&lt;li&gt;age:9&lt;/li&gt;
+		&lt;/ol&gt;
+	&lt;/li&gt;
+
+	&lt;li&gt;
+		$bk[1]
+		&lt;ol&gt;<!--block ages -->
+		&lt;li&gt;age:1&lt;/li&gt;
+		&lt;li&gt;age:3&lt;/li&gt;
+		&lt;li&gt;age:5&lt;/li&gt;
+		&lt;/ol&gt;
+	&lt;/li&gt;
+
+&lt;/ul&gt;
+</pre>
+                    </div>
+
+                    <h3>End _block.tpl.html</h3>
+                </div>
+            </p>
+
+            <p>
+                <hr>
+                <button class="btn btn-info btn-lg btn-block" data-toggle="collapse" data-target="#_recursive"> &lt;!-- include of  _recursive.tpl.html --&gt;</button>
+                <div id="_recursive" class="collapse">
+                    <h3>Start _recursive.tpl.html</h3>
+
+
+                    <div class="block">
+
+                        <!--	<h4>Block Data</h4>
+
+
+	<h4>Recursive Template</h4>
+-->
+                        <pre class="code">
+
+	&lt;!--recursion start $rc--&gt;
+	&lt;ul class="recursive"&gt;
+		&lt;li&gt;
+			&lt;p&gt;&lt;b&gt;{{$title}}&lt;/b&gt; - {{$text}}&lt;/p&gt;
+
+			&lt;!-- recursion $rc--&gt;
+
+		&lt;/li&gt;
+	&lt;/ul&gt;
+	&lt;!--recursion end $rc--&gt;
+	</pre>
+
+                        <!--	<h4>Rendered</h4>-->
+
+                        <!-- recursion rc -->
+                        <ul class="recursive">
+                            <li>
+                                <p><b>t1</b> - tx1</p>
+
+                                <!-- recursion rc -->
+                                <ul class="recursive">
+                                    <li>
+                                        <p><b>t11</b> - tx11</p>
+
+                                    </li>
+                                </ul>
+
+                            </li>
+                        </ul>
+
+
+                        <ul class="recursive">
+                            <li>
+                                <p><b>t2</b> - tx2</p>
+
+                                <!-- recursion rc -->
+                                <ul class="recursive">
+                                    <li>
+                                        <p><b>t21</b> - tx21</p>
+
+                                        <!-- recursion rc -->
+                                        <ul class="recursive">
+                                            <li>
+                                                <p><b>t211</b> - tx211</p>
+
+                                                <!-- recursion rc -->
+                                                <ul class="recursive">
+                                                    <li>
+                                                        <p><b>t2111</b> - tx2111</p>
+
+                                                    </li>
+                                                </ul>
+
+
+                                                <ul class="recursive">
+                                                    <li>
+                                                        <p><b>t2112</b> - tx2112</p>
+
+                                                    </li>
+                                                </ul>
+
+                                            </li>
+                                        </ul>
+
+                                    </li>
+                                </ul>
+
+                            </li>
+                        </ul>
+
+                    </div>
+
+
+                    <h3>End _recursive.tpl.html</h3>
+                </div>
+            </p>
+
+            <p>
+                <hr>
+                <button class="btn btn-info btn-lg btn-block" data-toggle="collapse" data-target="#_form"> &lt;!-- include of  _form.tpl.html --&gt;</button>
+                <div id="_form" class="collapse">
+                    <h3>Start _form.tpl.html</h3>
+
+
+                    <div class="block">
+                        <pre class="code">
+&lt;form id="myForm"&gt;
+		&lt;label&gt;Email:&lt;/label&gt;
+    &lt;input type="text" name="email" data-validation="required,email" / &gt;
+
+    &lt;label&gt;Age:&lt;/label&gt;
+    &lt;input type="text" name="age" data-validation="required,/^\d+$/i" / &gt;
+
+    &lt;label&gt;
+    	&lt;input type="checkbox" value="1" data-validation="required" name="terms" / &gt;
+    	You must agree my terms
+    &lt;/label&gt;
+    &lt;input type="submit" name="save" value="Submit" /&gt;
+&lt;/form&gt;
+
+
+	</pre>
+
+                        <!-- standard validation
+//			'address'=>"/[\-|\/|\,|\.|\'|a-z|A-Z|\x81-\xFE]+/",
+//			'email'=>"/[0-9|a-z|A-Z|\.|\-|_]+@([0-9|a-z|A-Z|\-|_]+\.)+([a-z|A-Z]{2,4})/",
+//			'name'=>"/[\s|\'|a-z|A-Z|\x81-\xFE]+/",
+//			'number'=>"/[0-9]+/",
+//			'number1'=>"/[0-9|\s]+/",
+//			'cc_number'=>"/[0-9|\s]+/",
+//			'phone'=>"/[0-9|\-|\s|\(|\)]+/",
+//			'title'=>"/[\-|\(|\)|\/|\'|a-z|A-Z|0-9|\s|\x81-\xFE]+/",
+//			'zip'=>"/[0-9]+/",
+//			'id'=>"/[\_|\-|\.|\@|a-z|A-Z|0-9|\x81-\xFE]+/",
+//			'time'=>"/([0-9]|[0-1][0-9]|[2][0-3]):([0-5][0-9])/",
+//			'date.au'=>"/[0-9]{2}-[0-9]{2}-[0-9]{4}/",
+//			'date.iso'=>"/[0-9]{4}-[0-9]{2}-[0-9]{2}/",
+//			'money'=>"/(\-)?[0-9]+(\.[0-9]{0,2}){0,1}/",
+//			'url'=>'/(https?|ftp|gopher|telnet)\:\/\/[^\/]*?(\..+)*([\/]?.*|$)/i',
+//			'ascii_display'=>'/[\[|\~|\!|\@|\#|\$|\%|\^|\&|\*|\(|\)|\_|\+|\||\\|\=|\-|\`|\{|\}|\"|\?|\>|\<|\[|\]|\'|\;|\,|\.|\/|\||0-9a-zA-Z|\t|\x20]+/',
+//			'chinese'=>'/[\u4e00-\u9fa5]*/',
+//			'readable'=>'/^\w+$/',
+//			'????????????'=>'/^[\u4e00-\u9fa5_a-zA-Z0-9]+$/',
+//			'??QQ?'=>'/^[1-9]*[1-9][0-9]*$/',
+//			'password'=>'/.{3,}/',
+//			'have'=>'has="12,33"',
+//			'nothave'=>'',
+//			'length' =>'',//check
+//			'required'=>'',//check
+//			'not_null'=>'',//check
+//			*not'if'=>'>15,<=2,like',//not //
+//			range=(12,13);
+//			'in'=>'in=(12,23,45)'
+-->
+                        <div>
+                            <div class="alert alert-info"> Validation Message Here </div>
+                            <form class="form-horizontal" role="form" id="myForm">
+                                <div class="form-group">
+                                    <label class="control-label col-sm-2" for="email">Email:</label>
+                                    <div class="col-sm-10">
+                                        <input type="text" class="form-control" name="email" id="email" placeholder="Enter email" data-validation="required,email" value="">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="control-label col-sm-2" for="pwd">Age:</label>
+                                    <div class="col-sm-10">
+                                        <input type="text" class="form-control" id="age" name="age" placeholder="Enter your age here" data-validation="required,/^\d+$/i" value="">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="col-sm-offset-2 col-sm-10">
+                                        <div class="checkbox">
+                                            <label><input type="checkbox" value="1" data-validation="required" name="terms">You must agree my terms</label>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="col-sm-offset-2 col-sm-10">
+                                        <input type="submit" name="save" class="btn btn-default" value="Submit" />
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+
+
+
+                    <h3>End _form.tpl.html</h3>
+                </div>
+            </p>
+
+        </div>
+    </div>
+
+</div>

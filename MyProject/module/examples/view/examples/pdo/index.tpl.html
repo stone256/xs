@@ -1,0 +1,242 @@
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+
+<!-- jQuery library -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+
+<!-- Latest compiled JavaScript -->
+<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+
+
+<link href='https://fonts.googleapis.com/css?family=Poiret+One' rel='stylesheet' type='text/css'><!-- font-family: 'Poiret One', cursive; -->
+<link href='https://fonts.googleapis.com/css?family=Lobster' rel='stylesheet' type='text/css'> <!--font-family: 'Lobster', cursive; -->
+<link href='https://fonts.googleapis.com/css?family=Josefin+Slab:400,300,600,700' rel='stylesheet' type='text/css'> <!-- font-family: 'Josefin Slab', serif; -->
+<link href='https://fonts.googleapis.com/css?family=Inconsolata:400,700' rel='stylesheet' type='text/css'> <!-- font-family: 'Inconsolata', ; -->
+<link href='https://fonts.googleapis.com/css?family=Archivo+Black' rel='stylesheet' type='text/css'>  <!-- font-family: 'Archivo Black', sans-serif; -->
+<!-- test root tpl file -->
+
+<style>
+.html, pre, body{
+font-family: 'Inconsolata', ;
+}
+.h1,h2,h3,h4,h5{
+margin-bottom:0;
+}
+.em{
+font-family: 'Archivo Black', sans-serif;
+}
+.include-block{
+padding:8px;
+margin:4px;
+border:2px dashed #777;
+}
+
+.block{
+padding:8px;
+margin:5px;
+border:2px solid #888;
+}
+
+.code{
+background:#ddd;
+padding:8px;
+display:block;
+}
+.recursive li{
+padding:8px;
+border:1px dotted #999;
+}
+</style>
+
+<div class="contain-fluid">
+	<div class="row">
+		<div class="col-sm-10 col-sm-offset-1">
+			<span class="code">
+			
+	<pre>
+	//instantiate
+	$cfg = array(
+		'host'   =>'localhost';
+		'user'    => 'peter',
+		'password'   => 'wang',
+		'database'   => 'magento_drupal_wordpress';
+		['driver'   => 'mysql',]	//use 'dblib' for mssql ; default = mysql
+		['prefix'   => 'wp',]	
+		['port'   => '3307',]
+			)
+	OR
+	$cfg['dsn'] = '...' ; 
+		
+
+	</pre>
+	<dl style="margin-left:20px;">
+		<dt>New</dt>
+		<dd style="margin-left:40px;margin-bottom:20px;">	
+<pre>
+<b>$pdo = new xpPdo($cfg);</b>
+<b>$pdo = xpPdo::conn([$cfg]);	</b>
+<p>//you don't need pass $cfg, it will look for global vars (array)$cfg, (array)$xp_config, (stdClass)$CFG;</p>
+</pre>		
+		</dd>
+		
+		
+		<dt>query($q, $data=array(), $option=array())</dt>
+		<dd style="margin-left:40px;margin-bottom:20px;">	
+<pre>
+/**
+ * query  database using perpare(), execute(),  and fetchAll() 
+ * @param string 	$q		: query string
+ * @param array 	$data		: perparing data
+ * @param array	 $option	: driver_options; check pdo perpare() 
+ * @return  fetchAll(PDO::FETCH_ASSOC);
+ */
+<b>$rs= $pdo->query("select * from wp_test where id = ? ", array(6));</b>
+return =>{
+1..........0=>[
+2................id=>6
+2................name=>bbbbpopdasdasdaso1438308139
+2................data=>
+2................date=>2015-07-31 12:02:19
+2................lock=>
+2................lock_ttl=>0
+2................lock_type=>
+1..........]
+}
+			</pre>
+		</dd>
+		
+		<dt>q($q, $raw=false)</dt>
+		<dd style="margin-left:40px;margin-bottom:20px;">	
+<pre>
+/**
+ * get result 
+ * @param string $q
+ * @param string $decode	: 1 = decode array
+ * @return array of  records
+ */
+<b>$rs= $pdo->q("select * from wp_test where id = 2 ");</b>
+return =>{
+1..........0=>[
+2................id=>2
+2................name=>bbbbpopdasdasdaso1438308075
+2................<b>data=><i>[
+3......................a=>15
+3......................b=>[
+4............................0=>abc
+4............................c=>ss0nn
+3......................]
+2................]</i></b>
+2................date=>2015-07-31 12:01:15
+2................lock=>
+2................lock_ttl=>0
+2................lock_type=>
+1..........]
+}
+
+<b>$rs= $pdo->q("select * from wp_test where id = 2 ", 1);</b>
+{
+1..........0=>[
+2................id=>2
+2................name=>bbbbpopdasdasdaso1438308075
+2................<b>data=><i>a:2:{s:1:"a";i:15;s:1:"b";a:2:{i:0;s:3:"abc";s:1:"c";s:5:"ss0nn";}}</i></b>
+2................date=>2015-07-31 12:01:15
+2................lock=>
+2................lock_ttl=>0
+2................lock_type=>
+1..........]
+}
+
+			</pre>
+		</dd>
+
+		
+		
+		
+		
+		<dt>get($table, $cond=' 1 ', $fields='' , $order='')</dt>
+		<dd style="margin-left:40px;margin-bottom:20px;">	
+<pre>
+/**
+ * query and get result for one record
+ *
+ * @param  string $table: table name
+ * @param mic $cond : condition
+ * @param mix  $fields : fileds to get
+ * @param mix  $order : if query return multi-record 
+ * @return array
+ */
+<b>$rs= $pdo->get("wp_test", array('id >2', 'name like bbb%', 'lock_ttl'=>0), 'id,name,lock_ttl');</b>
+return =>{
+1..........id=>3
+1..........name=>bbbbpopdasdasdaso1438308078
+1..........lock_ttl=>0
+}
+
+<b>$rs= $pdo->get("wp_test", array('id >2', 'name like bbb%', 'lock_ttl'=>0), 'id,name,lock_ttl', '-id');</b>
+return =>{
+1..........id=>35
+1..........name=>bbbbpopdasdasdaso1438308924
+1..........lock_ttl=>0
+}
+
+
+			</pre>
+		</dd>		
+		
+		<dt> gets($table,$cond=' 1 ',$fields='',$order='',$limit='' )</dt>
+		<dd style="margin-left:40px;margin-bottom:20px;">	
+<pre>
+/**
+ * query and get results
+ *
+ * @param  string $table: table name
+ * @param mic $cond : condition
+ * @param mix  $fields : fileds to get
+ * @param mix  $order : if query return multi-record 
+ * @param mix  $limit : limit 
+ * @return array
+ * condition array : [ a,b,c ] : a and b and c ; [[a],[b,c]] : a OR (b and c) ;  [a,[[b],[c]]] : a and (b or c) ;
+ */
+<b>$rs= $pdo->gets("wp_test", array(array('id <3'),array('id >30')), 'id,name,lock_ttl', '-id,name', '4')</b>
+return =>{
+1..........0=>[
+2................id=>43
+2................name=>asdfasdf
+2................lock_ttl=>0
+1..........]
+1..........1=>[
+2................id=>42
+2................name=>asdfasdf
+2................lock_ttl=>0
+1..........]
+1..........2=>[
+2................id=>41
+2................name=>asdfasdf
+2................lock_ttl=>0
+1..........]
+1..........3=>[
+2................id=>40
+2................name=>asdfasdf
+2................lock_ttl=>0
+1..........]
+}
+
+			</pre>
+		</dd>			
+		
+		
+		
+		
+		
+	</dl>
+	
+	
+	
+
+			
+			</span>
+		</div>
+	</div>
+			
+			
+</div>

@@ -1,0 +1,46 @@
+<!-- start of sitemin pagination -->
+
+<!--@ Font Awesome used!! -->
+
+	<nav class="z action-btn-expand-sm">
+		<ul class="navbar-nav ml-auto pagination0">
+			<li class="nav-item"><span class="page-link"><?=$rs['page']['length'];?> per page</span></li>
+			<li class="nav-item <?php if( !$rs['page']['backward'] ):  echo "sr-only"; else: echo "first-item"; endif;?>">
+				<a class="page-link" href="javascript:void(0)" onclick="jQuery('#page').val(1); jQuery('#filter')[0].submit();" ><i class="fa fa-fast-backward" aria-hidden="true"></i></a>
+			</li>
+			<li class="nav-item <?php if( !$rs['page']['backward'] ):  echo "sr-only"; else: echo "first-item"; endif;?>">
+				<a class="page-link" href="javascript:void(0)" onclick="jQuery('#page').val('<?=(int)( ($rs['page']['no'])/2); ?>'); jQuery('#filter')[0].submit();" >
+					<i class="fa fa-backward" aria-hidden="true"></i>
+				</a>
+			</li>
+			<li class="nav-item <?php if( !$rs['page']['backward'] ): echo "sr-only"; endif;?>">
+				<a class="page-link" href="javascript:void(0)" onclick="jQuery('#page').val('<?=$rs['page']['no']-1; ?>'); jQuery('#filter')[0].submit();" >
+					<i class="fa fa-step-backward" aria-hidden="true"></i>
+				</a>
+			</li>
+
+			<li class="nav-item <?php if( !$rs['page']['backward'] || !$rs['page']['omit']): echo "sr-only  first-no"; endif; ?> "><a class="page-link" href="#">...</a></li>
+			<?php for($i = ($rs['page']['current_shows']-1)*$rs['page']['pagination_max_length'] + 1; $i <= ($rs['page']['current_shows']-1)*$rs['page']['pagination_max_length'] + $rs['page']['current_shows_length']; $i++): ?>
+				<li class="page-item <?php if($i == $rs['page']['no']): echo "active"; endif;?> showed" ><a class="page-link" href="javascript:void(0)" onclick="jQuery('#page').val('<?php echo $i; ?>'); jQuery('#filter')[0].submit();"  ><?php echo $i;?></a></li>
+			<?php endfor; ?>
+			<li class="panavge-item <?php if( !$rs['page']['forward']  || !$rs['page']['omit']): echo "sr-only"; endif;?>"><a class="page-link" href="#">...</a></li>
+
+			<li class="panavge-item <?php if( !$rs['page']['forward'] ): echo "sr-only"; endif;?>">
+				<a class="page-link" href="javascript:void(0)" onclick="jQuery('#page').val('<?=$rs['page']['no']+1;?>'); jQuery('#filter')[0].submit();" >
+					<i class="fa fa-step-forward" aria-hidden="true"></i>
+				</a>
+			</li>
+			<li class="panavge-item <?php if( !$rs['page']['forward'] ): echo "sr-only"; endif;?>">
+				<a class="page-link" href="javascript:void(0)" onclick="jQuery('#page').val('<?=$rs['page']['no']+(Int)( ($rs['page']['pages']-$rs['page']['no'])/2);?>'); jQuery('#filter')[0].submit();" >
+					<i class="fa fa-forward" aria-hidden="true"></i>
+				</a>
+			</li>
+			<li class="panavge-item <?php if( !$rs['page']['forward'] ): echo "sr-only"; endif;?>">
+				<a class="page-link" href="javascript:void(0)" onclick="jQuery('#page').val('<?=$rs['page']['pages'];?>'); jQuery('#filter')[0].submit();" >
+					<i class="fa fa-fast-forward" aria-hidden="true"></i>
+				</a>
+			</li>
+		</ul>
+
+	</nav>
+<!-- end of sitemin pagination -->

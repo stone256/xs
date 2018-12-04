@@ -1,0 +1,61 @@
+<h3>Sitemin Installation</h3>
+<h4></h4>
+<p>
+    <ol>
+        <li>DATABASE:
+            <br>add soomething like this in your local config ".local"
+            <b class="code">
+             ..
+            //you can define more than one databases!
+            $config['DATABASE']['MYDATABASE'] = array( //for testing database
+            'user'	=> 'MYUSER',
+            'host'		=>'localhost',
+            'password'	=> 'MYPASSWORD',
+            'database'	=> 'MYDB',
+            );
+            $config['DATABASE']['MYBIGONE'] = array( //for testing database
+            'user'	=> 'MYUSER',
+            'host'		=>'localhost',
+            'password'	=> 'MYPASSWORD',
+            'database'	=> 'MYBIGDB',
+            );
+
+
+            //this will act as default database ( for xpTable/xpPdo)
+            $cfg = ['db'=> $config['DATABASE']['MYDATABASE']];
+            ..
+            </b>
+
+        </li>
+        <li>
+            ADD file: /config/enabled/sitemin.php
+            <b class="code">
+&lt;?php
+
+/**
+ * @author peter wang stone256@hotmail.com
+ * enable model load
+ * remember the bottom one overwrite aboves'
+ * all module from path "module"
+ */
+
+$modules[] = '/sitemin';
+
+            </b>
+        </li>
+        <li>
+            RENANE file : "/module/sitemin/.setup.1.0.0.0.php.done" TO /module/sitemin/.setup.1.0.0.0.php
+        </li>
+        <li>
+            RUN:<br>
+            http://www.myproject.com/testing<br>
+            or any pages.
+        </li>
+        <li>
+            Then RUN:<br>
+            http://www.myproject.com/sitemin/login<br>
+            -u my
+            -p 123e456
+        </li>
+    </ol>
+</p>

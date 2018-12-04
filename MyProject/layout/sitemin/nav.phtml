@@ -1,0 +1,81 @@
+<!-- Navigation -->
+<?php
+
+/**
+ * menu -- top nav bar
+ */
+
+
+// create menu html
+function render_menu($menu, $level=0){
+ 	foreach ($menu as $k=>$v){
+ 		//not allowed router
+ 		if($v['allowed'] !== 'allowed') continue;
+
+ 		$con2 = $v['children'] ? render_menu($v['children'],$level+1): false;
+
+ 		//if no router and no child don not use
+ 		if( !$v['router']  && ! $con2) continue;
+
+
+ 		$con1[] = '<li class="'.$v['css'].' mid_'.$v['id'].' pid_'.$v['parent_id'].' '.($v['children'] ?'has-sub up':'last').'">';
+ 		$con1[] = $v['router'] ? "<a   href=\"{$v['router']}\" >{$v['display']} </a>" : "<a href='#'>{$v['display']} </a>";
+ 		if($con2) $con1[] = $con2;
+ 		$con1[] = "</li>";
+ 	}
+ 	$con = '<ul class="mlevel_'.$level.' '. ($level ? 'sub-menu close':'').'">';
+ 	$con .= implode("\n", $con1);
+ 	$con .= '</ul>';
+ 	return $con1 ? $con : '';
+}
+//check if logged in?
+$current = _factory('sitemin_model_login')->current();
+
+$menu = _factory('sitemin_model_acl_menu')->tree();
+$menu = $menu[1]; //array_pop($menu);
+$menu = $menu['children'];
+
+//add login button on nav bar
+$arr =  array (
+	'id' => '100000',
+	'parent_id' => '1',
+	'display' => $current['password'] ? 'Logout' : 'Login',
+	'router' => $current['password'] ? '/sitemin/logout' : '/sitemin/login',
+	'order' => '0',
+	'role' => 'public,cms,designer,sitemin,admin,',
+	'allowed' => 'allowed',
+	'css'=>'fr',
+);
+array_push($menu, $arr);
+
+//add message alert on nav bar
+$arr =  array (
+	'id' => '100001',
+	'parent_id' => '1',
+	'display' => '<span class="s_message badge badge-pill badge-secondary"><i class="fa fa-bell-o"></i><span class="badge badge-dark">0</span></span>',
+	'router' => '#',
+	'order' => '0',
+	'role' => 'public,',
+	'allowed' => 'allowed',
+	'css'=>'fr',
+);
+array_push($menu, $arr);
+
+
+?>
+<div class="wrapper wrapper--nav clear <?=($current['password'] ? 'logged-in' : 'logged-out');?>">
+    <div class = "logo px-5">Sitemin</div>
+	<!--<button class="mobile">Menu toggle</button>-->
+	<a class="mobile" href="javascript:void(0);" ><i class="fa fa-bars" aria-hidden="true"></i></a>
+	<div id="cssmenu">
+		<?php echo render_menu($menu, 0); ?>
+	</div>
+	<div class="clear" > </div>
+</div>
+<div class="nav-space-holder"></div>
+
+
+
+
+<?php include "nav.js.inc";?>
+<?php include "nav.css.inc";?>

@@ -1,0 +1,6 @@
+{
+    "require": {
+        "illuminate/view": "5.*",
+        "philo/laravel-blade": "3.*"
+    }
+}
