@@ -1,0 +1,223 @@
+<?php
+
+
+?>
+
+
+<?php include _X_LAYOUT . '/sitemin/include_vue.phtml'; ?>
+
+<script>
+var _token='<?=$rs['_token'];?>';
+</script>
+
+<div class="container-fluid" id="sixthTable">
+	<!-- The Modal -->
+	<div class="modal" id="myModal">
+		<div class="modal-dialog modal-dialog-centered mt-7">
+			<form id="modal_form" >
+			<div class="modal-content">
+
+				<!-- Modal Header -->
+				<div class="modal-header">
+					<h4 class="modal-title">CRONTAB Entry</h4>
+					<button type="button" class="close" data-dismiss="modal">&times;</button>
+				</div>
+
+				<!-- Modal body -->
+				<div class="modal-body row" id="edit_form">
+					<div class="col-sm-6">
+						<input type="hidden" name="id" id="id" value="" />
+						<div class="form-group">
+							<label for="minute">minute:</label>
+							<input type="minute" class="form-control" name="minute" id="minute">
+						</div>
+						<div class="form-group">
+							<label for="hour">hour:</label>
+							<input type="hour" class="form-control" name="hour" id="hour">
+						</div>
+						<div class="form-group">
+							<label for="date">date:</label>
+							<input type="text" class="form-control" name="date" id="date">
+						</div>
+						<div class="form-group">
+							<label for="month">month:</label>
+							<input type="month" class="form-control" name="month" id="month">
+						</div>
+						<div class="form-group">
+							<label for="year">year:</label>
+							<input type="year" class="form-control" name="year" id="year">
+						</div>
+						<div class="form-group">
+							<label for="weekday">weekday:</label>
+							<input type="weekday" class="form-control" name="weekday" id="weekday">
+						</div>
+					</div>
+					<div class="col-sm-6">
+						<div class="form-group">
+							<label for="task">task:</label>
+							<input type="task" class="form-control" name="task" id="task">
+						</div>
+						<div class="form-group">
+							<label for="next">next:</label>
+							<input type="next" class="form-control" name="next" id="next">
+							<script>
+							// $( function() {
+							// 	$( "#next" ).datetpicker({ dateFormat: "yy-mm-dd H:i:s",timeFormat: 'HH:mm:ss', changeMonth: true, changeYear: true});
+							// } );
+							</script>
+						</div>
+						<div class="form-group">
+							<label for="note">note:</label>
+							<textarea class="form-control"  name="note" rows="5" id="note"></textarea>
+						</div>
+					</div>
+				</div>
+
+				<!-- Modal footer -->
+				<div class="modal-footer">
+					<button type="button" class="btn btn-primary" v-on:click="save_cron()" >Submit</button>
+				</div>
+
+			</div>
+			</form>
+		</div>
+	</div><!-- The Modal -->
+
+	<div class="row">
+		<div class="col-lg-12">
+			<h3 class="text-uppercase mt-5">Crontab</h3>
+			<ul>
+				<li>To run system command: attached "$" in front of the command. e.g. <CODE>$echo "abc"</CODE><br>&nbsp;</li>
+				<li>When you use ">" to redirect outout, please use "|" pipeline and some command at end as the corn call will attached ">/dev/null 2>&1" at end of the command.<br>
+					<br> e.g. <CODE>$date > /tmp/daterecord.txt</CODE> to <CODE>$date > /tmp/daterecord.txt | echo "done"</CODE>
+				</li>
+                <li></li>
+				<li>Each time, "/sitemin/cron/call" been call, it will issue the task that the next is less the now
+			</ul>
+			<div >
+				<table class="table table-striped table-hover mt-5">
+					<tr>
+						<th class="c--id">ID</th>
+						<th>minute</th>
+						<th>hour</th>
+						<th>date</th>
+						<th>month</th>
+						<th>year</th>
+						<th>weekday</th>
+						<th v-on:click="sortTable('task')">[task]
+							<div class="arrow"  v-if=" 'task' == sortColumn" v-bind:class="[ascending ? 'arrow_up' : 'arrow_down']"></div>
+						</th>
+						<th>next</th>
+						<th>note</th>
+						<th>status</th>
+						<th><button type="button" class="add-note" v-on:click="edit_cron(0, $event)">+</button></th>
+					</tr>
+					<tr v-for="row in get_rows()" >
+						<td valign="top" v-for="col in columns" :class="'c--'+col">{{row[col]}}</td>
+						<td valign="top" class="">
+							<a class="btn btn-extra-small btn-rounded btn-light-border" href="javascript:void(0);" v-on:click="edit_cron(row.id, $event)">
+								<span  class="fa fafa fa-edit"> </span>
+							</a>
+							<a class="btn btn-extra-small btn-rounded btn-light-border" href="javascript:void(0);" v-on:click="status_toggle(row.id, $event)">
+								<span v-if="row.status == 'active'" class="fa fa-pause"> Stop</span>
+								<span  v-if="row.status == 'inactive'" class="fa fa-play"> Active</span>
+							</a>
+						</td>
+					</tr>
+				</table>
+			</div>
+			<script>
+			var sixthTable = new Vue({
+				el: '#sixthTable',
+				data: {
+					currentPage: 1,
+					elementsPerPage: 102,
+					ascending: false,
+					sortColumn: '',
+					rows :  $.ajax({
+							url: '?cmd=list&_token='+_token,
+							method: 'POST',
+							dataType: 'json',
+							async: false
+						}).responseJSON || []
+					},
+				methods: {
+					"sortTable": function (col) {
+							if (this.sortColumn === col) {
+								this.ascending = !this.ascending;
+							} else {
+								this.ascending = true;
+								this.sortColumn = col;
+							}
+
+							var ascending = this.ascending;
+
+							this.rows.sort(function(a, b) {
+								if (a[col] > b[col]) {
+									return ascending ? 1 : -1
+								} else if (a[col] < b[col]) {
+									return ascending ? -1 : 1
+								}
+								return 0;
+							})
+						},
+					"get_rows": function () {
+							//if(!this.rows || this.rows.length == 0 ) return []
+							var start = (this.currentPage-1) * this.elementsPerPage;
+							var end = start + this.elementsPerPage;
+							return this.rows.slice(start, end);
+						},
+					"status_toggle" : function(id, ev){
+						var e = ev.currentTarget;
+						common.mask.up()
+						$.ajax({
+						  url: '?cmd=status_toggle&id='+id+'&_token='+_token,
+						  success: function(data){
+							window.location.reload();
+							//common.mask.down()
+						  }
+						});
+					},
+					"edit_cron" : function(id, e){
+
+						var tr = $(e.currentTarget).parent().parent();
+						$('#id').val(tr.find('td:nth-child(1)').html()|| '')
+						$('#minute').val(tr.find('td:nth-child(2)').html()|| '*')
+						$('#hour').val(tr.find('td:nth-child(3)').html()|| '*')
+						$('#date').val(tr.find('td:nth-child(4)').html()|| '*')
+						$('#month').val(tr.find('td:nth-child(5)').html()|| '*')
+						$('#year').val(tr.find('td:nth-child(6)').html()|| '*')
+						$('#weekday').val(tr.find('td:nth-child(7)').html()|| '*')
+						$('#task').val(tr.find('td:nth-child(8)').html()|| '')
+						$('#next').val(tr.find('td:nth-child(9)').html()|| '')
+						$('#note').val(tr.find('td:nth-child(10)').html()|| '')
+
+						$("#myModal").modal('toggle')
+					},
+					"save_cron": function(){
+						common.mask.up()
+						var form_data = $('#modal_form').serialize();
+						$.ajax({
+						  url: '?cmd=save&_token='+_token,
+						  data: form_data,
+						  success: function(data){
+							window.location.reload();
+							//common.mask.down()
+						  }
+						});
+						$("#myModal").modal('toggle');
+					}
+				},
+				computed: {
+					"columns": function columns() {
+						if (this.rows.length == 0) return [];
+						return Object.keys(this.rows[0])
+					}
+				}
+			});
+
+			</script>
+		</div>
+	</div>
+</div>
+<hr>

@@ -1,0 +1,50 @@
+<?php
+/**
+ * perpare data
+ */
+//_dv($rs);
+?>
+<div class = "container">
+	<div class="px-5 mt-4">
+       <div class="the-title">
+	        <h3 class="text-uppercase">ACL Role -- <span class = "small">List of roles</span> </h3>
+        </div>
+	</div>
+
+
+
+	<!-- grid table -->
+	<div class="mt-5 px-5">
+		<div class = "d-flex justify-content-end">
+
+		</div>
+		<table class="table table-striped table-hover">
+			<tr>
+				<th class=".Hide">
+					ID
+				</th>
+				<th>
+					Name
+				</th>
+				<th>
+					Description
+				</th>
+
+				<th>Action <a href="/sitemin/acl/role/edit/?id=" class="" role="button">+</a></th>
+			</tr>
+		<?php
+		foreach ($rs['data'] as $k=>$r): ?>
+			<tr class="<?php echo $k%2 ? 'even' : 'odd'; ?>">
+				<td class=".Hide"><?=$r['id']?></td>
+				<td><?=$r['name'];?></td>
+				<td><?=$r['description'];?></td>
+				<td width="150px">
+					<a class="btn btn-extra-small btn-rounded btn-light-border" role="button" href="/sitemin/acl/role/edit/?id=<?=$r['id']?>" ><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a>
+					<a class="btn btn-extra-small btn-rounded btn-light-border"  id="delete-<?=$r['id']?>" onclick="if(confirm('Delete role <?=$r['name'];?>?')){ return true;}  else{ return false;}  " href="/sitemin/acl/role/delete/?id=<?=$r['id']?>&_token=<?=$rs['_token'];?>" ><i class="fa fa-trash"></i></a>
+				</td>
+			</tr>
+		<?php endforeach; ?>
+		</table>
+	</div>
+    <hr>
+</div>

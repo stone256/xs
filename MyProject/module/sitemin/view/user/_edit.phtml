@@ -1,0 +1,105 @@
+
+<div class="container my-5">
+        <h3 class="mx-auto mb-5 text-uppercase">User info update</h3>
+        <?php if($rs['_msg'] ):?>
+	    <h4 class="alert alert-danger"><?=$rs['_msg'];?></h4>
+	    <?php endif;?>
+      
+          <form action="?id=<?=$rs['id']; ?>"  method="POST" id="filter">
+<!--             <input type="hidden" name="id" value="<?=$rs['id']; ?>" />-->
+                 <input type="hidden" name="_token" value="<?=$rs['_token']; ?>" />
+                 
+                <div class="row">
+                    <div class="col-md-6 form-group">
+                        <label for="username">Username </label>                      
+                        <input type="text" name="username"  class="form-control"  value="<?=$rs['username']; ?>">                     
+                    </div>
+                    <div class="col-md-6 form-group">
+                        <label for="email">Email</label>
+                        <input type="text" name="email"  class="form-control"  value="<?=$rs['email']; ?>">                                
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label for="userrole">User Role</label>
+                        <input type="text" name="userrole"  class="form-control"  value="<?=$rs['userrole']; ?>">               
+                    </div>
+
+                    <div class="form-group col-md-6">
+                        <label for="status">Status</label>
+                        
+                        <select class="form-control" name="status" >
+                            <?php foreach ($rs['status_options'] as $k => $v): ?>
+                                <option value="<?=$v;?>" <?php echo $v == $rs['status'] ? 'selected="true"' : ''; ?> ><?=$v;?></option> 
+                            <?php endforeach; ?>
+                        </select>    
+                    
+                    </div>
+
+             </div>   
+
+               <div class="form-group">        
+                  <div class="d-flex justify-content-center mt-5">
+                    <input type="submit" class="btn btn-danger mr-4" name="save"  value="<?php echo $rs['id'] ?  "&#10003 Update" : "&#10003 Create"; ?>" />
+                    <div class="btn btn-light">
+                    <a href="/sitemin/user"><span class="fa fa-arrow-left"> Back</a>
+                    </div>
+                  </div>      
+               </div>
+
+        </form>
+</div> 
+<hr> 
+<script>
+  	
+$(function() {
+	
+
+    function split( val ) {
+      return val.split( /,\s*/ );
+    }
+    function extractLast( term ) {
+      return split( term ).pop();
+    }
+ 
+    $( "#userrole" )
+      // don't navigate away from the field on tab when selecting an item
+      .bind( "keydown", function( event ) {
+        if ( event.keyCode === $.ui.keyCode.TAB &&
+            $( this ).autocomplete( "instance" ).menu.active ) {
+          event.preventDefault();
+        }
+      })
+      .autocomplete({
+        source: function( request, response ) {
+          $.getJSON( "/sitemin/acl/role/search/", {
+            term: extractLast( request.term )
+          }, response );
+        },
+        search: function() {
+          // custom minLength
+          var term = extractLast( this.value );
+          if ( term.length < 2 ) {
+            return false;
+          }
+        },
+        focus: function() {
+          // prevent value inserted on focus
+          return false;
+        },
+        select: function( event, ui ) {
+          var terms = split( this.value );
+          // remove the current input
+          terms.pop();
+          // add the selected item
+          terms.push( ui.item.value );
+          // add placeholder to get the comma-and-space at the end
+          terms.push( "" );
+          this.value = terms.join( ", " );
+          return false;
+        }
+      });
+      
+      
+});
+
+
+</script>

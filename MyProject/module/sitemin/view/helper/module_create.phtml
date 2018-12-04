@@ -1,0 +1,62 @@
+<?php $page_title = 'X-FRAME | MODULE | CREATE'; ?>
+<?php include _X_LAYOUT . '/demo/header.phtml'; ?>
+<style>
+.active{
+    padding: 8px 18px 8px 0px;
+background:#eff7d3;
+}
+pre{
+padding:3px 6px;
+border:1px solid #d3d3f5;
+background: #f8f8ff;
+}
+.header, .footer{
+background:#cedcc3;
+}
+.right-content h3 {
+padding-top:12px;
+}
+*{
+color:#535a3b;
+}
+a {
+color:#3b577d;
+}
+/*
+eff7d3
+cedcc3
+a7b99e
+535a3b
+*/
+</style>
+<div class="header"> &nbsp;</div>
+
+<div class="container-fluid">
+	<div class="row">
+		<div class="container">
+			<div class="jumbotron">
+			<h1>Create Simple Module</h1>      
+			<p>Create simple module for you. make script have write permission.</p>
+			<p>The name will be used in the path, so only allowed charactor are a-z 0-9, and can not start with digital, space will be convert to "_"</p>
+			<p>All name will be convert to low case before it been used.</p>
+			</div>		
+			<form>
+				<?php if($rs['msg']):?>
+					<div class="alert alert-warning">
+						<strong><?php echo implode("<br/>",$rs['msg']);?></strong>
+					</div>
+				<?php endif;?>
+				<div class="form-group">
+					<label for="name">Server Key: (in order to create module, you must have _X_SERVER_KEY) </label>
+					<input type="password" name="key" class="form-control" id="key" value="">
+					<label for="name">Module Name:</label>
+					<input type="text" name="name" class="form-control" id="name" value="<?php echo $rs['name'];?>">
+				</div>
+				<button type="submit" name="save" value="1" class="btn btn-default">Cretae Now</button>
+			</form> 
+		</div>	
+	</div>
+
+</div>
+
+<?php include _X_LAYOUT . '/demo/footer.phtml'; ?>

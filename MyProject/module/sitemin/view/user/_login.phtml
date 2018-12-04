@@ -1,0 +1,134 @@
+<?php
+$captcha = !$rs['no_captcha'];
+?>
+<script src='https://www.google.com/recaptcha/api.js'></script>
+
+
+<div class=" login-page container mt-7">
+	<div class="row justify-content-center">
+		<div class="modal-content ">
+			<div class="modal-header  login-logo">
+				<div class="title">
+					<h3 class="mt-4">LOGIN TO MY ACCOUNT</h3>
+				</div>
+			</div>
+			<div class="modal-body">
+				
+				<form method="post" role="form" class="form-horizontal" id="login-form" onsubmit="return ajax_login(this);">
+                    <!-- <input type="hidden" name="ret" id="ret" value="<?=$rs['ret'] ? $rs['ret'] :'/sitemin/dashboard'?>" /> -->
+                    <input type="hidden" name="ret" id="ret" value="/sitemin/dashboard" />
+       
+                    
+                    <div class="input-group mb-3 form-group mt-4">                        
+                        <input type="text" class="form-control input-lg" id="email"  name="email" required="" placeholder="Login ID - username or email">
+                    </div>
+					<br/>
+                    <div class="input-group mb-3 form-group">
+                        <input type="password" class="form-control input-lg" id="password"  name="password" required="" placeholder="Password">
+                    </div>			
+					<br/>
+<!--
+					<label for="vcode" ><span class="fa fa-picture-o"></span> Vcode (Click the image to get a new one)</label>
+					<img class="vcode-image mt-2 mb-2" style="cursor:pointer;border:1px solid #bbb;padding:1%;width:100%" onclick="this.src='<?=_X_URL?>/helper/vcode?a='+Math.random()" src="<?=_X_URL?>/helper/vcode">
+					<input type="text" placeholder="Click the image to get a new one" required="" name="vcode" class="form-control input-lg vcode-input" id="vcode">
+-->
+		<!--			<label> &nbsp;	<br/>
+						<div class="g-recaptcha" data-sitekey="<?=$rs['google_key'];?>"></div>
+						&nbsp;	<br/>
+
+					</label>
+					<label for="save" class="hidden-xs">&nbsp;</label>
+		-->
+
+		<!--<script src="https://www.google.com/recaptcha/api.js?render=reCAPTCHA_site_key"></script>
+		  <script>
+		  grecaptcha.ready(function() {
+		      grecaptcha.execute('<?=$rs['google_key'];?>', {action: 'login'}).then(function(token) {
+		      });
+		  });
+		  </script>
+		-->
+
+					<div class="alert"></div>
+					
+					<?php if($captcha): ?>
+						<script src="https://www.google.com/recaptcha/api.js" async defer></script>
+						<script>
+						function onSubmit(token) {
+						 $("#login-form").submit();
+						}
+						</script>
+						<button type="button" value="1" name="save" data-sitekey="<?=$rs['google_key'];?>" data-callback='onSubmit' class="g-recaptcha btn btn-lg text-center btn-secondary btn-block " id="save">Login</button>
+					<?php else: ?>
+						<button type="submit" value="1" name="save" id="save">Login</button>
+					<?php endif; ?>
+                    <br/>
+                    <div class="ml-4 my-4">
+                        <label class="form-check-label">
+                            <input type="checkbox" class="form-check-input" name="keeplogin" value="1"> Keep me logged in
+                        </label>
+                        <a class=" login pull-right" href="<?=_X_URL;?>/sitemin/forgotpassword">Forgot password ?</a>
+                    </div>
+					
+				</form>
+			</div>
+
+		</div>
+	</div>
+</div>
+<div class="visibilityHidden">
+	<form method="post" atcion="?" id="rform" target=''>
+<!--		<input type="hidden" name="formAction" value="submit" />
+		<input type="hidden" name="ifhPage" value="ifhPage" />
+		<input type="hidden" name="lastSubmitter" value="undefined" />
+		<input type="hidden" name="submittedBy" value="undefined" />
+-->		<input type="text" name="password" value="" id="rpassword" />
+		<input type="text" name="userName" value="" id="rusername" />
+	</form>
+</div>
+<script>
+
+(function($){
+	$('ul.sidebar-nav').html('');
+	$('ul.navbar-nav').html('');
+})(jQuery)
+
+
+
+function ajax_login(form){
+	common.mask.up()
+	//$('.alert').attr('class', 'alert').html('<img src="<?=_X_URL?>/media/image/ajax-loader.gif" />');
+	$.ajax({url: "<?=_X_URL;?>/sitemin/loginajax", dataType:'json',data:$(form).serialize(),type:'post',
+
+		success: function(ret){
+//			$('.vcode-image').click();
+//			$('.vcode-input').val('');
+			if(ret && ret.status == 'ok'){
+				//insert multiple login
+				/*
+				if(ret.msg_type){
+					$('#rusername').val(ret.msg_type);
+					$('#rpassword').val($('.password-input').val());
+					for(var k in ret.msg){
+						var fn = 'riframe'+Math.random();
+						//create iframe and h
+						$('body').append('<iframe  class="visibilityHidden" id="'+fn+'"  name="'+fn+'" ></iframe>');
+						$('#rform').attr('action', ret.msg[k].login_url);
+						$('#rform').attr('target', fn);
+						$('#rform').submit();
+					}
+				}
+				*/
+				window.location = $('#ret').val();
+			}else{
+				common.mask.down();
+				$('.alert').html(ret.msg).addClass('alert-'+ret.msg_type);
+			}
+
+		}
+	});
+
+	return false;
+}
+
+</script>

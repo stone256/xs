@@ -1,0 +1,105 @@
+<?php
+//_dv($rs);
+?>
+<h4 class="alert alert-warning my-5"><strong>Warning!</strong> this access list will not limit access unless the controller class of the router is extended from "sitemin_indexController"</h4>
+<div class = "container">
+    <div class = "d-flex justify-content-center">
+    	
+            <?php 	foreach($rs['data'] as $kr => $vr){
+            		$g = xpAS::preg_get($kr, '/^\/(.*?)(\/|$)/ims', 1);	
+            		if(in_array($g, array('', 'exception', '404', '500'))) continue;
+            		$grr[$g] = $g;
+            	}
+            ?>
+            <label class="radio-inline pr-4"><input type="radio" name="optradio" onclick="acl.router.show_group('all')">-All</label>&nbsp;
+	        <?php foreach ($grr as $kg=>$vg):?>
+		         <label class="radio-inline pr-4"><input type="radio" name="optradio" onclick="acl.router.show_group('<?=$vg;?>')">-<?=$vg;?></label>&nbsp;
+	        <?php endforeach;?>		    	
+    	
+    </div>
+    <div class = "row">
+        <div class = 'table-responsive ' >
+	        <table class="table table-striped table-hover">
+               <thead>
+		            <tr>
+			            <th>ROUTER</th>
+			            <?php foreach ($rs['roles'] as $ko => $vo): ?>
+			            <th><?=$vo ?></th>
+			            <?php endforeach; ?>
+		            </tr>
+                </thead>
+		        <?php foreach ($rs['data'] as $kr => $vr):?>
+		        <?php $roles = array_flip(!$vr || is_numeric($vr) ? array() : explode(',', substr($vr, 0, -1)));?>
+		        <tr class="trow all <?=xpAS::preg_get($kr, '/^\/(.*?)(\/|$)/ims', 1);?>">
+			        <td><?=$kr;?></td>
+			        
+			         <?php foreach ($rs['roles'] as $ko => $vo): ?>
+			        <td class="text-xs-center">
+			        	<a class="btn btn-extra-small btn-rounded btn-light-border" href="javascript:void(0);" onclick="acl.router.change(this, '<?=$kr;?>', '<?=$vo;?>', '<?=$rs['_token']?>')">
+				        	<?php if(isset($roles[$vo])):?>
+				       		<i class="fa fa-check" aria-hidden="true"></i>
+				       		<?php else: ?>
+						<i class="fa fa-times" aria-hidden="true"></i>
+						<?php endif; ?>
+					</a>
+<!--					<a class="textDecorationNone displayInlineBlock ACL b noOutline" href="javascript:void(0)" data-value="<?=$rs['acl'][$vr['url']][$vo['name']]; ?>" onclick="menuacl.change(this,'<?=$vr['url']; ?>','<?=$vo['name']; ?>','<?=$rs['hash']; ?>')"><?=$rs['acl'][$vr['url']][$vo['name']] ? '&#8730;' : '&#215;'; ?></a>-->
+				        
+			        </td>
+			        <?php endforeach; ?>
+			        
+		        </tr>
+		        <?php endforeach; ?>
+	        </table>
+	    
+	     </div>
+    </div>
+     
+</div>
+<hr>
+<script>
+
+var acl = {
+	router:{
+		change: function(e, router, role, _token){
+			common.mask.up();
+			$.ajax({
+				  url: '/sitemin/acl/router/change',
+				  data: {router:router, role,role,_token:_token},
+				  success: function(ret){
+					//window.location.reload();
+					//console.log(ret);
+					if(ret == 1) e.innerHTML = '<i class="fa fa-check" aria-hidden="true"></i>'; 
+					if(ret == 0) e.innerHTML = '<i class="fa fa-times" aria-hidden="true"></i>';
+					if(ret == 'err') e.innerHTML = '<i class="fa fa-bomb" aria-hidden="true"></i>';
+					e.blur();
+					common.mask.down();
+				  }
+			});			
+		},
+		show_group:	function(g){
+			$('.trow').hide();
+			$('.trow.'+g).show();
+		}
+	}
+}
+
+var menuacl={
+	change:function(e, router, role, hash){
+			common.mask.up();
+	
+			$.ajax({
+				  url: '/admin/acl/menu/change',
+				  data: {router:router, role,role,hash:hash},
+				  success: function(ret){
+					//window.location.reload();
+					//console.log(ret);
+					if(ret=='1') e.innerHTML = '&#8730;'; 
+					if(ret=='0') e.innerHTML = '&#215;';
+					e.blur();
+					common.mask.down();
+				  }
+			});
+	}
+}
+
+</script>
