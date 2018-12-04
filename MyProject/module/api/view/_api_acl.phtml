@@ -1,0 +1,112 @@
+<?php
+/**
+ * perpare data
+ */
+
+
+?>	
+	<div class="row px-5 mt-4 the-title">
+		<h3 class="text-uppercase">API ACL by users -- <span class = "small">List of API ACL by users</span>  </h3>
+	</div>
+
+	
+<form id="filter" class="search-form" method="get" >
+    <div class="total-row row mt-2 px-5 "><!-- total start -->
+        <div class="col-sm-2 ">Total: <span><?=count($rs['data']);?></span><br><br></div>
+        <div class="col-sm-2 ">
+            <input name="currentpage" type="hidden" id="page" value="<?=$rs['page']['no']?>" />
+            <input name="sort" type="hidden"  id="sort" value="<?=$rs['sort']?>" />
+
+
+            <div class=" mb-2 mr-sm-2 mb-sm-0 form-group has-icon">
+                <label class="sr-only" for="login_id">User ID</label>              
+                <span class="fa fa-user form-control-feedback"></span>
+                <input type="text" class="form-control" id="login_id" name="filter[login_id]" placeholder="Login Id" value="<?=$rs['filter']['login_id'];?>">
+            </div>
+        </div>  
+        <div class="col-sm-2 ">     
+            <div class=" mb-2 mr-sm-2 mb-sm-0 form-group has-icon">
+                <label class="sr-only" for="detail">User Detail</label>
+                <span class="fa fa-anchor form-control-feedback"></span>
+                <input type="text" class="form-control" id="url" name="filter[url]" placeholder="Path" value="<?=$rs['filter']['url'];?>">
+            </div>
+        </div>  
+        <div class="col-sm-2 ">
+            <button class="btn btn-extra-small btn-rounded btn-light-border" type="submit" >
+                <span class="fa fa-search">Search</span>
+            </button>
+        </div>
+    </div>
+</form> 
+
+	<script>
+
+	function TheSort(sort){
+		var current_sort = jQuery('#sort');
+		if(current_sort.val() == sort) current_sort.val('-'+sort);
+		else current_sort.val(sort);
+		jQuery('#filter')[0].submit();
+	}
+
+	</script>
+
+	<div class="row  mt-3 px-5">
+		<table class="table table-striped table-hover">
+			<tr>
+				<th class="Hide">id</th>
+				<th>
+					<a href="javascript:void(0)" onclick="TheSort('login_id')">API User Login ID &nbsp;<i class="fa  <?=preg_match('/^.?login_id$/',$rs['sort'])? (preg_match('/^\-/',$rs['sort'])?'fa-sort-amount-desc':'fa-sort-amount-asc') :'fa-task';?>"></i></a>
+				</th>
+				<th>Detail</th>
+				<th>Status</th>
+				<th>User Cretaed@</th>
+				<th>User Modified@</th>
+				<th>Allowed Gateway Path</th>
+				<th>Action</th>
+			</tr>
+			<?php foreach($rs['data'] as $k=>$v):?>
+			<tr>
+				<td class="Hide"><?=$v['id'];?></td>
+				<td><?=$v['login_id'];?></td>
+				<td><?=$v['user_detail'];?></td>
+				<td><?=$v['status'];?></td>
+				<td><?=xpAS::preg_get($v['created'], '/\d\d\d\d\-\d\d\-\d\d/');?></td>
+				<td><?=xpAS::preg_get($v['modified'], '/\d\d\d\d\-\d\d\-\d\d/');?></td>
+				<td>
+					<p><?=preg_replace('/\,+/ims', '<br/>', trim($v['url']));?></p>
+				</td>
+				<td>
+					<a class="btn btn-extra-small btn-rounded btn-light-border"  role="button" href="/api/acl/edit?uid=<?=$v['id']?>" ><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a>
+<!--					<a class="btn btn-sm btn-info"  id="delete-<?=$r['id']?>" href="/api/user/delete/?id=<?=$r['id']?>&_token=<?=$rs['_token'];?>" ><i class="fa fa-trash"></i></a>-->
+<!--					<a class="btn btn-sm btn-warning" href="/api/user/<?php echo $r['status'] == 'active' ? 'suspend' : 'active'; ?>?id=<?=$r['id']?>&_token=<?=$rs['_token'];?>"><span class="fa fa<?php echo $r['status'] == 'active' ? '-pause' : 'fa  fa-play'; ?>"> <?php echo $r['status'] == 'active' ? 'Stop' : 'Active'; ?></span></a>-->
+				</td>
+			</tr>
+			<?php endforeach; ?>
+
+		</table>
+	    <!-- pagination -->
+        <?php include _X_LAYOUT.'/sitemin/pagination.phtml';?>
+    
+    </div>
+    <hr>
+<script>
+
+$(function() {
+
+	$( "#login_id" ).each(function(){
+		$(this).autocomplete({
+			source: "/api/user/search?type=login_id",
+			minLength: 2,
+			select: function( event, ui ) { }
+		});
+	})
+	$( "#url" ).each(function(){
+		$(this).autocomplete({
+			source: "/api/search?type=url",
+			minLength: 2,
+			select: function( event, ui ) { }
+		});
+	})
+
+});
+</script>

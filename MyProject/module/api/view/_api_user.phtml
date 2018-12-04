@@ -1,0 +1,197 @@
+<?php
+/**
+ * perpare data
+ */
+//_dv($rs);
+?>
+
+	
+<div class="row px-5 mt-4 the-title">
+    <h3 class="text-uppercase">API Users -- <span class = "small">List of API users</span>  </h3>
+</div>
+
+<form id="filter" class="search-form" method="get" >
+    <div class="total-row row mt-2 px-5 "><!-- total start -->
+        <div class="col-sm-2 ">Total: <span><?=count($rs['data']);?></span><br><br></div>
+        <div class="col-sm-2 ">
+            <input name="currentpage" type="hidden" id="page" value="<?=$rs['page']['no']?>" />
+            <input name="sort" type="hidden"  id="sort" value="<?=$rs['sort']?>" />
+
+
+            <div class=" mb-2 mr-sm-2 mb-sm-0 form-group has-icon">
+                <label class="sr-only" for="login_id">User ID</label>              
+                <span class="fa fa-user form-control-feedback"></span>
+                <input type="text" class="form-control" id="login_id" name="filter[login_id]" placeholder="Login Id" value="<?=$rs['filter']['login_id'];?>">
+            </div>
+        </div>  
+        <div class="col-sm-2 ">     
+            <div class=" mb-2 mr-sm-2 mb-sm-0 form-group has-icon">
+                <label class="sr-only" for="detail">User Detail</label>
+                <span class="fa fa-archive form-control-feedback"></span>
+                <input type="text" class="form-control" id="detail" name="filter[detail]" placeholder="User Detail" value="<?=$rs['filter']['detail'];?>">
+            </div>
+        </div>  
+        <div class="col-sm-2 ">
+            <button class="btn btn-extra-small btn-rounded btn-light-border" type="submit" >
+                <span class="fa fa-search">Search</span>
+            </button>
+        </div>
+    </div>
+</form>
+
+
+
+<script>
+
+	function TheSort(sort){
+		var current_sort = jQuery('#sort');
+		if(current_sort.val() == sort) current_sort.val('-'+sort);
+		else current_sort.val(sort);
+		jQuery('#filter')[0].submit();
+	}
+
+</script>
+
+
+
+	<!-- grid table -->
+	<div class="row  mt-3 px-5">
+		<table class="table table-striped table-hover">
+			<tr>
+				<th class=".Hide">
+					ID
+				</th>
+				<th>
+					<a href="javascript:void(0)" onclick="TheSort('login_id')">Login ID &nbsp;<i class="fa  <?=preg_match('/^.?login_id$/',$rs['sort'])? (preg_match('/^\-/',$rs['sort'])?'fa-sort-amount-desc':'fa-sort-amount-asc') :'fa-task';?>"></i></a>
+				</th>
+				<th>
+					<a href="javascript:void(0)" onclick="TheSort('detail')">Detail &nbsp;<i class="fa  <?=preg_match('/^.?detail$/',$rs['sort'])? (preg_match('/^\-/',$rs['sort'])?'fa-sort-amount-desc':'fa-sort-amount-asc') :'fa-task';?> "></i></a>
+				</th>
+				<th>Quota</th>
+				<th>Quota Start</th>
+				<th>Quota Period</th>
+				<th>Quota Counter</th>
+				<th>
+					<a href="javascript:void(0)" onclick="TheSort('status')">Status &nbsp;<i class="fa  <?=preg_match('/^.?status$/',$rs['sort'])? (preg_match('/^\-/',$rs['sort'])?'fa-sort-amount-desc':'fa-sort-amount-asc') :'fa-task';?>"></i></a>
+				</th>
+				<th>
+					<a href="javascript:void(0)" onclick="TheSort('created')">Created &nbsp;<i class="fa  <?=preg_match('/^.?created$/',$rs['sort'])? (preg_match('/^\-/',$rs['sort'])?'fa-sort-amount-desc':'fa-sort-amount-asc') :'fa-task';?>"></i></a>
+				</th>
+				<th>Action <a href="/api/user/edit" class="" role="button">+</a></th>
+			</tr>
+		<?php
+		foreach ($rs['data'] as $k=>$r): ?>
+			<tr class="<?php echo $k%2 ? 'even' : 'odd'; ?>">
+				<td class=".Hide"><?=$r['id']?></td>
+				<td><?=$r['login_id'];?></td>
+				<td><?=$r['detail'];?></td>
+				<td><?=$r['quota'];?></td>
+				<td><?=date("Y-m-d", $r['quota_start_seconds']);?></td>
+				<td><?=$r['quota_period_seconds']/24/60/60;?> day<?=$r['quota_period_seconds'] > 86400 ?'s':'';?></td>
+				<td><?=$r['quota_counter'];?></td>
+				<td><?=$r['status'];?></td>
+				<td><?=$r['created'];?></td>
+				<td>
+					<a class="btn btn-extra-small btn-rounded btn-light-border"  href="javascript:void(0)" onclick="showmodal(<?php echo $r['id']; ?>)"><span class="fa fa-gear"> PWD</span></a>
+					<a class="btn btn-extra-small btn-rounded btn-light-border" role="button" href="/api/user/edit/?id=<?=$r['id']?>" ><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a>
+<!--					<a class="btn btn-sm btn-info"  id="delete-<?=$r['id']?>" href="/api/user/delete/?id=<?=$r['id']?>&_token=<?=$rs['_token'];?>" ><i class="fa fa-trash"></i></a>-->
+					<!--<a class="btn btn-sm btn-warning" href="/api/user/<?php echo $r['status'] == 'active' ? 'suspend' : 'active'; ?>?id=<?=$r['id']?>&_token=<?=$rs['_token'];?>"><span class="fa fa<?php echo $r['status'] == 'active' ? '-pause' : 'fa  fa-play'; ?>"> <?php echo $r['status'] == 'active' ? 'Stop' : 'Active'; ?></span></a>-->
+					<button class="btn btn-extra-small btn-rounded btn-light-border" onclick="api_user_status_change(this, '<?php echo $r['status'] == 'active' ? 'suspend' : 'active'; ?>','<?=$r['id']?>','<?=$rs['_token'];?>')"><?=$r['status'] !== 'active' ? '<span class="fa fa-play">Active</span>' :'<span class="fa fa-pause">Suspend</span>';?></button>
+				</td>
+			</tr>
+		<?php endforeach; ?>
+		</table>
+	</div>
+
+	<!-- pagination -->
+	<?php include _X_LAYOUT.'/api/pagination.phtml';?>
+	<hr>
+
+<!-- Modal -->
+<div class="modal fade mt-7" id="myModal" role="dialog">
+	<div class="modal-dialog">
+		<!-- Modal content-->
+		<div class="modal-content">
+			<div class="modal-header" style="padding:15px 20px;">
+				<button type="button" class="close" data-dismiss="modal">&times;</button>
+				
+			</div>
+            <h4 class="px-5">Please input new password</h4>
+			<div class="modal-body" style="padding:40px 50px;">
+				<form role="form" class="modal_form">
+					<input name="id" class="v_id" type="hidden" />
+			 	        <input type="hidden" name="_token" class="v_token" value="<?=$rs['_token']; ?>" />
+
+					<div class="form-group">
+						<label for="comment">New Password</label>
+						<input type="password" class="form-control v_password" id="comment" placeholder="Enter new password" name="password" value="pwd">
+					</div>
+				</form>
+			</div>
+			<div class="modal-footer">
+				<button  class="btn btn-danger" data-dismiss="modal" onclick="savepassword()"><span class="glyphicon glyphicon-ok"></span> Save</button>
+				<button  class="btn btn-default" data-dismiss="modal"><span class="glyphicon glyphicon-remove"></span> Cancel</button>
+			</div>
+		</div>
+		<!-- Modal content-->
+	</div>
+</div>
+<!-- Modal -->
+
+<script>
+function showmodal(id){
+	$('.v_id').val(id)
+	$('#myModal').modal('show');
+}
+
+function savepassword(){
+        common.mask.up();
+		$.ajax({
+		  url: '/api/user/password',
+		  data: {id:$('.v_id').val(),'n2048':$('.v_password').val(),_token:$('.v_token').val()},
+		  success: function(data){
+              common.mask.down();
+		  }
+		});
+}
+
+var e_status,el;
+function api_user_status_change(e, status, id, _token) {
+		el = e
+		e_status = status
+        common.mask.up();
+		$.ajax({
+			url: '/api/user/status_change',
+			data: {status, status, id:id,_token:_token},
+			success: function(data){
+				if (data == 'ok') {
+					$(el).html(e_status == 'active' ? '<span class="fa fa-pause">Suspend</span>' :'<span class="fa fa-play">Active</span>')
+					$(el).parent().prev().prev().html(e_status == 'active' ? 'Active' :'suspend')
+                    window.location.reload();
+                }else{
+					alert('update error');
+				}
+			}
+		});
+
+}
+
+$(function() {
+	$( "#login_id" ).each(function(){
+		$(this).autocomplete({
+			source: "/api/user/search/?type=login_id",
+			minLength: 2,
+			select: function( event, ui ) { }
+		});
+	})
+
+	$( "#detail" ).each(function(){
+		$(this).autocomplete({
+			source: "/api/user/search/?type=detail",
+			minLength: 2,
+			select: function( event, ui ) { }
+		});
+	})
+
+});
+</script>

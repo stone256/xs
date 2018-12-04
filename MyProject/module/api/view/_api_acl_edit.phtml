@@ -1,0 +1,71 @@
+<?php
+
+
+?>
+<div class="container-fluid">
+	<h3 class="mx-auto">API ACL edit</h3>
+        <?php if($rs['_msg'] ):?>
+	    <h4 class="alert alert-danger"><?=$rs['_msg'];?></h4>
+	    <?php endif;?>	
+	<form action="" method="post" >
+		<input type="hidden" name="_token" value="<?=$rs['_token'];?>" />
+		<input type="hidden" name="uid" value="<?=$rs['user']['id'];?>" />
+	<div class="row">
+		<div class="col-sm-5 alert alert-info"><h3>User Info</h3></div>
+		<div class="col-sm-7 alert alert-warning"><h3>Linked Gateways</h3></div>
+		<div class="col-sm-1 user_info alert alert-info"></div>
+		<div class="col-sm-4 user_info alert alert-info">
+			<div class="form-group">
+				<label for="id">User ID</label>
+				<input type="text" class="form-control" readonly id="id" name="id" value="<?=$rs['user']['id'];?>">
+			</div>
+			<div class="form-group">
+				<label for="login_id">User Login ID</label>
+				<input type="text" class="form-control" readonly id="login_id" name="login_id" value="<?=$rs['user']['login_id'];?>">
+			</div>		
+			<div class="form-group">
+				<label for="user_detail">User Detail</label>
+				<input type="text" class="form-control" readonly id="user_detail" name="user_detail" value="<?=$rs['user']['user_detail'];?>">
+			</div>		
+			<div class="form-group">
+				<label for="status">User Status</label>
+				<input type="text" class="form-control" readonly id="status" name="status" value="<?=$rs['user']['status'];?>">
+			</div>
+			<div class="form-group">
+				<label for="created">User Created@</label>
+				<input type="text" class="form-control" readonly id="created" name="created" value="<?=$rs['user']['created'];?>">
+			</div>
+			<div class="form-group">
+				<label for="modified">User Modified@</label>
+				<input type="text" class="form-control" readonly id="modified" name="modified" value="<?=$rs['user']['modified'];?>">
+			</div>
+		</div>
+		<div class="col-sm-1 alert alert-warning"></div>
+		<div class="col-sm-6 gateway alert alert-warning ">
+			<div class="gateway_level list-group">
+			<?php foreach($rs['gateway'] as $kg=>$vg):?>
+				<div class="">
+					<div class="checkbox">
+						<label onclick="$(this).parent().next().find('input').prop({'checked': $(this).find('input').is(':checked')});" ><input type="checkbox" value="">&nbsp;<i><b><?=preg_replace('/^\_/', '', $kg);?></b></i></label>
+					</div>
+					<ul class="method_level list-group">
+					<?php foreach($vg['method'] as $km=>$vm):?>
+						<li class="list-group-item">
+							<div class="checkbox">
+								<label><input type="checkbox"  <?=in_array("{$vg['L']}/{$vm['name']}", $rs['user']['url']) ? 'checked="true"' :'' ;?>  name="url[]"   value="<?=$vg['L'];?>/<?=$vm['name'];?>">&nbsp;<i><?=$vg['L'];?>/<b><?=$vm['name'];?></b></i> &nbsp; - <?=$vm['desc'];?> </label>
+							</div>						
+						</li>
+					<?php endforeach;?>
+					</ul>
+					<br/>
+				</div>
+			<?php endforeach;?>
+			</div>
+			<button type="submit" class="btn btn-danger" name="save" value="25">Save Changes</button>
+			<a  class="btn btn-primary" href="<?=$rs['_return'];?>">Cancel Changes</a>
+		</div>
+	</div>
+	</form>
+        
+</div>
+
