@@ -1,63 +1,64 @@
 X-Framework
 
 * note:
-	remember copy .local.sample to .local
-		copy .x2cli.config.sample to x2cli.config
+	remember copy config/local.sample to config/local.php
+		copy config/x2cli.sample to config/x2cli.php
 		before you start!! 
+
 	to enable vendor under .package
-		uncommet the line in /config/global.php
+		uncommet the line in /config/ganarel.php
 		define('_LOAD_VENDOR', true);
 
 ENTER POINT
 	WEB:
-		/public/index.php
+		public/index.php
 	
 	CLI:
-		/x2cli 
-		$php x2cli id=5\&date=2008-11-11
+		x2cli 
+		($php x2cli id=5\&date=2008-11-11)
 
 CONFIG
-	GLOBAL:
-		/config/config.php
+	GENERAL:
+		config/general.php
 	LOCAL:
-		/.local
-		/.x2cli.config
+		config/local.php
+		cpnfig/x2cli.php
 		
 	EDANLED MODULE
-		/config/enabled/*
+		config/enabled/*
 		
 LAYOUT
 	COMMON LAYOUT:
-		/layout
+		layout
 
 MODULE
-	/module/*
+	module/*
 
 VIEW
-	/module/*/view/[controller]/[method]
+	module/*/view/[controller]/[method]
 
 	
 PACKAGE:	
 	THRID PARTY PACKAGE USE PSR LOADER
-	/.package/_vendor
+	.package/_vendor
 		
 	LIBARAY:	USE LAZY LOADER
-	/.package/_lib/*
+	.package/_lib/*
 	
 	X-FRAMEWORK required : 
-	/.package/xp/*
+	.package/xp/*
 
 DATA STORAGE:
-	/data/*	
+	data/*	
 	
 SYSTEM FILE	
-	/.system/*
+	.system/*
 	
 
 PUBLIC RESOURCE	
-	/public
-	MEDIA
-	..
-	..
-	..
+	public
+	  MEDIA
+	  ..
+	  ..
+	  ..
 	
