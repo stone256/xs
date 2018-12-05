@@ -6,6 +6,9 @@ $sql="
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
+-- Generation Time: Dec 04, 2018 at 07:20 PM
+-- Server version: 5.7.24-0ubuntu0.16.04.1
+-- PHP Version: 7.0.32-0ubuntu0.16.04.1
 
 SET SQL_MODE = \"NO_AUTO_VALUE_ON_ZERO\";
 SET AUTOCOMMIT = 0;
@@ -13,7 +16,7 @@ START TRANSACTION;
 SET time_zone = \"+00:00\";
 
 --
--- Database: `data`
+-- Database: `my`
 --
 
 -- --------------------------------------------------------
@@ -22,8 +25,9 @@ SET time_zone = \"+00:00\";
 -- Table structure for table `acl_menu`
 --
 
+DROP TABLE IF EXISTS `acl_menu`;
 CREATE TABLE `acl_menu` (
-  `id` int(11) NOT NULL,
+  `id` bigint(20) NOT NULL,
   `parent_id` int(11) NOT NULL DEFAULT '0',
   `display` varchar(222) CHARACTER SET latin1 DEFAULT NULL,
   `router` varchar(222) CHARACTER SET latin1 DEFAULT NULL,
@@ -59,8 +63,9 @@ INSERT INTO `acl_menu` (`id`, `parent_id`, `display`, `router`, `order`) VALUES
 -- Table structure for table `acl_role`
 --
 
+DROP TABLE IF EXISTS `acl_role`;
 CREATE TABLE `acl_role` (
-  `id` int(11) NOT NULL,
+  `id` bigint(20) NOT NULL,
   `name` varchar(222) NOT NULL DEFAULT '',
   `description` varchar(222) NOT NULL DEFAULT ''
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
@@ -84,8 +89,9 @@ INSERT INTO `acl_role` (`id`, `name`, `description`) VALUES
 -- Table structure for table `acl_router`
 --
 
+DROP TABLE IF EXISTS `acl_router`;
 CREATE TABLE `acl_router` (
-  `id` int(11) NOT NULL,
+  `id` bigint(20) NOT NULL,
   `router` varchar(222) NOT NULL,
   `role` varchar(222) NOT NULL,
   `modified` datetime DEFAULT NULL
@@ -177,8 +183,9 @@ INSERT INTO `acl_router` (`id`, `router`, `role`, `modified`) VALUES
 -- Table structure for table `sitemin_crontab`
 --
 
+DROP TABLE IF EXISTS `sitemin_crontab`;
 CREATE TABLE `sitemin_crontab` (
-  `id` int(11) NOT NULL,
+  `id` bigint(20) NOT NULL,
   `minute` varchar(222) NOT NULL,
   `hour` varchar(222) NOT NULL,
   `date` varchar(222) NOT NULL,
@@ -186,7 +193,7 @@ CREATE TABLE `sitemin_crontab` (
   `year` varchar(222) NOT NULL,
   `weekday` varchar(22) NOT NULL,
   `task` text NOT NULL,
-  `next` datetime NOT NULL,
+  `next` datetime DEFAULT NULL,
   `note` text NOT NULL,
   `status` varchar(22) NOT NULL DEFAULT 'active'
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
@@ -198,8 +205,8 @@ CREATE TABLE `sitemin_crontab` (
 INSERT INTO `sitemin_crontab` (`id`, `minute`, `hour`, `date`, `month`, `year`, `weekday`, `task`, `next`, `note`, `status`) VALUES
 (1, '5', '1', '*', '*', '*', '*', '/sitemin/housekeeping/backup/database=daily', '2018-11-21 01:05:59', 'back up database each weekday \r\nand store to file 1.sql .. 7.sql', 'active'),
 (2, '*', '*', '*', '*', '*', '*', '$/root/memlog.sh', '2018-11-07 18:32:59', 'log memory usage to maintenance server', 'inactive'),
-(3, '*', '*', '*', '*', '*', '*', '$date> /tmp/crontest | date ', '2018-11-20 22:46:59', 'test cron', 'active'),
-(10, '5', '3,9,14,20', '*', '*', '*', '*', '/spiderm1/ext/proxysearch', '0000-00-00 00:00:00', 'search external proxy ', 'inactive');
+(3, '*', '*', '*', '*', '*', '*', '> /tmp/crontest | date ', '2018-11-20 22:46:59', 'test cron', 'active'),
+(10, '5', '3,9,14,20', '*', '*', '*', '*', '/spiderm1/ext/proxysearch', '1970-12-01 00:00:00', 'search external proxy ', 'inactive');
 
 -- --------------------------------------------------------
 
@@ -207,6 +214,7 @@ INSERT INTO `sitemin_crontab` (`id`, `minute`, `hour`, `date`, `month`, `year`, 
 -- Table structure for table `sitemin_log`
 --
 
+DROP TABLE IF EXISTS `sitemin_log`;
 CREATE TABLE `sitemin_log` (
   `id` bigint(20) NOT NULL,
   `user_id` int(11) NOT NULL DEFAULT '0',
@@ -221,10 +229,11 @@ CREATE TABLE `sitemin_log` (
 -- Table structure for table `sitemin_message`
 --
 
+DROP TABLE IF EXISTS `sitemin_message`;
 CREATE TABLE `sitemin_message` (
   `id` bigint(20) NOT NULL,
   `from` bigint(20) NOT NULL,
-  `to` int(11) NOT NULL DEFAULT '0',
+  `to` bigint(20) NOT NULL DEFAULT '0',
   `to_group` varchar(222) DEFAULT NULL,
   `title` varchar(222) NOT NULL DEFAULT '',
   `message` text NOT NULL,
@@ -238,6 +247,7 @@ CREATE TABLE `sitemin_message` (
 -- Table structure for table `sitemin_message_receiver`
 --
 
+DROP TABLE IF EXISTS `sitemin_message_receiver`;
 CREATE TABLE `sitemin_message_receiver` (
   `id` bigint(20) NOT NULL,
   `sitemin_message_id` bigint(20) NOT NULL,
@@ -251,6 +261,7 @@ CREATE TABLE `sitemin_message_receiver` (
 -- Table structure for table `sitemin_role`
 --
 
+DROP TABLE IF EXISTS `sitemin_role`;
 CREATE TABLE `sitemin_role` (
   `id` bigint(20) NOT NULL,
   `sitemin_id` bigint(20) NOT NULL,
@@ -290,6 +301,7 @@ INSERT INTO `sitemin_role` (`id`, `sitemin_id`, `acl_role_id`) VALUES
 -- Table structure for table `sitemin_user`
 --
 
+DROP TABLE IF EXISTS `sitemin_user`;
 CREATE TABLE `sitemin_user` (
   `id` bigint(20) NOT NULL,
   `hash` varchar(64) DEFAULT '',
@@ -316,26 +328,14 @@ INSERT INTO `sitemin_user` (`id`, `hash`, `username`, `password`, `email`, `user
 (13, '', 'ee', 'e76ffb6d8361599fcb6e0983698cea2a', 'ee@ee.ee', 'admin', '2017-06-04 11:11:41', 0, 'suspend', '2017-06-05 01:46:08'),
 (14, '', 'ff', '42c1208369f55c49edc989e7aab25848', 'ff@ff.ff', 'admin,', '2017-07-27 06:30:40', 0, 'active', '2017-07-27 06:30:40'),
 (15, '', 'my', '252a17c7412d87f0d9d992da1a2f0803', 'my@my.my', 'sitemin', '2017-06-01 23:31:51', 0, 'active', '2017-06-05 01:46:08');
+
 -- --------------------------------------------------------
-ALTER TABLE `sitemin_user`
-  ADD PRIMARY KEY (`id`),
-  ADD UNIQUE KEY `username` (`username`),
-  ADD UNIQUE KEY `email` (`email`),
-  ADD KEY `hash` (`hash`),
-  ADD KEY `status` (`status`),
-  ADD KEY `created` (`created`);
---
--- AUTO_INCREMENT for dumped tables
---
---
--- AUTO_INCREMENT for table `sitemin_user`
---
-ALTER TABLE `sitemin_user`
-  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
+
 --
 -- Table structure for table `var`
 --
 
+DROP TABLE IF EXISTS `var`;
 CREATE TABLE `var` (
   `name` varchar(222) NOT NULL,
   `value` text,
@@ -438,18 +438,11 @@ ALTER TABLE `sitemin_role`
 --
 ALTER TABLE `sitemin_user`
   ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `username` (`username`),
+  ADD UNIQUE KEY `email` (`email`),
   ADD KEY `hash` (`hash`),
   ADD KEY `status` (`status`),
-  ADD KEY `email` (`email`),
-  ADD KEY `username` (`username`),
   ADD KEY `created` (`created`);
-
---
--- Indexes for table `var`
---
-ALTER TABLE `var`
-  ADD PRIMARY KEY (`name`),
-  ADD KEY `date` (`date`);
 
 --
 -- AUTO_INCREMENT for dumped tables
@@ -459,25 +452,25 @@ ALTER TABLE `var`
 -- AUTO_INCREMENT for table `acl_menu`
 --
 ALTER TABLE `acl_menu`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=89;
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=89;
 
 --
 -- AUTO_INCREMENT for table `acl_role`
 --
 ALTER TABLE `acl_role`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9008;
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9001;
 
 --
 -- AUTO_INCREMENT for table `acl_router`
 --
 ALTER TABLE `acl_router`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=278;
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=278;
 
 --
 -- AUTO_INCREMENT for table `sitemin_crontab`
 --
 ALTER TABLE `sitemin_crontab`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT for table `sitemin_log`
