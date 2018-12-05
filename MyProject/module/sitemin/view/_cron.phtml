@@ -75,7 +75,7 @@ var _token='<?=$rs['_token'];?>';
 
 				<!-- Modal footer -->
 				<div class="modal-footer">
-					<button type="button" class="btn btn-primary" v-on:click="save_cron()" >Submit</button>
+                    <button type="button" class="btn btn-warning" v-on:click="save_cron()" >Submit</button>
 				</div>
 
 			</div>
@@ -110,7 +110,7 @@ var _token='<?=$rs['_token'];?>';
 						<th>next</th>
 						<th>note</th>
 						<th>status</th>
-						<th><button type="button" class="add-note" v-on:click="edit_cron(0, $event)">+</button></th>
+						<th><button type="button" class="btn btn-extra-small btn-rounded btn-light-border" v-on:click="edit_cron(0, $event)"><span  class="fa fa-plus"> </span></button></th>
 					</tr>
 					<tr v-for="row in get_rows()" >
 						<td valign="top" v-for="col in columns" :class="'c--'+col">{{row[col]}}</td>

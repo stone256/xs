@@ -3,8 +3,8 @@
 
 ?>
 <div class="container-fluid">
-    <div class="row">
-        <div class="col-12 col-md-8 offset-md-2">    
+    <div class="row my-5">
+        <div class="col-12 col-md-8 offset-md-2 white-container">    
             <h3 class="text-uppercase mt-5">API ACL edit</h3>
             <?php if($rs['_msg'] ):?>
                 <h4 class="alert alert-danger"><?=$rs['_msg'];?></h4>
@@ -60,7 +60,7 @@
                         <?php endforeach;?>
                         </div>
                         <div class="text-center">
-                           <button type="submit" class="btn btn-danger" name="save" value="25">Save Changes</button>
+                           <button type="submit" class="btn btn-warning" name="save" value="25">Save Changes</button>
                             <a  class="btn btn-secondary" href="<?=$rs['_return'];?>">Cancel Changes</a>
                         </div>
                    </div>         

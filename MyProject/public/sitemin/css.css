@@ -192,4 +192,11 @@ select {
     background-color: #f1c360;
     border-color: #f1c360;
 }
+.white-container {
+    background: #ffffff;
+    overflow: hidden;
+    padding: 30px;
+    border-radius: 5px;
+    box-shadow: 0px 0px 43px 0px rgba(131, 131, 131, 0.23);
+}
 

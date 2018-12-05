@@ -77,7 +77,7 @@
 				<th>
 					<a href="javascript:void(0)" onclick="TheSort('created')">Created &nbsp;<i class="fa  <?=preg_match('/^.?created$/',$rs['sort'])? (preg_match('/^\-/',$rs['sort'])?'fa-sort-amount-desc':'fa-sort-amount-asc') :'fa-task';?>"></i></a>
 				</th>
-				<th>Action <a href="/api/user/edit" class="" role="button">+</a></th>
+				<th>Action <a href="/api/user/edit"  class="btn btn-extra-small btn-rounded btn-light-border" role="button"><span  class="fa fa-plus"></a></th>
 			</tr>
 		<?php
 		foreach ($rs['data'] as $k=>$r): ?>
@@ -129,7 +129,7 @@
 				</form>
 			</div>
 			<div class="modal-footer">
-				<button  class="btn btn-danger" data-dismiss="modal" onclick="savepassword()"><span class="glyphicon glyphicon-ok"></span> Save</button>
+				<button  class="btn btn-warning" data-dismiss="modal" onclick="savepassword()"><span class="glyphicon glyphicon-ok"></span> Save</button>
 				<button  class="btn btn-default" data-dismiss="modal"><span class="glyphicon glyphicon-remove"></span> Cancel</button>
 			</div>
 		</div>
