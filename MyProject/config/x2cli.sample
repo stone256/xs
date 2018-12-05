@@ -43,3 +43,6 @@ $apache_data=array (
 		  'X2CLI_CALL'=>true,
 		);
 
+
+define('__X_DEBUG', true);
+
