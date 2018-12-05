@@ -19,15 +19,7 @@
 //}
 
 ?>
-    <div class="row px-5 mt-4">
-        <div class="the-title">
-            <h3 class="text-uppercase">MENU <span class="small">- sitemin menu edit</span>  </h3>
-        </div>
-    </div>
-
-	<!-- grid table -->
-	<div class="px-5 ">
-
+    
 
 <style>
 .tree {
@@ -130,9 +122,21 @@ $tpl->sets(array('children'=>$rs['data']));
 $menutree_html = $tpl->html(false);
 
 ?>
-        <div class="contain-fluid">
-            <div class="row">
 
+   
+
+<!-- grid table -->
+
+<div class="contain-fluid">
+    <div class="row">
+        <div class="col-12 col-md-8 offset-md-2">    
+            <div class="px-5 mt-4">
+                    <div class="the-title">
+                        <h3 class="text-uppercase">MENU <span class="small">- sitemin menu edit</span>  </h3>
+                    </div>
+            </div>
+            <div class="row">
+                
                 <div class="col-sm-4">
                     <h4>Router</h4>
                     <div class="menu-delete-grap router mt-5 p-4">
@@ -151,6 +155,7 @@ $menutree_html = $tpl->html(false);
             </div>
         </div>
     </div>
+</div>
 
 <script>
 function order_area_show(ev, e){

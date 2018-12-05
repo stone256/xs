@@ -39,8 +39,10 @@
 				<td><?=$r['name'];?></td>
 				<td><?=$r['description'];?></td>
 				<td width="150px">
+                    <?php if(!in_array($r['id'], [1,9000])):?>
 					<a class="btn btn-extra-small btn-rounded btn-light-border" role="button" href="/sitemin/acl/role/edit/?id=<?=$r['id']?>" ><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a>
 					<a class="btn btn-extra-small btn-rounded btn-light-border"  id="delete-<?=$r['id']?>" onclick="if(confirm('Delete role <?=$r['name'];?>?')){ return true;}  else{ return false;}  " href="/sitemin/acl/role/delete/?id=<?=$r['id']?>&_token=<?=$rs['_token'];?>" ><i class="fa fa-trash"></i></a>
+                    <?php endif;?>
 				</td>
 			</tr>
 		<?php endforeach; ?>
