@@ -6,9 +6,9 @@ $sql="
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Nov 18, 2018 at 02:08 AM
--- Server version: 5.7.24-0ubuntu0.18.04.1
--- PHP Version: 7.2.10-0ubuntu0.18.04.1
+-- Generation Time: Dec 04, 2018 at 08:29 PM
+-- Server version: 5.7.24-0ubuntu0.16.04.1
+-- PHP Version: 7.0.32-0ubuntu0.16.04.1
 
 SET SQL_MODE = \"NO_AUTO_VALUE_ON_ZERO\";
 SET AUTOCOMMIT = 0;
@@ -16,7 +16,7 @@ START TRANSACTION;
 SET time_zone = \"+00:00\";
 
 --
--- Database: `data_p`
+-- Database: `my`
 --
 
 -- --------------------------------------------------------
@@ -25,6 +25,7 @@ SET time_zone = \"+00:00\";
 -- Table structure for table `api`
 --
 
+DROP TABLE IF EXISTS `api`;
 CREATE TABLE `api` (
   `id` varchar(64) NOT NULL,
   `batch` varchar(66) NOT NULL,
@@ -52,9 +53,10 @@ INSERT INTO `api` (`id`, `batch`, `gateway`, `method`, `path`, `url`, `descripti
 -- Table structure for table `api_acl`
 --
 
+DROP TABLE IF EXISTS `api_acl`;
 CREATE TABLE `api_acl` (
   `api_id` varchar(64) CHARACTER SET latin1 NOT NULL,
-  `api_user_id` int(11) NOT NULL,
+  `api_user_id` bigint(20) NOT NULL,
   `modified` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
@@ -80,8 +82,9 @@ INSERT INTO `api_acl` (`api_id`, `api_user_id`, `modified`) VALUES
 -- Table structure for table `api_user`
 --
 
+DROP TABLE IF EXISTS `api_user`;
 CREATE TABLE `api_user` (
-  `id` int(11) NOT NULL,
+  `id` bigint(20) NOT NULL,
   `login_id` varchar(222) NOT NULL,
   `password` varchar(222) CHARACTER SET latin1 NOT NULL,
   `detail` text NOT NULL,
@@ -153,8 +156,9 @@ ALTER TABLE `api_user`
 -- AUTO_INCREMENT for table `api_user`
 --
 ALTER TABLE `api_user`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 COMMIT;
+
 "
 ;
 
