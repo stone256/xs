@@ -8,6 +8,6 @@
  * all module from path "module"
  */
 
-#$modules[] = '/sitemin';
+$modules[] = '/sitemin';
 
 

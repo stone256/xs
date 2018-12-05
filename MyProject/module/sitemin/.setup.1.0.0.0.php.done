@@ -74,8 +74,8 @@ INSERT INTO `acl_role` (`id`, `name`, `description`) VALUES
 (2, 's-master', 'the master of school'),
 (3, 'designer', 'designer'),
 (9000, 'sitemin', 'System Administrator (* please do not modify or delete this!)'),
-(900, 'admin', 'Administrator'),
-(1020, 'Level 1', 'minimum access'),
+(3000, 'admin', 'Administrator'),
+(120, 'Level 1', 'minimum access'),
 (130, 'Level 2', 'middle level admin');
 
 -- --------------------------------------------------------
@@ -242,7 +242,7 @@ CREATE TABLE `sitemin_message_receiver` (
   `id` bigint(20) NOT NULL,
   `sitemin_message_id` bigint(20) NOT NULL,
   `sitemin_id` bigint(20) NOT NULL,
-  `viewed` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00'
+  `viewed` timestamp NULL DEFAULT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
