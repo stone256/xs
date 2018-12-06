@@ -7,6 +7,9 @@
 * 		 * 		'/router'=>'topview/ycon@zact' will map y to modules/[topview]/[ycon]Controller::[zact]Action()
 * 	 3> custom router always overwrites defaultone
 */
+
+define('_X_SITEMIN', true);
+
 $routers=[
  //for test controller
 '/sitemin/test' => '/sitemin/login@test',
@@ -59,3 +62,5 @@ $routers=[
 '/sitemin/housekeeping/backup' => '/sitemin/housekeeping@backup',
 
 ];
+
+
