@@ -72,7 +72,7 @@ padding:0;
     padding: 0;
     position: absolute;
     z-index: 1000;
-    background: rgba(236,198,117,0.2);
+    background: #f8efdd;
     border: 1px solid #dfdfdf;
     border-top: none;
     top:100%;
@@ -86,7 +86,7 @@ padding:0;
 }
 #cssmenu .sub-menu .sub-menu {
         position: absolute;
-        background: rgba(236,198,117,0.2);
+        background: #f8efdd;
         border: 1px solid #dfdfdf;
         top:1%;
         left: 94%;
@@ -162,13 +162,13 @@ background:#4976d2;
     padding: 0;
     position: relative;
     z-index: 0;
-    background: #2976d2;
+    background: #f8efdd;
     color: #000;
     top: 5px;
 }
     #cssmenu .sub-menu .sub-menu {
         position: relative;
-        background: #3976d2;
+        background: #fff;
         left:20px
 
     }

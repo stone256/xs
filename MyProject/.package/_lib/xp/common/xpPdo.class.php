@@ -95,7 +95,7 @@ class xpPdo {
 		$databse_str = ":dbname={$params['database']}";
 		$params['dsn'] = xpAS::priority_get($c['dsn'], "{$params['driver']}{$databse_str};host={$params['host']}" . ($params['port'] ? ":" . $params['port'] : ''));
 		$params['options'] = xpAS::priority_get($c['pdo-options'], $c['options'], array(PDO::ATTR_TIMEOUT => 5,PDO::ATTR_ERRMODE =>  PDO::ERRMODE_EXCEPTION));
-		$params['log'] = xpAS::merge(array ('on'=>0, 'path'=>"../../var/log/mysql", 'size'=>4000000), $c['log']);
+		$params['log'] = xpAS::merge(array ('path'=>null, 'size'=>4000000), $c['log']); //logging
 
 		//		$params['flat'] = 'json';
 		$this->params = $params;
@@ -146,7 +146,7 @@ class xpPdo {
 	 * @param string $path
 	 * @param int $max_size
 	 */
-	function log($on = false, $path = null, $max_size = 40000) { //4mb
+	function log($on = false, $path = null, $max_size = 4000000) { //4mb
 		$this->params['log']['path'] = $path ? $path : __DIR__ . '/../../var/logs/mysql';
 		mkdir($this->params['log']['path'], 0777, 1);
 		$this->params['log']['on'] = $on;
@@ -160,7 +160,7 @@ class xpPdo {
 	 */
 	function _log($q) {
 		$this->params['last'] = $q;
-		if (_XP_MYSQL_LOG === true || $this->params['log']['on']) {
+		if ($this->params['log']['path']) {
 			$file = $this->params['log']['path'] . '/' . $this->parems["database"] . ".log";
 			$log = file_get_contents($file);
 			if (strlen($log) > $this->params['log']['size']) $log = substr($log, 0 - ($max));
