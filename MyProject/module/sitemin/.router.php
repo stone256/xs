@@ -16,6 +16,7 @@ $routers=[
 
 '/sitemin/keepalive' => '/sitemin/index@keepalive',
 
+'/sitemin/requestpassword' => '/sitemin/login@requestpassword',
 '/sitemin/login' => '/sitemin/login@login',
 '/sitemin/loginajax' => '/sitemin/login@loginajax',
 '/sitemin/logout' => '/sitemin/login@logout',

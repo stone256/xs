@@ -104,7 +104,9 @@ class sitemin_loginController extends _system_defaultController {
 		if(strlen($r)>12) $r = $this->_short($r);
 		return $r;
 	}
-
+    function requestpasswordAction(){
+        _factory('sitemin_model_login')->sendresetpasswordlink($this->q);
+    }
 	function loginAction() {
 		if( !($r = defaultHelper::return_url())) $r = _X_URL.'/sitemin/dashboard';
 		//if google bot check used

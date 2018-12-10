@@ -1,4 +1,5 @@
 <?php
+
 class sitemin_aclController extends sitemin_indexController {
 
 //	function listAction(){

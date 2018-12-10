@@ -339,6 +339,7 @@ DROP TABLE IF EXISTS `var`;
 CREATE TABLE `var` (
   `name` varchar(222) NOT NULL,
   `value` text,
+  `note` text,
   `date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
@@ -346,12 +347,12 @@ CREATE TABLE `var` (
 -- Dumping data for table `var`
 --
 
-INSERT INTO `var` (`name`, `value`, `date`) VALUES
-('sitemin/log/keeped_in_days', '30', '2018-11-14 00:45:44'),
-('sitemin/message/max_days', '60', '2018-06-18 12:20:28'),
-('sitemin/message/max_list_items', '12', '2018-06-18 12:20:28'),
-('sitemin/note/max', '6', '2018-07-05 08:07:53'),
-('sitemin/testing/value', '36', '2018-08-06 09:26:08');
+INSERT INTO `var` (`name`, `value`, `note`, `date`) VALUES
+('sitemin/log/keeped_in_days', '30', 'log before archive', '2018-11-14 00:45:44'),
+('sitemin/message/max_days', '60', 'message stored peroid', '2018-06-18 12:20:28'),
+('sitemin/message/max_list_items', '12', 'message in a list page', '2018-06-18 12:20:28'),
+('sitemin/note/max', '6', 'max note number', '2018-07-05 08:07:53'),
+('sitemin/testing/value', '36', 'for testing', '2018-08-06 09:26:08');
 
 --
 -- Indexes for dumped tables

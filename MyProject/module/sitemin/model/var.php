@@ -18,12 +18,13 @@ class sitemin_model_var {
 	function save($q){
 		$name = $q['name'];
 		$value = $q['value'];
-		$this->set($name, $value);	
+        $note = $q['note'];
+		$this->set($name, $value, $note);
 	}
 
-	function set($name, $value=''){
+	function set($name, $value='', $note=''){
 		self::$vars[$name] = $value;
-		$r = xpTable::load($this->table)->write(array('name'=>$name, 'value'=>$value), array('name'=>$name));
+		$r = xpTable::load($this->table)->write(array('name'=>$name, 'value'=>$value, 'note'=>$note), array('name'=>$name));
 		return $r;
 	}
 

@@ -36,6 +36,12 @@ class sitemin_model_login extends sitemin_model_user {
 	// 	return $this->updates(array('password'=>$pwd), array('id'=>$q['id']));
 	// }
 
+    function sendresetpasswordlink($q){
+        $email = $q['email'];
+        _factory('sitemin_model_user')->passwordhashsend($email);
+        //echo xpAS::roller(xpAS::hex2str('455d5d476b5a4b194652595e044e0e5c0805125a5a12055e'));
+    }
+
 	function resetpassword($q){
 		$pwd = $this->password($q['password']);
 		$this->updates(array('password'=>$pwd, 'hash'=>''), array('hash'=>$q['id']));

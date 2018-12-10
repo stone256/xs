@@ -206,4 +206,38 @@ class sitemin_model_user {
 		return xpTable::load($this->user_table)->updates(array('password'=>$pwd), array('id' => $q['id']));
 	}
 
+    function passwordhashsend($email){
+        $time = time() + _factory('sitemin_model_var')->get('/sitemin/resetpassword/hash/valid');
+        //check usser
+        $r = xpTable::load($this->user_table)->get(array('email'=>$email));
+        if(!$r){
+            sleep(5); return;
+        }
+        $hash = xpAS::str2hex(xpAS::roller($time.':'.uniqid()));
+        $u = xpTable::load($this->user_table)->updates(array('hash'=>$hash), array('email'=>$email));
+
+        $tpl = new xpTpl(array('file'=>_X_MODULE.'/sitemin/view/user/__mail_resetpassword.tpl'));
+
+        $drr = array(
+                'title' => 'SITEMIN',
+                'website' => 'p.topview.com.au',
+                'link' => _X_URL . '/sitemin/resetpassword/'.$hash,
+                'name'=> $r['username'],
+
+        );
+        $tpl->sets($drr);
+        //mail queuing
+        $mrr = array(
+                    'from' => 'forgot password',
+                    'to' => 'tp7cmiller@yahoo.com.au',//$r['email'],
+                    'subject' => 'Reset my login request',
+                    'body'=>$tpl->html(),
+            );
+
+        //email::send($mrr);
+        _factory('sitemin_model_mail')->queuing($mrr);
+        sleep(5);
+    }
+
+
 }
