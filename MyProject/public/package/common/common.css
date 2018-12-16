@@ -407,7 +407,7 @@ additional css
 .textTransformLowerCase{text-transform:lowercase}
 .textTransformInherit{text-transform:inherit}
 
-
+.NoWrap{ white-space: nowrap;}
 /**
  *positioning
  **/
