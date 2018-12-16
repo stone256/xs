@@ -1,0 +1,165 @@
+<?php
+/**
+ * perpare data
+ */
+
+?>
+
+    <div class="row mb-5">
+        <div class="col-12 col-md-10 offset-md-1">
+            <form id="filter" class="search-form" method="get"  >
+	            <div class="row mt-5">
+		            <div class="the-title">
+			            <h3 class="text-uppercase">Mail -- <span class = "small">Queue</span>  </h3>
+		            </div>
+	            </div>
+	            <br>
+	            <div class="total-row row mt-2 mr-3"><!-- total start -->
+		            <div class="col-sm-2 ">Total: <span><?=count($rs['data']);?></span></div>
+                    <div class="col-sm-2 form-group has-icon">
+                        <input name="currentpage" type="hidden" id="page" value="<?=$rs['page']['no']?>" />
+                        <input name="sort" type="hidden"  id="sort" value="<?=$rs['sort']?>" />
+
+                        <label class="sr-only" for="from">From</label>
+                        <span class="fa fa-user form-control-feedback"></span>
+                        <input type="text" class="form-control" id="from" name="filter[from]" placeholder="from" value="<?=$rs['filter']['from'];?>">
+                    </div>
+
+                    <div class="col-sm-2 form-group has-icon">
+                        <label class="sr-only" for="to">To</label>
+                        <span class="fa fa-envelope form-control-feedback"></span>
+                        <input type="text" class="form-control" id="to" name="filter[to]" placeholder="to" value="<?=$rs['filter']['to'];?>">
+                    </div>
+		    <div class="col-sm-2 form-group has-icon">
+                        <label class="sr-only" for="subject">Subject</label>
+                        <span class="fa fa-envelope form-control-feedback"></span>
+                        <input type="text" class="form-control" id="subject" name="filter[subject]" placeholder="subject" value="<?=$rs['filter']['subject'];?>">
+                    </div>
+                    <div class="col-sm-2 ">
+                        <button class="btn btn-extra-small btn-rounded btn-light-border" type="submit" >
+                            <span class="fa fa-search">Search</span>
+                        </button>
+                    </div>
+	            </div>
+            </form>
+
+	        <script>
+
+	        function TheSort(sort){
+		        var current_sort = jQuery('#sort');
+		        if(current_sort.val() == sort) current_sort.val('-'+sort);
+		        else current_sort.val(sort);
+		        jQuery('#filter')[0].submit();
+	        }
+
+	        </script>
+
+
+
+	        <!-- grid table -->
+	        <div class="row">
+		        <table class="table table-striped table-hover">
+			        <tr>
+				        <th class=".Hide">
+					        ID
+				        </th>
+				        <th>
+					        <a href="javascript:void(0)" onclick="TheSort('from')">From&nbsp;<i class="fa  <?=preg_match('/^.?from$/',$rs['sort'])? (preg_match('/^\-/',$rs['sort'])?'fa-sort-amount-desc':'fa-sort-amount-asc') :'fa-task';?>"></i></a>
+				        </th>
+					<th>To</th>
+				        <th>
+					        <a href="javascript:void(0)" onclick="TheSort('subject')">Subject &nbsp;<i class="fa  <?=preg_match('/^.?subject$/',$rs['sort'])? (preg_match('/^\-/',$rs['sort'])?'fa-sort-amount-desc':'fa-sort-amount-asc') :'fa-task';?> "></i></a>
+				        </th>
+					<th>Attached</th>
+				        <th>
+					        <a href="javascript:void(0)" onclick="TheSort('created')">Created &nbsp;<i class="fa  <?=preg_match('/^.?created$/',$rs['sort'])? (preg_match('/^\-/',$rs['sort'])?'fa-sort-amount-desc':'fa-sort-amount-asc') :'fa-task';?>"></i></a>
+				        </th>
+				        <th>
+					        <a href="javascript:void(0)" onclick="TheSort('sent')">Send &nbsp;<i class="fa  <?=preg_match('/^.?sent$/',$rs['sort'])? (preg_match('/^\-/',$rs['sort'])?'fa-sort-amount-desc':'fa-sort-amount-asc') :'fa-task';?>"></i></a>
+				        </th>
+					<th>
+					        <a href="javascript:void(0)" onclick="TheSort('status')">Status &nbsp;<i class="fa  <?=preg_match('/^.?status$/',$rs['sort'])? (preg_match('/^\-/',$rs['sort'])?'fa-sort-amount-desc':'fa-sort-amount-asc') :'fa-task';?>"></i></a>
+				        </th>
+				        <th>Action</th>
+			        </tr>
+		        <?php
+		        foreach ($rs['data'] as $k=>$r): ?>
+			        <tr class="<?php echo $k%2 ? 'even' : 'odd'; ?>">
+				        <td class=".Hide"><?=$r['id']?></td>
+				        <td><?=$r['from'];?></td>
+				        <td><?=implode(', ', $r['to']);?></td>
+                        <td><?=$r['subject'];?></td>
+				        <td><?=implode(', ', $r['attached']);?></td>
+				        <td><?=$r['created'];?></td>
+				        <td><?=$r['sent'];?></td>
+				        <td><?=$r['status'];?></td>
+				        <td>
+							<a class="btn btn-sm btn-info"  id="delete-<?=$r['id']?>" href="javascript:void(0);" onclick="delete_now('<?=$r['id']?>','<?=$rs['_token'];?>')" ><i class="fa fa-trash"></i></a>
+							<a class="btn btn-sm btn-info"  id="send_now-<?=$r['id']?>" href="javascript:void(0);" onclick="send_now('<?=$r['id']?>','<?=$rs['_token'];?>')" >
+                                <i class="fa fa-paper-plane-o" aria-hidden="true"></i>
+                            </a>
+				        </td>
+			        </tr>
+		        <?php endforeach; ?>
+		        </table>
+	        </div>
+
+	        <!-- pagination -->
+            <div class="row mt-1">
+	            <?php include _X_LAYOUT.'/sitemin/pagination.phtml';?>
+
+            </div>
+        </div>
+    </div>
+
+<hr>
+
+<script>
+
+function delete_now(id, token){
+    common.mask.up();
+    $.ajax({
+        url: '/sitemin/mail/queue/delete='+id+'/_token='+token,
+        success: function(data){
+            window.location.reload();
+        }
+    });
+}
+
+function send_now(id, token){
+        common.mask.up();
+		$.ajax({
+		  url: '/sitemin/mail/queue/send='+id+'/_token='+token,
+		  success: function(data){
+              window.location.reload();
+		  }
+		});
+}
+
+
+$(function() {
+
+	$( "#from" ).each(function(){
+		$(this).autocomplete({
+			source: "/sitemin/mail/queue/search=from",
+			minLength: 2,
+			select: function( event, ui ) { }
+		});
+	})
+	$( "#to" ).each(function(){
+		$(this).autocomplete({
+			source: "/sitemin/mail/queue/search=to",
+			minLength: 2,
+			select: function( event, ui ) { }
+		});
+	})
+	$( "#subject" ).each(function(){
+		$(this).autocomplete({
+			source: "/sitemin/mail/queue/search=subject",
+			minLength: 2,
+			select: function( event, ui ) { }
+		});
+	})
+
+});
+</script>
