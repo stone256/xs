@@ -8,7 +8,7 @@ class sitemin_model_login extends sitemin_model_user {
 		$g = array('response' => $data['g-recaptcha-response'], 'secret' => _config('google,bot check,secret'), 'remoteip' => xpAS::get_client_ip());
 		$a = xpAS::curlOut(_config('google,bot check,api'), http_build_query($g));
 		$arr = json_decode($a);
-		return $arr->success != ture;
+		return $arr->success == ture;
 	}
 
 

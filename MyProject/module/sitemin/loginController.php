@@ -6,8 +6,10 @@
  */
 class sitemin_loginController extends _system_defaultController {
 
+	var $captcha_key="1!2@3#4$";
 
 	function __construct($argv){
+		$this->captcha = _config('login,captcha,key') ? _config('login,captcha,key')  : _X_SERVER_KEY ;
 		$this->q = $_REQUEST;
 		session_start();
 		//$this->return_url = defaultHelper::return_url();
@@ -104,21 +106,47 @@ class sitemin_loginController extends _system_defaultController {
 		if(strlen($r)>12) $r = $this->_short($r);
 		return $r;
 	}
-    function requestpasswordAction(){
-        _factory('sitemin_model_login')->sendresetpasswordlink($this->q);
-    }
+	function requestpasswordAction(){
+		_factory('sitemin_model_login')->sendresetpasswordlink($this->q);
+	}
+	function resetpasswordAction(){
+		 $q = $this->q;
+		// die(asdfasdf);
+		 if($q['save']){
+			 if ($_COOKIE['_x_captcha'] == $this->captcha || $l->captcha($q)){
+				 $q['n2048'] = $q['p1'];
+				 _factory('sitemin_model_user')->update_password($q);
+			 }
+			 sleep(3);
+			 exit;
+		 }else{
+		 	$hash = key($q);
+		 	//check hash
+		 	$u = _factory('sitemin_model_user')->check_hash($hash);
+			if(!$u) $rs['overdue'] =1;
+			$rs['hash'] = $hash;
+			$rs['user'] = $u;;
+		}
+		//check hash
+		//if google bot check used
+		//f**k the captcha which is not able to work in old firefox: _x_captcha data.invigorgroup.com/sitemin/login
+		$rs['google_key'] = _config('google,bot check,key');
+		$rs['no_captcha'] = $_COOKIE['_x_captcha'] ;
+		$rs['tpl'] = 'user/_resetpassword.phtml';
+		$rs['TITLE'] = 'SITEMIN USER';
+		return array('view'=>'/sitemin/view/index.phtml', 'data' => array('rs' => $rs));
+	}
 	function loginAction() {
 		if( !($r = defaultHelper::return_url())) $r = _X_URL.'/sitemin/dashboard';
 		//if google bot check used
 		//f**k the captcha which is not able to work in old firefox: _x_captcha data.invigorgroup.com/sitemin/login
 		$rs['google_key'] = _config('google,bot check,key');
-		$rs['no_captcha'] = $_COOKIE['_x_captcha'] ;
+		$rs['no_captcha'] = $_COOKIE['_x_captcha'] == $this->captcha;
 		$rs['ret'] = $r;
 		$rs['tpl'] = 'user/_login.phtml';
 		$rs['TITLE'] = 'SITEMIN LOGIN';
 		return array('view'=>'/sitemin/view/index.phtml', 'data' => array('rs' => $rs));
 	}
-
 	function loginajaxAction() {
 		$q = $_REQUEST;
 		//$l = new sitemin_model_login($u = new sitemin_model_user);
@@ -136,18 +164,15 @@ class sitemin_loginController extends _system_defaultController {
 			$arr = array('user_id' => $u['id'], 'router' => 'logged in', 'data'=>$u, );
 			_factory('sitemin_model_log')->insert($arr);
 		}
-		sleep(1);	//slow down
-//		if(_X_SITEMIN_LOG === true) _factory('sitemin_log_model_log')->insert();
+		sleep(2);	//slow down
 		echo json_encode($ret);
 	}
 
 	function _login($q){
 		$l = _factory('sitemin_model_login');
 		//google captach
-		//f* the captcha which is not able to work in old firefox: _x_captcha data.invigorgroup.com/sitemin/login
-		$parent_uri = xpAS::preg_get(_X_URL_REQUEST, '/^(.*?\/)login.*/ims', 1);
-
-		if (!$_COOKIE['_x_captcha']== 'THE_COOKIE_VALUE_NO_CAPTCHA_&*%*&FGHDFG$%bvsdfE%T^Y3342' && $l->captcha($q)) 	return array('status' =>'failed', 'msg'=>'Robot check failed', 'msg_type'=>'warning' );
+		//f* the captcha which is not able to work in old firefox: _x_captcha data.xxx.com/sitemin/login
+		if ( $_COOKIE['_x_captcha'] != $this->captcha && !$l->captcha($q)) return array('status' =>'failed', 'msg'=>'Robot check failed', 'msg_type'=>'warning' );
 		//if( !xpCaptcha::check($q['vcode']) ) $ret = array('status' =>'failed',  'msg'=>'Robot check failed, Vcode error, click on image to refresh code', 'msg_type'=>'warning' );
 		if (!$ret && !($r = $l->login($q)))   	$ret =  array('status' =>'failed', 'msg'=>'login failed, username and password are not match', 'msg_type'=>'warning' );
 		if (!$ret)  $ret =  array('status' =>'ok', 'msg'=>xpAS::get(defaultHelper::data_get('admin,login'),'permission,login'),  'msg_type'=>xpAS::get(defaultHelper::data_get('admin,login'),'user,username') );

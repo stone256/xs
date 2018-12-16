@@ -19,7 +19,7 @@ class email {
 			$arr['bcc'] = is_array($arr['bcc']) ? $arr['bcc'] : explode(';', $arr['bcc']);
 			foreach ($arr['bcc'] as $bcc) $mail->setBcc(self::pack($bcc));
 		}
-		if (is_array($arr['attachement'])) foreach ($arr['attachement'] as $k => $v) {
+		if (is_array($arr['attachment'])) foreach ($arr['attachment'] as $k => $v) {
 			$mail->addAttachment($v['content'], $v['name']);
 		}
 		$to = xpAS::priority_get($arr['to'], $arr['email']);

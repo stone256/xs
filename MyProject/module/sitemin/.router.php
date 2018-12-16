@@ -16,7 +16,11 @@ $routers=[
 
 '/sitemin/keepalive' => '/sitemin/index@keepalive',
 
+
+'/sitemin/mail/queue' => '/sitemin/mail@queue',
+
 '/sitemin/requestpassword' => '/sitemin/login@requestpassword',
+'/sitemin/resetpassword' => '/sitemin/login@resetpassword',
 '/sitemin/login' => '/sitemin/login@login',
 '/sitemin/loginajax' => '/sitemin/login@loginajax',
 '/sitemin/logout' => '/sitemin/login@logout',
@@ -63,5 +67,3 @@ $routers=[
 '/sitemin/housekeeping/backup' => '/sitemin/housekeeping@backup',
 
 ];
-
-

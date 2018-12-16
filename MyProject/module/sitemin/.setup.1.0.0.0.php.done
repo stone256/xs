@@ -42,20 +42,26 @@ INSERT INTO `acl_menu` (`id`, `parent_id`, `display`, `router`, `order`) VALUES
 (1, 0, 'ROOT', NULL, 0),
 (2, 75, 'User Control', '', 1),
 (82, 2, 'Users', '/sitemin/user', 0),
-(5, 2, 'Router', '/sitemin/acl/router', 2),
-(6, 2, 'Role', '/sitemin/acl/role', 1),
+(5, 5, 'Router', '/sitemin/acl/router', 0),
+(6, 2, 'Role', '/sitemin/acl/role', 2),
 (10, 1, 'Examples', '', 3),
 (11, 10, 'blade', '/examples/blade', 1),
-(87, 85, 'List', '/api/list', 0),
+(87, 85, 'List', '/api/list', 1),
 (86, 85, 'users', '/api/user', 2),
 (18, 1, 'Dashboard', '/sitemin/dashboard', 0),
-(19, 75, 'Menu Control', '/sitemin/acl/menutree', 0),
+(19, 19, 'Menu Control', '/sitemin/acl/menutree', 0),
 (28, 10, 'Example', '/examples', 0),
-(77, 75, 'Var', '/sitemin/var', 2),
-(85, 1, 'API', '', 1),
-(73, 75, 'Cron', '/sitemin/cron', 3),
+(91, 91, 'router', '/sitemin/acl/router', 0),
+(90, 75, 'mail queue', '/sitemin/mail/queue', 4),
+(77, 75, 'Var', '/sitemin/var', 3),
+(85, 85, 'API', '', 0),
+(73, 73, 'Cron', '/sitemin/cron', 0),
 (75, 1, 'Setting', '', 2),
-(88, 85, 'ACL', '/api/acl', 1);
+(88, 85, 'ACL', '/api/acl', 3),
+(92, 75, 'menu control', '/sitemin/acl/menutree', 0),
+(94, 2, 'router', '/sitemin/acl/router', 1),
+(93, 75, 'cron', '/sitemin/cron', 2);
+
 
 -- --------------------------------------------------------
 
@@ -353,6 +359,82 @@ INSERT INTO `var` (`name`, `value`, `note`, `date`) VALUES
 ('sitemin/message/max_list_items', '12', 'message in a list page', '2018-06-18 12:20:28'),
 ('sitemin/note/max', '6', 'max note number', '2018-07-05 08:07:53'),
 ('sitemin/testing/value', '36', 'for testing', '2018-08-06 09:26:08');
+
+
+
+CREATE TABLE `sitemin_mail_attachment` (
+  `id` bigint(20) NOT NULL,
+  `mail_id` bigint(20) NOT NULL,
+  `name` varchar(222) NOT NULL,
+  `content` text NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- `sitemin_mail_recipient`
+--
+
+CREATE TABLE `sitemin_mail_recipient` (
+  `id` bigint(20) NOT NULL,
+  `mail_id` bigint(20) NOT NULL,
+  `to` varchar(222) NOT NULL,
+  `ccbcc` varchar(22) DEFAULT 'to'
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+
+--
+-- `sitemin_mail`
+--
+ALTER TABLE `sitemin_mail`
+  ADD PRIMARY KEY (`id`,`created`),
+  ADD KEY `created` (`created`),
+  ADD KEY `sent` (`sent`),
+  ADD KEY `status` (`status`),
+  ADD KEY `try` (`try`),
+  ADD KEY `from` (`from`),
+  ADD KEY `subject` (`subject`);
+ALTER TABLE `sitemin_mail` ADD FULLTEXT KEY `body` (`body`);
+
+--
+-- `sitemin_mail_attachment`
+--
+ALTER TABLE `sitemin_mail_attachment`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `mail_id` (`mail_id`),
+  ADD KEY `name` (`name`);
+
+--
+-- `sitemin_mail_recipient`
+--
+ALTER TABLE `sitemin_mail_recipient`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `mail_id` (`mail_id`),
+  ADD KEY `ccbcc` (`ccbcc`),
+  ADD KEY `to` (`to`);
+
+--
+-- AUTO_INCREMENT
+--
+
+--
+-- AUTO_INCREMENT `sitemin_mail`
+--
+ALTER TABLE `sitemin_mail`
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT;
+
+--
+-- 使用表AUTO_INCREMENT `sitemin_mail_attachment`
+--
+ALTER TABLE `sitemin_mail_attachment`
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT;
+
+--
+-- 使用表AUTO_INCREMENT `sitemin_mail_recipient`
+--
+ALTER TABLE `sitemin_mail_recipient`
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT;
+
 
 --
 -- Indexes for dumped tables
