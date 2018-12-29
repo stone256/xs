@@ -87,15 +87,15 @@
 			        <tr class="<?php echo $k%2 ? 'even' : 'odd'; ?>">
 				        <td class=".Hide"><?=$r['id']?></td>
 				        <td><?=$r['from'];?></td>
-				        <td><?=implode(', ', $r['to']);?></td>
+				        <td width="25%"><?=implode(', ', $r['to']);?></td>
                         <td><?=$r['subject'];?></td>
 				        <td><?=implode(', ', $r['attached']);?></td>
 				        <td><?=$r['created'];?></td>
 				        <td><?=$r['sent'];?></td>
 				        <td><?=$r['status'];?></td>
-				        <td>
-							<a class="btn btn-sm btn-info"  id="delete-<?=$r['id']?>" href="javascript:void(0);" onclick="delete_now('<?=$r['id']?>','<?=$rs['_token'];?>')" ><i class="fa fa-trash"></i></a>
-							<a class="btn btn-sm btn-info"  id="send_now-<?=$r['id']?>" href="javascript:void(0);" onclick="send_now('<?=$r['id']?>','<?=$rs['_token'];?>')" >
+				        <td width="120">
+							<a class="btn btn-extra-small btn-rounded btn-light-border"  id="delete-<?=$r['id']?>" href="javascript:void(0);" onclick="delete_now('<?=$r['id']?>','<?=$rs['_token'];?>')" ><i class="fa fa-trash"></i></a>
+							<a class="btn btn-extra-small btn-rounded btn-light-border"  id="send_now-<?=$r['id']?>" href="javascript:void(0);" onclick="send_now('<?=$r['id']?>','<?=$rs['_token'];?>')" >
                                 <i class="fa fa-paper-plane-o" aria-hidden="true"></i>
                             </a>
 				        </td>

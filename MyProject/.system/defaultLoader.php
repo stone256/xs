@@ -6,9 +6,9 @@
  */
 
 // get enabled modules
-$enabled_path = _X_MODEL_ENABLE;
+$enabled_path = _X_MODULE_ENABLED;
 //load all enabled modules for above directory
-foreach(xpFile::file_in_dir($enabled_path, array('level'=>5, 'path'=>true)) as $k=>$v)   include $v;
+foreach(xpFile::file_in_dir($enabled_path, array('level'=>15, 'path'=>true)) as $k=>$v)   include $v;
 
 
 /**

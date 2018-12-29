@@ -90,9 +90,9 @@ $template = <<<EOF
 
 <div  class="menu-root" >
 	<h4 class="menu-title pl-5 pb-4">Menu <small>You can drag, edit, add and delete menu item <small></h4>
-	<ul class="tree pt-3"  >
+	<ul class="tree pb-3"  >
 		<!-- recursion start children -->
-		<li id="m_{{id}}" >
+		<li id="m_{{id}}" class="pt-3">
 			<div id="sort_{{parent_id}}_{{%K}}"  class="drop order-spacer" ondrop="order_save(event,this)" ondragover="order_area_show(event,this)" ondragleave="order_area_hide(this)"></div>
 
 			<span style="float:left; font-size:16px">&#9492;  <!-- &#10662; &#9493;menu--></span>
@@ -110,12 +110,12 @@ $template = <<<EOF
 			</span>
 
 
-			<ul id="s_{{id}}"  class="tree" >
+			<ul id="s_{{id}}"  class="tree " >
 
 				<!-- recursion children-->
 
 			</ul>
-			<div class="clear h0" ></div>
+			<div class="clear" ></div>
 		</li>
 		<!-- recursion end children -->
 		<li class="last_li none clear"></li>

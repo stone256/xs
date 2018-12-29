@@ -9,4 +9,4 @@
  */
 
 
-$modules['examples'] = '/examples';
+$modules[] = '/module';
