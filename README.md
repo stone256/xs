@@ -1,3 +1,5 @@
+What is
+=======
 xs framework is simple and fast php framework with minimum code. 
 
 
@@ -19,33 +21,33 @@ clone or just download to your project folder
 
 Usage
 =====
-* remember before your start:
-	under your project folder,
-		copy "config/general.sample" to "config/general.php"
-		copy "config/local.sample" to "config/local.php"
-		copy "config/x2cli.sample" to "config/x2cli.php"
-*to enable vendor under .package/:
-	uncommet the line in "config/general.php"
-		define('_LOAD_VENDOR', true);
+remember before your start:
+	*under your project folder,
+	*	copy "config/general.sample" to "config/general.php"
+	*	copy "config/local.sample" to "config/local.php"
+	*	copy "config/x2cli.sample" to "config/x2cli.php"
+to enable vendor under .package/:
+	*uncommet the line in "config/general.php"
+	*	define('_LOAD_VENDOR', true);
 
 ENTER POINT WEB are handled by "public/index.php"
-		e.g. http://www.myproject.com
-			or 
-			 http://www.mydomain.com/myproject
+	*	e.g. http://www.myproject.com
+	*		or 
+	*		 http://www.mydomain.com/myproject
 
 CLI are handled by file "x2cli" under the project folder
-	$php x2cli foo/bar id=5\&date=2008-11-11
-	e.g. $php x2cli [ROUTER] [PARAMETERS]
+	*$php x2cli foo/bar id=5\&date=2008-11-11
+	*e.g. $php x2cli [ROUTER] [PARAMETERS]
 
 CONFIG 
-	general: "config/general.php" 
-	local:   "config/local.php"
-			 "config/x2cki.php"
+	*general: "config/general.php" 
+	*local:   "config/local.php"
+	*		 "config/x2cki.php"
 
 EDANLED MODULE:
-	"config/enabled/YOURMODULE.php"
-	e.g. "config/enabled/foo.php" 
-		<?php
+	*"config/enabled/YOURMODULE.php"
+	*e.g. "config/enabled/foo.php" 
+	    <?php
 			$modules[] = "/foo";
 		?>
 
