@@ -5,10 +5,13 @@
  * @param string$classname
  */
 
-// get enabled modules
-$enabled_path = _X_MODEL_ENABLE;
-//load all enabled modules for above directory
-foreach(xpFile::file_in_dir($enabled_path, array('level'=>5, 'path'=>true)) as $k=>$v)   include $v;
+// get enabled modules (global $modules)
+foreach(xpFile::file_in_dir(_X_MODEL_ENABLE, array('level'=>5, 'path'=>true)) as $k=>$v)   include $v;
+
+// get overwrite model (global $overwrite)
+foreach(xpFile::file_in_dir(_X_MODEL_OVERWRITE, array('level'=>5, 'path'=>true)) as $k=>$v)   include $v;
+
+
 
 
 /**

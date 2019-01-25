@@ -2,6 +2,11 @@
 class testing_indexController extends _system_defaultController {
 
 	function indexAction(){
+	
+	  echo   "<h1>testing_model_test over write by testing_model_testa</h1>"; 
+	    _factory('testing_model_test', 1, 2,8)->t();
+	    
+	    die("<hr>");
 		$data['rs']['controller'] = _rp(__FILE__);
 		/** create database
 		global $cfg;

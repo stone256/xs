@@ -34,7 +34,7 @@ class app {
 	static $_url ='';
 	static $_mapper ='';
 	static $_controller ='';
-
+	static $_overwrite=[];
 	var $update_scripts=array();
 
 	static $models = array();
@@ -59,7 +59,7 @@ class app {
 			$this->update_scripts = $this->update_scripts + $us;
 		}
 		$routers = $this->routers;
-
+		    
 	}
 
 	function at_404($v){
