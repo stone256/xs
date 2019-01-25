@@ -289,14 +289,19 @@ function _cp($k, $value) {
 	return $_cache->put($k, $value);
 }
 
-
-function _factory($name, $signleton = true, $construct_data=null){
-
+//function _factory($name, $no_singleton = false, $construct_data=null){
+function _factory(){
+	global $overwrites;
 	static $objects=array();
-
-	if($signleton && $objects[$name]) return $objects[$name];
-
-	return $objects[$name] ? new $name($construct_data) : $objects[$name] = new $name($construct_data);
+	$args = func_get_args();
+	$name =array_shift($args);
+	if($overwrites[$name]) $name = $overwrites[$name];
+	$no_singleton = array_shift($args);
+	if(!$no_singleton && $objects[$name]) return $objects[$name];
+	//use if(phpversion()>7)
+	return $objects[$name] ? new $name(...$args) : $objects[$name] = new $name(...$args);
+	//else use
+	//  return $objects[$name] ? new $name($args) : $objects[$name] = new $name($args);
 
 }
 function _config($name){

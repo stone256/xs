@@ -18,6 +18,7 @@ define('_X_OFFSET', STR_REPLACE(realpath($_SERVER['DOCUMENT_ROOT']), '', _X_INDE
 define('_X_SYSTEM', _X_ROOT . '/.system');
 define('_X_CONFIG', _X_ROOT . '/config');
 define('_X_MODEL_ENABLE', _X_CONFIG . '/enabled');
+define('_X_MODEL_OVERWRITE', _X_CONFIG . '/overwrite');
 
 define('_X_MODULE', _X_ROOT . '/module');
 define('_X_PACKAGE', _X_ROOT . '/.package');
