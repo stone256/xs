@@ -6,7 +6,7 @@
  */
 
 // get enabled modules (global $modules)
-foreach(xpFile::file_in_dir(_X_MODEL_ENABLE, array('level'=>5, 'path'=>true)) as $k=>$v)   include $v;
+foreach(xpFile::file_in_dir(_X_MODEL_ENABLED, array('level'=>5, 'path'=>true)) as $k=>$v)   include $v;
 
 // get overwrite model (global $overwrite)
 foreach(xpFile::file_in_dir(_X_MODEL_OVERWRITE, array('level'=>5, 'path'=>true)) as $k=>$v)   include $v;
