@@ -3,7 +3,7 @@
  * @author 	 peter wang<stone256@hotmail.com>
  * @copyright MIT;
  * system config
- * @// NOTE:  DO NOT change this unless you know what you're doing	
+ * @// NOTE:  DO NOT change this unless you know what you're doing
  *
  */
 error_reporting(E_ERROR);
@@ -17,7 +17,8 @@ define('_X_ROOT', preg_replace('/\/public$/', '', _X_INDEX));
 define('_X_OFFSET', STR_REPLACE(realpath($_SERVER['DOCUMENT_ROOT']), '', _X_INDEX));
 define('_X_SYSTEM', _X_ROOT . '/.system');
 define('_X_CONFIG', _X_ROOT . '/config');
-define('_X_MODULE_ENABLED', _X_CONFIG . '/enabled');
+define('_X_MODEL_ENABLED', _X_CONFIG . '/enabled');
+define('_X_MODEL_OVERWRITE', _X_CONFIG . '/overwrite');
 
 define('_X_MODULE', _X_ROOT . '/module');
 define('_X_PACKAGE', _X_ROOT . '/.package');

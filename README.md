@@ -96,4 +96,8 @@ PUBLIC RESOURCE: "public"
 		"index.php"	#system file donot touch unless you know what you doing.
 		".htaccess"	#system file donot touch unless you know what you doing.	
 		"maintenance.html"	#for maintenance model [option]
+<<<<<<< HEAD
 		"robots.txt"	#robot file [option]
+=======
+		"robots.txt"	#robot file [option]
+>>>>>>> master
