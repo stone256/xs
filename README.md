@@ -28,34 +28,32 @@ Usage
 	*	copy "config/x2cli.sample" to "config/x2cli.php"
 * to enable vendor under .package/:
 	* uncommet the line in "config/general.php"
-	*	define('_LOAD_VENDOR', true);
+	*       define('_LOAD_VENDOR', true);
 
 * ENTER POINT WEB are handled by "public/index.php"
 	*	e.g. http://www.myproject.com
-	*		or 
-	*		 http://www.mydomain.com/myproject
+
 
 * CLI are handled by file "x2cli" under the project folder
 	* $php x2cli foo/bar id=5\&date=2008-11-11
-	* e.g. $php x2cli [ROUTER] [PARAMETERS]
+	* e.g. 
+	*       $php x2cli [ROUTER] [PARAMETERS]
 
 * CONFIG 
 	* general: "config/general.php" 
 	* local:   "config/local.php"
-	*		 "config/x2cki.php"
+	*  "config/x2cki.php"
 
 * MODULE ENABLE
 	* "config/enabled/YOURMODULE.php"
 	* e.g. "config/enabled/foo.php" 
-	    *	$modules[] = "/foo";
+	*       $modules[] = "/foo";
 		
 
 * MODEL OVERWRITE :
 	* "config/overwrite/MODEL_2_NEWMODEL.php"
 	* e.g. "config/enabled/foo_model_2_bar_model.php" 
-	    <?php
-            $overwrites['foo_model']= 'bar_model';
-		?>
+    *       $overwrites['foo_model']= 'bar_model';
 	* note: only working with "_factory('xxx')"  	
 
 * LAYOUT: 
