@@ -71,12 +71,10 @@ Usage
 	* router file is under your module path, wihch defined when you put in your enabled module
 	* e.g. $modules[] = "/foo";
 	*	router file is : "foo/.router.php
-		<?php
-			$routers = array(
+	*       $routers = array(
 						"/foo/bar" => "/foo/index@bar",
 						#"FRONT-URI" => "MODULEPATH/CONTROLLERNAME@METHODNAME"
 					);
-		?>
 
 * CONTROLLER:
 	*	controller is defined in the router file
