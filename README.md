@@ -22,12 +22,12 @@ Installation
 Usage
 =====
 * remember before your start:
-	*under your project folder,
+	* under your project folder,
 	*	copy "config/general.sample" to "config/general.php"
 	*	copy "config/local.sample" to "config/local.php"
 	*	copy "config/x2cli.sample" to "config/x2cli.php"
 * to enable vendor under .package/:
-	*uncommet the line in "config/general.php"
+	* uncommet the line in "config/general.php"
 	*	define('_LOAD_VENDOR', true);
 
 * ENTER POINT WEB are handled by "public/index.php"
@@ -36,20 +36,19 @@ Usage
 	*		 http://www.mydomain.com/myproject
 
 * CLI are handled by file "x2cli" under the project folder
-	*$php x2cli foo/bar id=5\&date=2008-11-11
-	*e.g. $php x2cli [ROUTER] [PARAMETERS]
+	* $php x2cli foo/bar id=5\&date=2008-11-11
+	* e.g. $php x2cli [ROUTER] [PARAMETERS]
 
 * CONFIG 
-	*general: "config/general.php" 
-	*local:   "config/local.php"
+	* general: "config/general.php" 
+	* local:   "config/local.php"
 	*		 "config/x2cki.php"
 
-* EDANLED MODULE
+* MODULE ENABLE
 	* "config/enabled/YOURMODULE.php"
 	* e.g. "config/enabled/foo.php" 
-	    <?php
-			$modules[] = "/foo";
-		?>
+	    *	$modules[] = "/foo";
+		
 
 * MODEL OVERWRITE :
 	* "config/overwrite/MODEL_2_NEWMODEL.php"
@@ -99,9 +98,9 @@ Usage
 * SYSTEM core ".system/*"
 
 * PUBLIC RESOURCE: "public" 
-		MEDIA, JS.. .. ..
-		..
-		"index.php"	#system file donot touch unless you know what you doing.
-		".htaccess"	#system file donot touch unless you know what you doing.	
-		"maintenance.html"	#for maintenance model [option]
-		"robots.txt"	#robot file [option]
+	*	MEDIA, JS.. .. ..
+	*	..
+	*	"index.php"	#system file donot touch unless you know what you doing.
+	*	".htaccess"	#system file donot touch unless you know what you doing.	
+	*	"maintenance.html"	#for maintenance model [option]
+	*	"robots.txt"	#robot file [option]
