@@ -100,15 +100,17 @@ Controller
 
 Packagem and library
 -- 
-1. composed PACKAGE : ".package/_vendor"
-2. just use lazyloader: ".package/_lib/*"
+1. composed PACKAGE : 
+    - folder ".package/_vendor"
+2. just use lazyloader: 
+    - folder ".package/_lib/*"
 
-    Required
-    * framework is required  ".package/xp/*"
+* #####framework is required  ".package/xp/*"
 
 Layout
 ------
-* COMMON LAYOUT: "layout/" #this is recommand, not enforced. 
+* folder: "layout/" 
+    - this is recommand common layout files, but not enforced. 
 
 Data storage
 --
