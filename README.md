@@ -98,7 +98,7 @@ Controller
 	        }
 	        ..
 
-PAackage/library
+Packagem and library
 -- 
 1. composed PACKAGE : ".package/_vendor"
 2. just use lazyloader: ".package/_lib/*"
