@@ -53,10 +53,11 @@ Usage
 
 * MODEL OVERWRITE :
 	* "config/overwrite/MODEL_2_NEWMODEL.php"
-	* e.g. "config/enabled/foo_2_bar.php" 
+	* e.g. "config/enabled/foo_model_2_bar_model.php" 
 	    <?php
-            $overwrites['foo']= 'bar';
+            $overwrites['foo_model']= 'bar_model';
 		?>
+	* note: only working with "_factory('xxx')"  	
 
 * LAYOUT: 
 	* COMMON LAYOUT: "layout/" #this is recommand, not enforced. 
