@@ -1,21 +1,21 @@
-What is
+WHAT IS
 =======
-xs framework is simple and fast php framework with minimum code. 
+xs framework is simple and fast php framework with minimum code. Idea for if you do not want write tons of code
 
 
-License FREE MIT 
+LICENCE FREE MIT 
 =======================
 [https://en.wikipedia.org/wiki/MIT_License]
 
 
-Requirements
+REQUIREMENTS
 ============
 
 * PHP >= 5
 * Pdo Extension for mysql, only for sitemin and api
 * apache2 + rewrite, only for webapp
 
-Installation
+INSTALLATION
 ============ 
 * clone or just download to your project folder
 
@@ -32,45 +32,42 @@ Before your start:
 	- uncommet the line in "config/general.php"
 	-       define('_LOAD_VENDOR', true);
 
-ENTER POINT - WEB 
+Enter point for WEB 
 --
 * are handled by "public/index.php"
 * so please point your document-root here
 *	e.g. http://www.myproject.com
 
 
-ENTER POINT - CLI
+Enter point - CLI
 --
 * are handled by file "x2cli" under the project folder
 *   $php x2cli [ROUTER] [PARAMETERS]
 	- e.g. 
 	-       $php x2cli foo/bar id=5\&date=2008-11-11
 
-CONFIG
+Config
 --
 * general: "config/general.php" 
 * local:   "config/local.php"
 * cli:      "config/x2cli.php" - extra for cli
 
-MODULE ENABLE
+Module enable
 --
 * "config/enabled/YOURMODULE.php"
 * e.g. "config/enabled/foo.php" 
 *       $modules[] = "/foo";
 		
 
-MODEL OVERWRITE
+Model overwrite
 ---------------
 * "config/overwrite/MODEL_2_NEWMODEL.php"
 * e.g. "config/enabled/foo_model_2_bar_model.php" 
    -       $overwrites['foo_model']= 'bar_model';
 * note: this only works with "_factory('xxx')" - factory-singleton   	
 
-LAYOUT
-------
-* COMMON LAYOUT: "layout/" #this is recommand, not enforced. 
 
-MODULE
+Module
 ------
 * "module/YOURMODULE"	#all module have to be in there!
 * e.g. "module/foo"
@@ -99,24 +96,28 @@ CONTROLLER
 *	the method "bar()" in "indexController.php"
 
 PACKAGE
-------- 
+-- 
 1. composed PACKAGE : ".package/_vendor"
 2. just use lazyloader: ".package/_lib/*"
 
-Required
---------
-* framework is required  ".package/xp/*"
+    Required
+    ________
+    * framework is required  ".package/xp/*"
 
-DATA STORAGE
-------------
+Layout
+------
+* COMMON LAYOUT: "layout/" #this is recommand, not enforced. 
+
+Data storage
+--
 * folder "data/*"
 
-SYSTEM core
------------
+System core
+--
 * folder ".system/*"
 
-PUBLIC RESOURCE
----------------
+Public
+--
 * folder  "public" 
 	*	MEDIA, JS.. .. ..
 	*	..
