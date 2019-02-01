@@ -72,13 +72,13 @@ Module
 * "module/YOURMODULE"	#all module have to be in there!
 * e.g. "module/foo"
 
-VIEW
+View
 ----
 - "module/YOURMODEL/view/[controller]/[method].phtml"
 - e.g. "module/foo/view/index/bar.phtml"
 
-ROUTER MAPPING
---------------
+Router mapping
+--
 * router file is under your module path, wihch defined when you put in your enabled module
 * e.g. $modules[] = "/foo";
 *	router file is : "foo/.router.php
@@ -87,15 +87,15 @@ ROUTER MAPPING
 				"/foo/bar" => "/foo/index@bar",
 			);
 
-CONTROLLER
-----------
+Controller
+--
 *	controller is defined in the router file
 *	e.g. "/foo/bar" => "/foo/index@bar",
 *	this defined controller is "foo/indexController.php"	
 *	so "http://www.xxx.com/foo/bar" will call
 *	the method "bar()" in "indexController.php"
 
-PACKAGE
+PAackage/library
 -- 
 1. composed PACKAGE : ".package/_vendor"
 2. just use lazyloader: ".package/_lib/*"
