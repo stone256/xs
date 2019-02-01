@@ -35,14 +35,14 @@ Usage
 
 
 * CLI are handled by file "x2cli" under the project folder
-	* $php x2cli foo/bar id=5\&date=2008-11-11
+	* $php x2cli [ROUTER] [PARAMETERS]
 	* e.g. 
-	*       $php x2cli [ROUTER] [PARAMETERS]
+	*       $php x2cli foo/bar id=5\&date=2008-11-11
 
 * CONFIG 
 	* general: "config/general.php" 
 	* local:   "config/local.php"
-	*  "config/x2cki.php"
+	* cli:      "config/x2cli.php" - extra for cli
 
 * MODULE ENABLE
 	* "config/enabled/YOURMODULE.php"
