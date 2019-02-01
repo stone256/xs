@@ -105,7 +105,7 @@ Packagem and library
 2. just use lazyloader: 
     - folder ".package/_lib/*"
 
-* *framework is required  ".package/xp/*"
+* *xs framework requires  ".package/xp/*"
 
 Layout
 ------
