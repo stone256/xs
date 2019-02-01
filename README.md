@@ -52,27 +52,27 @@ Usage
 		?>
 
 * MODEL OVERWRITE :
-	*"config/overwrite/MODEL_2_NEWMODEL.php"
-	*e.g. "config/enabled/foo_2_bar.php" 
+	* "config/overwrite/MODEL_2_NEWMODEL.php"
+	* e.g. "config/enabled/foo_2_bar.php" 
 	    <?php
             $overwrites['foo']= 'bar';
 		?>
 
 * LAYOUT: 
-	COMMON LAYOUT: "layout/" #this is recommand, not enforced. 
+	* COMMON LAYOUT: "layout/" #this is recommand, not enforced. 
 
 * MODULE: 
-	"module/YOURMODULE"	#all module have to be in there!
-	e.g. "module/foo"
+	* "module/YOURMODULE"	#all module have to be in there!
+	* e.g. "module/foo"
 
 * VIEW: 
-	"module/YOURMODEL/view/[controller]/[method].phtml"
-	e.g. "module/foo/view/index/bar.phtml"
+	* "module/YOURMODEL/view/[controller]/[method].phtml"
+	* e.g. "module/foo/view/index/bar.phtml"
 
 * ROUTER MAPPING:
-	router file is under your module path, wihch defined when you put in your enabled module
-	e.g. $modules[] = "/foo";
-		router file is : "foo/.router.php
+	* router file is under your module path, wihch defined when you put in your enabled module
+	* e.g. $modules[] = "/foo";
+	*	router file is : "foo/.router.php
 		<?php
 			$routers = array(
 						"/foo/bar" => "/foo/index@bar",
@@ -81,8 +81,8 @@ Usage
 		?>
 
 * CONTROLLER:
-		controller is defined in the router file
-		e.g. "/foo/bar" => "/foo/index@bar",
+	*	controller is defined in the router file
+	*	e.g. "/foo/bar" => "/foo/index@bar",
 			this defined controller is "foo/indexController.php"	
 			so "http://www.xxx.com/foo/bar" will call
 				the method "bar()" in "indexController.php"
