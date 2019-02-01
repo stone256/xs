@@ -85,15 +85,18 @@ Router mapping
 *       $routers = array(
 				#"FRONT-URI" => "MODULEPATH/CONTROLLERNAME@METHODNAME"
 				"/foo/bar" => "/foo/index@bar",
-			);
+			);		
 
 Controller
 --
 *	controller is defined in the router file
 *	e.g. "/foo/bar" => "/foo/index@bar",
-*	this defined controller is "foo/indexController.php"	
-*	so "http://www.xxx.com/foo/bar" will call
-*	the method "bar()" in "indexController.php"
+*      "foo/indexController.php"
+	        ..
+	        function barAction(){
+	                ..
+	        }
+	        ..
 
 PAackage/library
 -- 
@@ -101,7 +104,6 @@ PAackage/library
 2. just use lazyloader: ".package/_lib/*"
 
     Required
-    ________
     * framework is required  ".package/xp/*"
 
 Layout
