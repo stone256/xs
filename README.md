@@ -44,9 +44,9 @@ Usage
 	*local:   "config/local.php"
 	*		 "config/x2cki.php"
 
-* EDANLED MODULE:
-	*"config/enabled/YOURMODULE.php"
-	*e.g. "config/enabled/foo.php" 
+* EDANLED MODULE
+	* "config/enabled/YOURMODULE.php"
+	* e.g. "config/enabled/foo.php" 
 	    <?php
 			$modules[] = "/foo";
 		?>
