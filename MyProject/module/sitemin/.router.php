@@ -26,6 +26,7 @@ $routers=[
 '/sitemin/user/profile' => '/sitemin/user@profile',
 '/sitemin/user/message' => '/sitemin/user@message',
 
+
 '/sitemin/user' => '/sitemin/user@list',
 '/sitemin/user/password' => '/sitemin/user@password',
 '/sitemin/user/edit' => '/sitemin/user@edit',
