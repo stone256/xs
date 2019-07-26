@@ -3,8 +3,6 @@ nbproject
 
 MyProject/data/backup/*.sql
 
-MyProject/config/local.php
-MyProject/config/x2cli.php
 MyProject/config/general.php
 
 MyProject/config/enabled/sitemin.php

@@ -21,7 +21,7 @@ define('_X_MODEL_ENABLED', _X_CONFIG . '/enabled');
 define('_X_MODEL_OVERWRITE', _X_CONFIG . '/overwrite');
 
 define('_X_MODULE', _X_ROOT . '/module');
-define('_X_PACKAGE', _X_ROOT . '/.package');
+define('_X_PACKAGE', _X_ROOT . '/_package');
 define('_X_PACKAGE_LIB', _X_PACKAGE . '/_lib');
 define('_X_PACKAGE_VENDOR', _X_PACKAGE . '/_vendor');
 define('_X_DATA', _X_ROOT . '/data');
