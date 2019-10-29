@@ -8,8 +8,10 @@
  *
  */
 //load  config and setting (global and *local)
+
 //load system config
 require_once (__DIR__. '/../config/.system.php');
+
 //load framework global config
 require_once (_X_CONFIG . '/general.php');
 
