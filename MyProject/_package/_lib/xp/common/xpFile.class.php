@@ -77,11 +77,12 @@ class xpFile {
 		if (!is_dir($path)) return false;
 		$entry = scandir($path);
 		$files = array();
+		$option['level'] -- ;
 		foreach ($entry as $f) {
 			if ($f == '.') continue;
 			if ($f == '..') continue;
 			if (is_dir($path . '/' . $f)) {
-				if ($option['level']-- > 0) {
+				if ($option['level'] > 0) {
 					$fs = self::file_in_dir($path . '/' . $f, $option);
 					$files = xpAS::extend($files, $fs);
 				}
