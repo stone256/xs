@@ -1,4 +1,12 @@
 <?php
+/**
+ * @name 	: local config
+ * @author 	: peter<stone256@hotmail.com>
+ *
+ *  this file will be included in cli calls.
+ *  	setup according to you needs 
+ */
+
 
 $apache_data=array (
 		  'REDIRECT_UNIQUE_ID' => 'd0kswwbixVze9J38AAQEAAE6LPisAAAAD',
@@ -23,12 +31,12 @@ $apache_data=array (
 		  'SERVER_ADDR' => '127.0.0.1',	//local ip
 		  'SERVER_PORT' => '80',
 		  'REMOTE_ADDR' => '127.0.0.1', //from local,
-		  'DOCUMENT_ROOT' => '/var/www/test/www/public',
+		  'DOCUMENT_ROOT' => '/var/www/local/xs/MyProject',
 		  'REQUEST_SCHEME' => 'http',
 		  'CONTEXT_PREFIX' => '',
-		  'CONTEXT_DOCUMENT_ROOT' => '/var/www/test/public',
+		  'CONTEXT_DOCUMENT_ROOT' => '/var/www/local/xs/MyProject/public',
 		  'SERVER_ADMIN' => 'stone256#hotmail.com',
-		  'SCRIPT_FILENAME' => '/var/www/test/www/public/index.php',
+		  'SCRIPT_FILENAME' => '/var/www/local/xs/MyProject/public/index.php',
 		  'REMOTE_PORT' => '4768',
 		  'REMOTE_USER' => 'abce1234',
 		  'AUTH_TYPE' => 'Basic',

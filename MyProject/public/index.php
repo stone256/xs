@@ -13,7 +13,7 @@ define('_X_START_TIME', microtime(1));
 define('_X_INDEX', __DIR__);
 
 //load framework
-require_once(__DIR__.'/../.system/app.php');
+require_once(__DIR__ . '/../_system/app.php');
 
 
 //init framework

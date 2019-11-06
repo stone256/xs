@@ -40,3 +40,4 @@ $config['login']['captcha']['key'] = '7feda8c64c2ea4246c58472818d41c18cb28fe8c';
 
 //for ie P3P
 header('P3P:CP="IDC DSP COR ADM DEVi TAIi PSA PSD IVAi IVDi CONi HIS OUR IND CNT"');
+
