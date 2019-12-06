@@ -2,7 +2,12 @@
 nbproject
 MyProject/.vscode
 
-MyProject/data/backup/*.sql
+MyProject/data/*.sql
+
+MyProject/public/sitemin
+MyProject/public/media
+
+
 
 MyProject/config/enabled/sitemin.php
 MyProject/module/sitemin
