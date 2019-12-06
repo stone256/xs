@@ -1,5 +1,6 @@
 .idea
 nbproject
+.vscode
 MyProject/.vscode
 
 MyProject/data/*.sql
