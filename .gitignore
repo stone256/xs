@@ -1,11 +1,8 @@
 .idea
 nbproject
+MyProject/.vscode
 
 MyProject/data/backup/*.sql
-
-MyProject/config/general.php
-MyProject/config/local.php
-MyProject/config/x2cli.php
 
 MyProject/config/enabled/sitemin.php
 MyProject/module/sitemin
