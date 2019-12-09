@@ -310,7 +310,10 @@ function _config($name){
 		global $config;
 		$cnf = $config;
 	}
-	if($value === null) return xpAS::get($cnf, $name);
+	if(is_null($value)) return xpAS::get($cnf, $name);
+	xpAS::set($cnf,$name,$value);
+	global $config;
+	xpAS::set($config,$name,$value);
 }
 function _url(){
 	return app::$_url;
