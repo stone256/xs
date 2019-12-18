@@ -8,7 +8,7 @@
  *
  */
 
-
+//show error only
 ini_set('display_errors',1);
 error_reporting(E_ERROR);
 
@@ -24,7 +24,7 @@ ini_set('session.cookie_lifetime', 0);
 
 
 ini_set('post_max_size', '2M');
-ini_set('upload_max_filesize', '2M');
+ini_set('upload_max_filesize', '8M');
 
 define('PROJECT_NAME', 'my best project');
 

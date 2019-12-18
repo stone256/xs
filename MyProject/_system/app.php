@@ -40,6 +40,8 @@ class app {
 	var $update_scripts=array();
 
 	static $models = array();
+
+	//init
 	function __construct() {
 		$this->helper = new defaultHelper();
 		//load routers
@@ -50,20 +52,20 @@ class app {
 		foreach ($modules as $km => $vm) {
 			$routers=array();
 			//load router.php
-			$router_file = _X_MODULE . $vm . '/.router.php';
+			$router_file = _X_MODULE . $vm . DS .'.router.php';
 			if (file_exists($router_file)) {
 				include_once ($router_file);
 				$this->routers += (array)$routers;
 			}
 			//load modules update scritps, if any
-			$us = glob(_X_MODULE . $vm. '/.setup.*.php');
+			$us = glob(_X_MODULE . $vm. DS . '.setup.*.php');
 			sort($us);
 			$this->update_scripts = $this->update_scripts + $us;
 		}
 		$routers = $this->routers;
 		    
 	}
-
+	//when 404 happened
 	function at_404($v){
 		$missing = $v;
 		include _X_404_PAGE !== '_X_404_PAGE' ? _X_404_PAGE : _X_LAYOUT.'/_404.phtml';
@@ -94,7 +96,7 @@ class app {
 		//init control
 		$controller = new $router['controller']($router);
 		if (!method_exists($controller, $action = $router['action'])) $this->at_404("missing action : {$controller}->{$action}");
-		include_once (_X_CONFIG . '/init.php');
+		include_once (_X_CONFIG . DS .'init.php');
 
 		//start modules update scripts, if any.
 		foreach ((array)$this->update_scripts as $k=>$v){
@@ -109,24 +111,18 @@ class app {
 		switch (true) {
 				//FOR _SYSTEM
 
-			case $ret['view'] {
-					0
-			} . $ret['view'] {
-					1
-			} == '/_':
+			case $ret['view'] {0} . $ret['view'] {1} == DS .'_':
 				$view = _X_ROOT . $_v;
 			break;
 				//FOR ALL OTHER
 
-			case $ret['view'] {
-					0
-			} == '/':
+			case $ret['view'] {0} == DS :
 				$view = _X_MODULE . $_v;
 			break;
 				//FOR DEFAULT WITH PATH, IT USE CONTROLLER POSITION AS GUIDE
 
 			default:
-				$view = dirname($router['file']) . '/view/' . xpAS::preg_get($router['controller'], '|\_([a-zA-Z0-9]*?)Controller|', 1) . '/' . $_v;
+				$view = dirname($router['file']) . DS .'view' . DS . xpAS::preg_get($router['controller'], '|_([a-zA-Z0-9]*?)Controller|', 1) . DS . $_v;
 		}
 		$viewData = $ret['data'];
 		$viewData['_controller'] = $router;
