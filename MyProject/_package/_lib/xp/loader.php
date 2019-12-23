@@ -14,8 +14,6 @@ function xp_class_autoload($classname) {
 		require_once (XP_ROOT . '/class/' . $classname . '/' . $classname . '.class.php');
 		return;
 	}
-	//die("class $classname not found");
-	
 }
 spl_autoload_register('xp_class_autoload');
 require_once (XP_ROOT . '/common/xpDebug.php');
