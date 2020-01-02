@@ -30,12 +30,13 @@ RewriteEngine on
 #do not rewrite these directory
 #RewriteRule ^css/ - [L]
 #RewriteRule ^js/ - [L]
+
 RewriteRule ^media/ - [L]
 RewriteRule ^package/ - [L]
+
 #RewriteRule ^upload/ - [L]
 #RewriteRule ^fonts/ - [L]
 #RewriteRule ^_fonts/ - [L]
-
 #RewriteRule ^pma/ - [L]
 
 
