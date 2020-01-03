@@ -1,0 +1,134 @@
+<?php
+?>
+
+<div class="container">
+	<div class="row justify-content-center">
+
+		<div class="title">
+			<h3 class="mt-4">SITEMIN INSTALLATION</h3>
+		</div>
+		 <div class="input-group mb-2 form-group mt-6">
+			 <!-- file permission-->
+			 <div class="permission">
+			 </div>
+		</div>
+	</div>
+</div>
+
+
+<!-- The Modal -->
+<div class="modal" id="myModal">
+    <div class="modal-dialog">
+        <div class="modal-content">
+
+            <!-- Modal Header -->
+            <div class="modal-header">
+                <h4 class="modal-title">Request to Reset password</h4>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+
+            <!-- Modal body -->
+            <div class="modal-body">
+                <p><small>a link to reset password will send via your account email</small></p>
+                <input type="email" name="rsemail" value="" id="rsemail" />
+            </div>
+
+            <!-- Modal footer -->
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger" onclick="reset_my_password()">send Request</button>
+            </div>
+
+        </div>
+    </div>
+</div>
+<style>
+    .modal-dialog  {
+        top:15%;
+    }
+</style>
+
+<script>
+
+(function($){
+	$.ajax({
+//	        url: "#",
+	        dataType:'json',
+	        data:{step:'file permission'},
+		success: function(ret){
+			if(ret.data.ok)
+			ret.data.ok.forEach(function(v, i){
+				$('.permission').append('<div class="alert alert-success"><strong><i class="fa fa-check-square" aria-hidden="true"></i></strong> ' + v + ' </div>')
+			})
+			if(ret.data.failed)
+			ret.data.failed.forEach(function(v, i){
+				$('.permission').append('<div class="alert alert-warning"><strong><i class="fa fa-window-close" aria-hidden="true"></i></strong> ' + v + ' </div>')
+			})
+
+			if(ret && ret.status == 'success' ){
+
+			}
+			//do next
+		}
+	});
+
+
+
+
+
+})(jQuery)
+
+
+
+function reset_my_password(){
+    common.mask.up("Sending request to your email");
+    $.ajax({
+        url: '/sitemin/requestpassword',
+        data: {email:$('#rsemail').val()},
+        success: function(data){
+            common.mask.down();
+            $("#myModal").modal('hide')
+            $('.login-page').html('<h3>Reset Password link has been sent to your email</h3><h4>Please follow the link in the email to reset your password!</h4><button onclick="window.location.reload()">Try Login</button>')
+        }
+    });
+}
+
+
+function ajax_login(form){
+	common.mask.up()
+	//$('.alert').attr('class', 'alert').html('<img src="<?=_X_URL?>/media/image/ajax-loader.gif" />');
+	$.ajax({
+        url: "/sitemin/loginajax",
+        dataType:'json',
+        data:$(form).serialize(),
+        type:'post',
+
+		success: function(ret){
+//			$('.vcode-image').click();
+//			$('.vcode-input').val('');
+			if(ret && ret.status == 'ok'){
+				//insert multiple login
+				/*
+				if(ret.msg_type){
+					$('#rusername').val(ret.msg_type);
+					$('#rpassword').val($('.password-input').val());
+					for(var k in ret.msg){
+						var fn = 'riframe'+Math.random();
+						//create iframe and h
+						$('body').append('<iframe  class="visibilityHidden" id="'+fn+'"  name="'+fn+'" ></iframe>');
+						$('#rform').attr('action', ret.msg[k].login_url);
+						$('#rform').attr('target', fn);
+						$('#rform').submit();
+					}
+				}
+				*/
+				window.location = $('#ret').val();
+			}else{
+				common.mask.down();
+                $('.login-page').html('<h3>Login failed</h3><h4 class="alert-'+ret.msg_type+'">'+ret.msg+'</h4><button onclick="window.location.reload()">Try Again</button>')
+			}
+		}
+	});
+	return false;
+}
+
+</script>

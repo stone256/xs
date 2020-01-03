@@ -10,12 +10,12 @@
 
 define('_X_SITEMIN', true);
 
+
 $routers=[
  //for test controller
 '/sitemin/test' => '/sitemin/login@test',
 
 '/sitemin/keepalive' => '/sitemin/index@keepalive',
-
 
 '/sitemin/mail/queue' => '/sitemin/mail@queue',
 
@@ -95,5 +95,8 @@ $routers=[
 '/api/acl/edit' => '/sitemin/api/acl@edit',
 
 
-
 ];
+
+
+//first time will start install screen
+//include "installer.php";
