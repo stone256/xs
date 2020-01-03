@@ -61,7 +61,6 @@ class app {
 			$this->update_scripts = $this->update_scripts + $us;
 		}
 		$routers = $this->routers;
-		    
 	}
 
 	function at_404($v){
@@ -95,13 +94,11 @@ class app {
 		$controller = new $router['controller']($router);
 		if (!method_exists($controller, $action = $router['action'])) $this->at_404("missing action : {$controller}->{$action}");
 		include_once (_X_CONFIG . '/init.php');
-
 		//start modules update scripts, if any.
 		foreach ((array)$this->update_scripts as $k=>$v){
 			include_once $v;
 			rename($v , $v.".done");
 		}
-
 		if (!is_array($ret = $controller->$action($router))) die($ret); //none standard controller return ! not to handle, directly output
 		$name = preg_replace('/Action$/', '', $action);
 		$_v = $ret['view'] ? $ret['view'] : $name . '.phtml';

@@ -27,4 +27,3 @@ ini_set('post_max_size', '2M');
 ini_set('upload_max_filesize', '2M');
 
 define('PROJECT_NAME', 'my best project');
-

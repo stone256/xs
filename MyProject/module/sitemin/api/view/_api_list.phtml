@@ -1,0 +1,51 @@
+<?php
+/**
+ * perpare data
+ */
+?>
+<style type="text/css">
+.h-divider{
+ margin-top:5px;
+ margin-bottom:5px;
+ height:1px;
+ border-top:1px solid gray;
+}
+</style>
+<div class = "container mb-5">
+        <div class="row">
+                <div class="col-12 col-md-8 offset-md-2 ">
+
+                        <div class="row">
+                                <div class="mt-5 the-title">
+                                        <h3>API --  <span class = "small">List of API and methods</span>  </h3>
+                                </div>
+                        </div>
+                        <?php foreach ($rs['api'] as $ka=>$va):?>
+                        <div class="row">
+                                <div class="col-4 alert-secondary py-2"><div class="well well-sm"><i><?=_X_URL;?></i><?=preg_replace('/^\_/', '', $va['L']);?></div></div>
+                                <div class="col-1  alert-secondary py-2">--</div>
+                                <div class="col-7  alert-secondary py-2"><pre><b><?=$va['desc'];?></b></pre></div>
+                        </div>
+                        <div class="h-divider row"></div>
+                                <?php foreach ($va['method'] as $km=>$vm):?>
+                                <div class="row">
+                                        <div class="col-4 text-center">/<b><?=$vm['name'];?></b></div>
+                                        <div class="col-1 ">--</div>
+                                        <div class="col-7"><pre><?=preg_replace('/\n\t/ims', "\n", $vm['desc']);?></pre></div>
+                                </div>
+                                <?php endforeach;?>
+                        <?php endforeach;?>
+                        <!-- bottom -->
+                        <div class="row">
+                                <div class="h-divider col-12"></div>
+                                <div class="col-4 alert-secondary"><h5 class="well well-sm"></h5></div>
+                                <div class="col-8  alert-secondary"><pre><b></b></pre></div>
+                                <div class="h-divider col-12"></div>
+                                <div class="col-2 col-xs-hidden"></div>
+                                <div class="col-2 "></div>
+                                <div class="col-8 "><pre></pre></div>
+                        </div>
+                </div>
+        </div>
+</div>
+<hr>

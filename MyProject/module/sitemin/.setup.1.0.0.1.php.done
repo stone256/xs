@@ -1,0 +1,109 @@
+<?php
+
+$sql="
+-- phpMyAdmin SQL Dump
+SET SQL_MODE = \"NO_AUTO_VALUE_ON_ZERO\";
+SET AUTOCOMMIT = 0;
+START TRANSACTION;
+SET time_zone = \"+00:00\";
+
+--
+-- Table structure for table `api`
+--
+DROP TABLE IF EXISTS `api`;
+CREATE TABLE `api` (
+  `id` varchar(64) NOT NULL,
+  `batch` varchar(66) NOT NULL,
+  `gateway` varchar(222) CHARACTER SET utf8 NOT NULL,
+  `method` varchar(222) NOT NULL DEFAULT '',
+  `path` varchar(222) NOT NULL,
+  `url` varchar(222) NOT NULL,
+  `description` varchar(555) NOT NULL,
+  `created` timestamp NULL DEFAULT CURRENT_TIMESTAMP
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+--
+-- Indexes for table `api`
+--
+ALTER TABLE `api`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `url_2` (`url`),
+  ADD KEY `router` (`gateway`(191)),
+  ADD KEY `method` (`method`),
+  ADD KEY `path` (`path`),
+  ADD KEY `url` (`url`),
+  ADD KEY `description` (`description`),
+  ADD KEY `batch` (`batch`);
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `api_acl`
+--
+DROP TABLE IF EXISTS `api_acl`;
+CREATE TABLE `api_acl` (
+  `api_id` varchar(64) CHARACTER SET latin1 NOT NULL,
+  `api_user_id` bigint(20) NOT NULL,
+  `modified` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+--
+-- Indexes for table `api_acl`
+--
+ALTER TABLE `api_acl`
+  ADD KEY `siteapi_id` (`api_id`),
+  ADD KEY `siteapi_user_id` (`api_user_id`),
+  ADD KEY `modified` (`modified`),
+  ADD KEY `siteapi_id_2` (`api_id`,`api_user_id`);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `api_user`
+--
+DROP TABLE IF EXISTS `api_user`;
+CREATE TABLE `api_user` (
+  `id` bigint(20) NOT NULL,
+  `login_id` varchar(222) NOT NULL,
+  `password` varchar(222) CHARACTER SET latin1 NOT NULL,
+  `detail` text NOT NULL,
+  `quota_counter` varchar(222) CHARACTER SET latin1 NOT NULL DEFAULT '2000',
+  `quota_start_seconds` bigint(20) DEFAULT NULL,
+  `quota` varchar(222) CHARACTER SET latin1 NOT NULL DEFAULT '0',
+  `quota_period_seconds` bigint(22) NOT NULL DEFAULT '604800',
+  `token` varchar(222) CHARACTER SET latin1 DEFAULT NULL,
+  `token_ttl` varchar(222) CHARACTER SET latin1 DEFAULT NULL,
+  `created` datetime DEFAULT NULL,
+  `modified` timestamp NULL DEFAULT NULL,
+  `status` varchar(22) CHARACTER SET latin1 DEFAULT 'pending'
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+--
+-- Indexes for table `api_user`
+--
+ALTER TABLE `api_user`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `login_id` (`login_id`),
+  ADD KEY `user_id` (`login_id`),
+  ADD KEY `token` (`token`),
+  ADD KEY `token_ttl` (`token_ttl`),
+  ADD KEY `quota` (`quota_counter`),
+  ADD KEY `status` (`status`);
+--
+-- AUTO_INCREMENT for table `api_user`
+--
+ALTER TABLE `api_user`
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+--
+-- Dumping data for table `api_user`
+--
+INSERT INTO `api_user` (`id`, `login_id`, `password`, `detail`, `quota_counter`, `quota_start_seconds`, `quota`, `quota_period_seconds`, `token`, `token_ttl`, `created`, `modified`, `status`) VALUES
+(1, 'testing', '88ea39439e74fa27c09a4fc0bc8ebe6d00978392', 'test', '2000', 1374674400, '2000', 2592000, NULL, NULL, '2012-08-10 15:05:06', '2012-08-10 05:05:09', 'active'),
+(2, 'server', 'e7ba2fb7e35a89a980d85b11ffb2c520', 'monitor api', '98', 1262955600, '90', 604800, NULL, NULL, NULL, NULL, 'active'),
+(3, 'tineyetest', 'b1b382f135291867fb28f7cc919568d6', 'internal RI', '', 1510750800, '3000000', 86400, NULL, NULL, '2017-11-14 18:05:03', '2018-02-19 05:43:22', 'active'),
+(4, 'tospub', '', 't1234', '1', -36000, '11111', 86400, NULL, NULL, '2018-02-20 17:13:49', NULL, 'active'),
+(5, 'machone', '34cdccc18144326d22c9567f42536a36', 'speed', '', 1519131600, '11111', 86400, NULL, NULL, '2018-02-21 11:27:13', NULL, 'active');
+-- --------------------------------------------------------
+";
+
+
+/**
+ * note: this script used default databse configuration, so no cfg been set.
+ */
+xpPdo::conn()->exec($sql);

@@ -66,4 +66,34 @@ $routers=[
 '/sitemin/housekeeping/logarchive' => '/sitemin/housekeeping@logarchive',
 '/sitemin/housekeeping/backup' => '/sitemin/housekeeping@backup',
 
+
+/** api gateway/webservice first contact point **/
+'/api' => '/sitemin/api/_api@dispatch',
+'/api/login' => '/sitemin/api/_api@login',
+
+
+
+/** list apis **/
+'/api/list'=>'/sitemin/api/api@list',
+'/api/search'=>'/sitemin/api/api@search',
+
+
+
+/** api users **/
+'/api/user'=>'/sitemin/api/user@index',
+'/api/user/password' => '/sitemin/api/user@password',
+
+'/api/user/edit' => '/sitemin/api/user@edit',
+'/api/user/idcheck' => '/sitemin/api/user@idcheck',
+'/api/user/search' => '/sitemin/api/user@search',
+
+'/api/user/status_change' => '/sitemin/api/user@status_change',
+
+
+/** api acl **/
+'/api/acl' => '/sitemin/api/acl@index',
+'/api/acl/edit' => '/sitemin/api/acl@edit',
+
+
+
 ];

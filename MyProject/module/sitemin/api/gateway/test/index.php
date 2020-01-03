@@ -4,7 +4,7 @@
  * test class
  *
  */
-class api_gateway_test_index {
+class sitemin_api_gateway_test_index {
 
 	/**
 	 * testing function return "ssss"

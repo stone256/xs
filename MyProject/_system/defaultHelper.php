@@ -218,7 +218,7 @@ function _dt($from_last=true) {
 	_dv(array('elapsed' => $last - _X_START_TIME));
 }
 function _dd($x, $die = false, $display = true, $tab = 6, $deep = 50, $level = 0) {
-	if (!(__X_DEBUG === true)) return;
+	//if (!(__X_DEBUG === true)) return;
 	if ($level == 0) $con = "<pre>\n{\n"; //1st start
 	$level++;
 	if ($level == $deep) return serialize($x);

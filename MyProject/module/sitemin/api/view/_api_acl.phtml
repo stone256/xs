@@ -4,15 +4,15 @@
  */
 
 
-?>	
+?>
 <div class="container-fluid mb-5">
     <div class="row">
-        <div class="col-12 col-md-8 offset-md-2">   
+        <div class="col-12 col-md-8 offset-md-2">
 	        <div class="row px-5 mt-5 the-title">
 		        <h3 class="text-uppercase">API ACL by users -- <span class = "small">List of API ACL by users</span>  </h3>
 	        </div>
 
-	        
+
             <form id="filter" class="search-form" method="get" >
                 <div class="total-row row mt-2 px-5 "><!-- total start -->
                     <div class="col-sm-2 ">Total: <span><?=count($rs['data']);?></span><br><br></div>
@@ -22,25 +22,25 @@
 
 
                         <div class=" mb-2 form-group has-icon">
-                            <label class="sr-only" for="login_id">User ID</label>              
+                            <label class="sr-only" for="login_id">User ID</label>
                             <span class="fa fa-user form-control-feedback"></span>
                             <input type="text" class="form-control" id="login_id" name="filter[login_id]" placeholder="Login Id" value="<?=$rs['filter']['login_id'];?>">
                         </div>
-                    </div>  
-                    <div class="col-sm-4 ">     
+                    </div>
+                    <div class="col-sm-4 ">
                         <div class=" mb-2 form-group has-icon">
                             <label class="sr-only" for="detail">User Detail</label>
                             <span class="fa fa-anchor form-control-feedback"></span>
                             <input type="text" class="form-control" id="url" name="filter[url]" placeholder="Path" value="<?=$rs['filter']['url'];?>">
                         </div>
-                    </div>  
+                    </div>
                     <div class="col-sm-2 ">
                         <button class="btn btn-extra-small btn-rounded btn-light-border" type="submit" >
                             <span class="fa fa-search">Search</span>
                         </button>
                     </div>
                 </div>
-            </form> 
+            </form>
 
 	        <script>
 	            function TheSort(sort){
@@ -69,7 +69,7 @@
 			        <tr>
 				        <td class="Hide"><?=$v['id'];?></td>
 				        <td><?=$v['login_id'];?></td>
-				        <td><?=$v['user_detail'];?></td>
+				        <td><?=$v['detail'];?></td>
 				        <td><?=$v['status'];?></td>
 				        <td><?=xpAS::preg_get($v['created'], '/\d\d\d\d\-\d\d\-\d\d/');?></td>
 				        <td><?=xpAS::preg_get($v['modified'], '/\d\d\d\d\-\d\d\-\d\d/');?></td>
@@ -90,7 +90,7 @@
             </div>
         </div>
     </div>
-</div> 
+</div>
 <hr>
 <script>
 

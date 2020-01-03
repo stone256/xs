@@ -7,10 +7,6 @@ SET AUTOCOMMIT = 0;
 START TRANSACTION;
 SET time_zone = \"+00:00\";
 
-SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
-SET AUTOCOMMIT = 0;
-START TRANSACTION;
-SET time_zone = "+00:00";
 --
 -- Table structure for table `acl_menu`
 --
@@ -60,7 +56,11 @@ INSERT INTO `acl_menu` (`id`, `parent_id`, `display`, `router`, `order`) VALUES
 (88, 85, 'ACL', '/api/acl', 3),
 (92, 75, 'menu control', '/sitemin/acl/menutree', 0),
 (94, 2, 'router', '/sitemin/acl/router', 1),
-(93, 75, 'cron', '/sitemin/cron', 2);
+(93, 75, 'cron', '/sitemin/cron', 2),
+(95, 1, 'api', '', 1),
+(96, 95, 'list', '/api/list', 0),
+(97, 95, 'user', '/api/user', 2),
+(98, 95, 'acl', '/api/acl', 1);
 -- --------------------------------------------------------
 
 --
@@ -445,7 +445,7 @@ CREATE TABLE `sitemin_mail_attachment` (
   `mail_id` bigint(20) NOT NULL,
   `name` varchar(222) NOT NULL,
   `content` text NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1; 
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 --
 -- `sitemin_mail_attachment`
 --

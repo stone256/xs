@@ -8,7 +8,7 @@ class sitemin_loginController extends _system_defaultController {
 
 	var $captcha_key="1!2@3#4$";
 
-	function __construct($argv){
+	function __construct(){
 		$this->captcha = _config('login,captcha,key') ? _config('login,captcha,key')  : _X_SERVER_KEY ;
 		$this->q = $_REQUEST;
 		session_start();

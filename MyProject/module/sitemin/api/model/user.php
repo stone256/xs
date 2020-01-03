@@ -1,6 +1,6 @@
 <?php
 
-class api_model_user {
+class sitemin_api_model_user {
 	var $status = array('pending', 'active', 'suspend', 'deleted');
 
 	function __construct() {
@@ -104,8 +104,7 @@ class api_model_user {
 		if(!$q['quota_period_seconds']) $msg[] = 'quota period';
 		$q['quota_start_seconds'] = xpDate::returnUNIXTimestampFromMYSQL($q['quota_start_seconds']);
 		$q['created'] = $q['created'] ? $q['created'] : date("Y-m-d H:i:s");
-		$arr = xpAS::round_up($q, 'login_id,user_detail,quota,quota_start_seconds,quota_counter,quota_period_seconds,status,created');
-
+		$arr = xpAS::round_up($q, 'login_id,detail,quota,quota_start_seconds,quota_counter,quota_period_seconds,status,created');
 		if($msg) return $msg;
 		xpTable::load($this->user_table)->write($arr, array('id' => (int)$q['id']));
 	}

@@ -4,25 +4,25 @@
  * default api controller
  *
  */
-class api__apiController extends _system_defaultController {
+class sitemin_api__apiController extends _system_defaultController {
 
 
 	function __construct(){
 		session_start();
 
-		$this->query = _factory('api_model_api')->get_query();
+		$this->query = _factory('sitemin_api_model_api')->get_query();
 
 	}
 
 	function loginAction(){
 		$q = $this->query;
-		if($user = _factory('api_model_user')->login_check($q['id'], $q['key'])){
+		if($user = _factory('sitemin_api_model_user')->login_check($q['id'], $q['key'])){
 				/**
 				 *to do: user quota
 				 */
 				$q['token'] = md5(uniqid(), false);
-				defaultHelper::data_set('api_token', $q['token']);
-				defaultHelper::data_set('api_user', $user);
+				defaultHelper::data_set('sitemin_api_token', $q['token']);
+				defaultHelper::data_set('sitemin_api_user', $user);
 		}
 		$this->_return(array( "status"=>$q['token'] ? "success" : "failed", 'token'=>$q['token']));
 	}
@@ -32,26 +32,26 @@ class api__apiController extends _system_defaultController {
 		$q = $this->query;
 
 		//login used;
-		if($q['key']  && $user = _factory('api_model_user')->login_check($q['id'], $q['key'])){
+		if($q['key']  && $user = _factory('sitemin_api_model_user')->login_check($q['id'], $q['key'])){
 				/**
 				 *to do: user quota
 				 */
 				$q['token'] = md5(uniqid(), false);
-				defaultHelper::data_set('api_token', $q['token']);
-				defaultHelper::data_set('api_user', $user);
+				defaultHelper::data_set('sitemin_api_token', $q['token']);
+				defaultHelper::data_set('sitemin_api_user', $user);
 		}
-		$token = defaultHelper::data_get('api_token');
-		$user = defaultHelper::data_get('api_user');
+		$token = defaultHelper::data_get('sitemin_api_token');
+		$user = defaultHelper::data_get('sitemin_api_user');
 		//check token
 		if(!$token || $token != $q['token']) $this->_return(json_encode(array('status'=>'failed', 'msg'=>'server open failed')));
 
 
 		//find gateway
 		$url = $_SERVER['REDIRECT_URL'];
-		$api = _factory('api_model_api')->get_acl_by_url($url);
+		$api = _factory('sitemin_api_model_api')->get_acl_by_url($url);
 
 		//check acl
-		if(!_factory('api_model_acl')->check_acl($user, $api)){
+		if(!_factory('sitemin_api_model_acl')->check_acl($user, $api)){
 			$this->_return(json_encode(array('status'=>'failed', 'msg'=>'sector open failed')));
 		}
 		$path = $api['path'];

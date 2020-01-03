@@ -4,15 +4,15 @@
  * default api controller
  *
  */
-class api_aclController extends sitemin_indexController {
+class sitemin_api_aclController extends sitemin_indexController {
 
 	/**
-	 *list all api's ACL by user
+	 *list all api's ACL
 	 */
 	function indexAction(){
 		$q = $_REQUEST;
-		$rs = _factory('api_model_acl')->gets($q);
-		$rs['tpl'] = '/api/view/_api_acl.phtml';
+		$rs = _factory('sitemin_api_model_acl')->gets($q);
+		$rs['tpl'] = '/sitemin/api/view/_api_acl.phtml';
 		$rs['_token'] = defaultHelper::page_hash_set('api,acl');
 		$rs['TITLE'] = 'API ACL';
 		return array('view'=>'/sitemin/view/index.phtml','data' => array('rs' => $rs));
@@ -33,18 +33,18 @@ class api_aclController extends sitemin_indexController {
 
 		//csrf token
 		$_token = defaultHelper::page_hash_get('api,acl,edit');
-		if($q['_token'] == $_token &&  $q['save'] && !($err = _factory('api_model_acl')->saves($q))) return defaultHelper::return_url(true);
+		if($q['_token'] == $_token &&  $q['save'] && !($err = _factory('sitemin_api_model_acl')->saves($q))) return defaultHelper::return_url(true);
 
 		$q['_msg'] = $err ? implode(',', $err) : null;
 
 
-		$rs['gateway'] = _factory('api_model_api')->get_gateway();
-		$rs['user'] = _factory('api_model_acl')->get($q['uid']);
+		$rs['gateway'] = _factory('sitemin_api_model_api')->get_gateway();
+		$rs['user'] = _factory('sitemin_api_model_acl')->get($q['uid']);
 
 		$rs['user']['url'] = preg_split('/\,/', $rs['user']['url']);
 
 		$rs['_token'] = defaultHelper::page_hash_set('api,acl,edit');
-		$rs['tpl'] = '/api/view/_api_acl_edit.phtml';
+		$rs['tpl'] = '/sitemin/api/view/_api_acl_edit.phtml';
 		$rs['TITLE'] = 'API ACL EDIT';
 		return array('view'=>'/sitemin/view/index.phtml','data' => array('rs' => $rs));
 	}

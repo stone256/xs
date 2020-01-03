@@ -1,10 +1,9 @@
 <?php
 
-class api_model_acl {
+class sitemin_api_model_acl {
 	function __construct() {
 		$this->table = 'api_acl';
 	}
-
 	/**
 	 * list acl
 	 *
@@ -12,7 +11,6 @@ class api_model_acl {
 	 * @return array of results
 	 */
 	function gets($q) {
-
 		$q = xpAS::escape(xpAS::trim($q));
 
 		if ($q['filter']['login_id']) $search[] = " u.login_id like  '%{$q['filter']['login_id']}%'  ";
@@ -57,6 +55,7 @@ class api_model_acl {
 		$rs['page'] = $page;
 		return $rs;
 	}
+
 	/**
 	 *get acl by a key/column
 	 */
@@ -79,19 +78,16 @@ class api_model_acl {
 	 * this involve delete old entrys
 	 */
 	function saves($q) {
-
 		if(!($user = (int)$q['id'])) return array('gateway');
 		$gateway = $q['url'];
 		//remove old entries
 		xpTable::load($this->table)->deletes(array('api_user_id' => $user));
-
 		foreach($gateway as $g){
-            $g = '/api'.$g;
-			if($acl = _factory('api_model_api')->get_acl_by_url($g))
+			//$g = '/api'.$g;
+			if($acl = _factory('sitemin_api_model_api')->get_acl_by_url($g))
 				xpTable::load($this->table)->insert(array('api_user_id'=>$user, 'api_id'=>$acl['id']));
 		}
 	}
-
 	/**
 	 *check user acl on api call
 	 */
