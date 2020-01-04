@@ -3,9 +3,6 @@ nbproject
 
 MyProject/data/backup/*.sql
 
-MyProject/config/general.php
-MyProject/config/local.php
-MyProject/config/x2cli.php
 
 
 
