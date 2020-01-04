@@ -96,7 +96,6 @@ class xpPdo {
 		$params['dsn'] = xpAS::priority_get($c['dsn'], "{$params['driver']}{$databse_str};host={$params['host']}" . ($params['port'] ? ":" . $params['port'] : ''));
 		$params['options'] = xpAS::priority_get($c['pdo-options'], $c['options'], array(PDO::ATTR_TIMEOUT => 5,PDO::ATTR_ERRMODE =>  PDO::ERRMODE_EXCEPTION));
 		$params['log'] = xpAS::merge(array ('path'=>null, 'size'=>4000000), $c['log']); //logging
-
 		//		$params['flat'] = 'json';
 		$this->params = $params;
 		//make someone else handle catah error

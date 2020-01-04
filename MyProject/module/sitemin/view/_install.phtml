@@ -2,53 +2,48 @@
 ?>
 
 <div class="container">
-	<div class="row justify-content-center">
-
 		<div class="title">
-			<h3 class="mt-4">SITEMIN INSTALLATION</h3>
+			<h3 class="mt-4 textAlignCenter">SITEMIN INSTALLATION</h3>
 		</div>
-		 <div class="input-group mb-2 form-group mt-6">
+	
+	
+		 <!-- file permission-->
+		 <div class="form-group">
 			 <!-- file permission-->
-			 <div class="permission">
-			 </div>
-		</div>
-	</div>
+			 <div class="permission"> </div>
+			 <div class="clear"></div>
+			 <!-- retry -->
+			 <span class="floatRight"> Please change the permission  by "chmod", and  <button type="button" id="re-test-file" class="none btn btn-danger " onclick="window.location.reload()"> Test again</button></span>
+		 </div>
+		 <div class="clear"></div>
+
+
+		 <!-- database credential-->
+		 <form action="/action_page.php">
+			<div class="form-group">
+				<label for="host">Database Server Host Name ot IP:</label>
+				<input type="text" class="form-control" placeholder="Enter database host name or IP " id="host" required>
+			</div>
+			<div class="form-group">
+				<label for="database">Database Name:</label>
+				<input type="text" class="form-control" placeholder="database name" id="database">
+			</div>
+			<div class="form-group">
+				<label for="user">Database User:</label>
+				<input type="text" class="form-control" placeholder="database user" id="user">
+			</div>
+			<div class="form-group">
+				<label for="password">Database User Password:</label>
+				<input type="password" class="form-control" placeholder="database user password" id="password">
+			</div>
+						 <!-- retry -->
+						 <span class="floatRight"> after fill in above database items <button type="button" id="re-test-file" class="none btn btn-danger " onclick="window.location.reload()"> Test Connection</button></span>
+		</form> 
+		<div class="clear"></div>
+
 </div>
-
-
-<!-- The Modal -->
-<div class="modal" id="myModal">
-    <div class="modal-dialog">
-        <div class="modal-content">
-
-            <!-- Modal Header -->
-            <div class="modal-header">
-                <h4 class="modal-title">Request to Reset password</h4>
-                <button type="button" class="close" data-dismiss="modal">&times;</button>
-            </div>
-
-            <!-- Modal body -->
-            <div class="modal-body">
-                <p><small>a link to reset password will send via your account email</small></p>
-                <input type="email" name="rsemail" value="" id="rsemail" />
-            </div>
-
-            <!-- Modal footer -->
-            <div class="modal-footer">
-                <button type="button" class="btn btn-danger" onclick="reset_my_password()">send Request</button>
-            </div>
-
-        </div>
-    </div>
-</div>
-<style>
-    .modal-dialog  {
-        top:15%;
-    }
-</style>
 
 <script>
-
 (function($){
 	$.ajax({
 //	        url: "#",
@@ -56,23 +51,22 @@
 	        data:{step:'file permission'},
 		success: function(ret){
 			if(ret.data.ok)
-			ret.data.ok.forEach(function(v, i){
-				$('.permission').append('<div class="alert alert-success"><strong><i class="fa fa-check-square" aria-hidden="true"></i></strong> ' + v + ' </div>')
-			})
-			if(ret.data.failed)
-			ret.data.failed.forEach(function(v, i){
-				$('.permission').append('<div class="alert alert-warning"><strong><i class="fa fa-window-close" aria-hidden="true"></i></strong> ' + v + ' </div>')
-			})
+				ret.data.ok.forEach(function(v, i){
+					$('.permission').append('<div class="alert alert-success wp100"><strong><i class="fa fa-check-square" aria-hidden="true"></i></strong> ' + v + ' <span class="badge badge-success">Check\'s OK</span></div>')
+				})
+			if(ret.data.failed){
+				ret.data.failed.forEach(function(v, i){
+					$('.permission').append('<div class="alert alert-warning wp100"><strong><i class="fa fa-window-close" aria-hidden="true"></i></strong> ' + v + ' <span class="badge badge-warning">Check\'s failed</span></div>')
+				})
 
-			if(ret && ret.status == 'success' ){
+				$('.re-test-file').show();
+
 
 			}
-			//do next
+
+
 		}
 	});
-
-
-
 
 
 })(jQuery)
@@ -132,3 +126,36 @@ function ajax_login(form){
 }
 
 </script>
+
+
+
+<!-- The Modal -->
+<div class="modal" id="myModal">
+    <div class="modal-dialog">
+        <div class="modal-content">
+
+            <!-- Modal Header -->
+            <div class="modal-header">
+                <h4 class="modal-title">Request to Reset password</h4>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+
+            <!-- Modal body -->
+            <div class="modal-body">
+                <p><small>a link to reset password will send via your account email</small></p>
+                <input type="email" name="rsemail" value="" id="rsemail" />
+            </div>
+
+            <!-- Modal footer -->
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger" onclick="reset_my_password()">send Request</button>
+            </div>
+				
+        </div>
+    </div>
+</div>
+<style>
+    .modal-dialog  {
+        top:15%;
+    }
+</style>

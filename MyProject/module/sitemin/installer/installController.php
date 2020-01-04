@@ -1,11 +1,13 @@
 <?php
 
 
+define ('_DO_NOT_INCLUDE_MENU', true);
 class sitemin_installer_installController extends _system_defaultController{
         var $access_file = [
-                _X_INSTALL_FILE,
                 _X_INSTALL_FILE0,
                 _X_INSTALL_FILE1,
+                _X_INSTALL_FILE2,
+                _X_INSTALL_FILE3,
         ];
 
         function runAction(){
@@ -18,6 +20,10 @@ class sitemin_installer_installController extends _system_defaultController{
                                 }
                                 die(json_encode(['status'=>$p['failed']?'failed':'success', 'data'=>$p]));
                                 break;
+                        case 'databse connection':
+
+
+                        break;
                 }
                 $rs['tpl'] = '_install.phtml';
 		$rs['TITLE'] = 'SITEMIN installation';
@@ -25,7 +31,7 @@ class sitemin_installer_installController extends _system_defaultController{
         }
 //check file permission
 
-//ask db crediential
+//ask db credential
 
 //check database connection and the contents
 

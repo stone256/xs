@@ -30,10 +30,13 @@ function render_menu($menu, $level=0){
 }
 //check if logged in?
 $current = _factory('sitemin_model_login')->current();
-
-$menu = _factory('sitemin_model_acl_menu')->tree();
-$menu = $menu[1]; //array_pop($menu);
-$menu = $menu['children'];
+$menu=[];
+//do not include on certain condition
+if( _DO_NOT_INCLUDE_MENU === '_DO_NOT_INCLUDE_MENU'){
+	$menu = _factory('sitemin_model_acl_menu')->tree();
+	$menu = $menu[1]; //array_pop($menu);
+	$menu = $menu['children'];
+}
 
 //add login button on nav bar
 $arr =  array (
