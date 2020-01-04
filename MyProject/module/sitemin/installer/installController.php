@@ -21,7 +21,7 @@ class sitemin_installer_installController extends _system_defaultController{
                                 die(json_encode(['status'=>$p['failed']?'failed':'success', 'data'=>$p]));
                                 break;
                         case 'databse connection':
-
+                                $r = _factory('sitemin_installer_install')->test_connection($q);
 
                         break;
                 }
