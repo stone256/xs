@@ -8,47 +8,96 @@
 	
 	
 		 <!-- file permission-->
-		 <div class="form-group">
+		 <div class="form-group file-permission">
 			 <!-- file permission-->
 			 <div class="permission"> </div>
 			 <div class="clear"></div>
 			 <!-- retry -->
-			 <span class="floatRight"> Please change the permission  by "chmod", and  <button type="button" id="re-test-file" class="none btn btn-danger " onclick="window.location.reload()"> Test again</button></span>
+			 <span class="floatRight re-test-file"> Please change the permission  by "chmod", "chown", and  <button type="button" id="re-test-file" class="none btn btn-danger " onclick="test_file_permission()"> Test again</button></span>
 		 </div>
 		 <div class="clear"></div>
 
 
 		 <!-- database credential-->
-		 <form action="/action_page.php">
+		 <form action="?" id="db-form" method="post">
+		 	<input type="hidden" name="step" id="step" value="db connection" />
 			<div class="form-group">
 				<label for="host">Database Server Host Name ot IP:</label>
-				<input type="text" class="form-control" placeholder="Enter database host name or IP " id="host" required>
+				<input type="text" class="form-control" placeholder="Enter database host name or IP " value="localhost" id="host" name="host" required>
 			</div>
 			<div class="form-group">
 				<label for="database">Database Name:</label>
-				<input type="text" class="form-control" placeholder="database name" id="database">
+				<input type="text" class="form-control" placeholder="database name" id="database" name="database">
 			</div>
 			<div class="form-group">
 				<label for="user">Database User:</label>
-				<input type="text" class="form-control" placeholder="database user" id="user">
+				<input type="text" class="form-control" placeholder="database user" id="user" name="user">
 			</div>
 			<div class="form-group">
 				<label for="password">Database User Password:</label>
-				<input type="password" class="form-control" placeholder="database user password" id="password">
+				<input type="password" class="form-control" placeholder="database user password" id="password" name="password">
 			</div>
-						 <!-- retry -->
-						 <span class="floatRight"> after fill in above database items <button type="button" id="re-test-file" class="none btn btn-danger " onclick="window.location.reload()"> Test Connection</button></span>
+				<!-- retry -->
+				<span class="floatRight re-test-db"> after fill in above database items <button type="button"  class="none btn btn-danger " onclick="test_db_connection()"> Test Connection</button></span>
+
+
+
+		
+			<div class="clear"></div>
+			<div>&nbsp;</div>
+			<pre class="msg p20 mt-20 Black Hide "></pre>
+			<!-- to install after all checks ok -->
+			<span class="floatRight Hide next" > All checks OK, click <button type="button"  onclick="install()" class="btn btn-info " >here</button> to start installation, it may take a few seconds</span>
 		</form> 
 		<div class="clear"></div>
-
+		<div class="form-group installed Hide">
+			<div class="jumbotron alert alert-warning">
+				<h1>Installation is done!</h1>
+				<p>click <a href="/sitemin/login">here</a> to login to admin</p>
+			</div>
+		</div>
+		<div class="clear"></div>
 </div>
 
 <script>
+
+var checked = {file:0, db:0};
+
 (function($){
+	test_file_permission()
+})(jQuery)
+
+
+
+function install(){
+
+$('.file-permission').fadeOut();
+$('#db-form').fadeOut();
+$('#step').val("install")
+
+common.mask.up();
+$.ajax({
+	dataType:'json',
+	type:'post',
+	data: $('#db-form').serialize(),
+		success: function(ret){
+			common.mask.down();
+			$('.installed').fadeIn();
+		}
+});
+
+}
+
+
+function test_file_permission(){
+
+	$('.permission').fadeOut().html("");
+	$('.re-test-file').hide();
+	common.mask.up();
 	$.ajax({
-//	        url: "#",
-	        dataType:'json',
-	        data:{step:'file permission'},
+        dataType:'json',
+        data:{step:'file permission', a:Math.random()},
+		type:'post',
 		success: function(ret){
 			if(ret.data.ok)
 				ret.data.ok.forEach(function(v, i){
@@ -58,104 +107,51 @@
 				ret.data.failed.forEach(function(v, i){
 					$('.permission').append('<div class="alert alert-warning wp100"><strong><i class="fa fa-window-close" aria-hidden="true"></i></strong> ' + v + ' <span class="badge badge-warning">Check\'s failed</span></div>')
 				})
-
-				$('.re-test-file').show();
-
-
 			}
-
-
+			common.mask.down();
+			$('.permission').fadeIn()
+			if((ret.status == 'failed')){
+				$('.re-test-file').show();
+			}else{
+				checked.file = 1;
+			}
+			to_install()
 		}
 	});
-
-
-})(jQuery)
-
-
-
-function reset_my_password(){
-    common.mask.up("Sending request to your email");
-    $.ajax({
-        url: '/sitemin/requestpassword',
-        data: {email:$('#rsemail').val()},
-        success: function(data){
-            common.mask.down();
-            $("#myModal").modal('hide')
-            $('.login-page').html('<h3>Reset Password link has been sent to your email</h3><h4>Please follow the link in the email to reset your password!</h4><button onclick="window.location.reload()">Try Login</button>')
-        }
-    });
+	
 }
 
 
-function ajax_login(form){
-	common.mask.up()
-	//$('.alert').attr('class', 'alert').html('<img src="<?=_X_URL?>/media/image/ajax-loader.gif" />');
+function test_db_connection(){
+	$('.msg').fadeOut();
+	$('.re-test-db').hide();
+	common.mask.up();
 	$.ajax({
-        url: "/sitemin/loginajax",
         dataType:'json',
-        data:$(form).serialize(),
-        type:'post',
-
+		type: 'post',
+        data: $('#db-form').serialize(),
 		success: function(ret){
-//			$('.vcode-image').click();
-//			$('.vcode-input').val('');
-			if(ret && ret.status == 'ok'){
-				//insert multiple login
-				/*
-				if(ret.msg_type){
-					$('#rusername').val(ret.msg_type);
-					$('#rpassword').val($('.password-input').val());
-					for(var k in ret.msg){
-						var fn = 'riframe'+Math.random();
-						//create iframe and h
-						$('body').append('<iframe  class="visibilityHidden" id="'+fn+'"  name="'+fn+'" ></iframe>');
-						$('#rform').attr('action', ret.msg[k].login_url);
-						$('#rform').attr('target', fn);
-						$('#rform').submit();
-					}
-				}
-				*/
-				window.location = $('#ret').val();
+			common.mask.down();
+			if(ret && ret.status=='failed'){
+				$('.msg').html(ret.data).fadeIn();
+				$('.re-test-db').show();
 			}else{
-				common.mask.down();
-                $('.login-page').html('<h3>Login failed</h3><h4 class="alert-'+ret.msg_type+'">'+ret.msg+'</h4><button onclick="window.location.reload()">Try Again</button>')
+				checked.db = 1
+				$('.msg').html("Database connection checks ok").fadeIn();
 			}
+			to_install()
 		}
 	});
-	return false;
+
+}
+
+
+function to_install(){
+
+	if(!checked.file || !checked.db) return;
+	$('.next').show();
+
 }
 
 </script>
 
-
-
-<!-- The Modal -->
-<div class="modal" id="myModal">
-    <div class="modal-dialog">
-        <div class="modal-content">
-
-            <!-- Modal Header -->
-            <div class="modal-header">
-                <h4 class="modal-title">Request to Reset password</h4>
-                <button type="button" class="close" data-dismiss="modal">&times;</button>
-            </div>
-
-            <!-- Modal body -->
-            <div class="modal-body">
-                <p><small>a link to reset password will send via your account email</small></p>
-                <input type="email" name="rsemail" value="" id="rsemail" />
-            </div>
-
-            <!-- Modal footer -->
-            <div class="modal-footer">
-                <button type="button" class="btn btn-danger" onclick="reset_my_password()">send Request</button>
-            </div>
-				
-        </div>
-    </div>
-</div>
-<style>
-    .modal-dialog  {
-        top:15%;
-    }
-</style>

@@ -16,10 +16,10 @@ define('_XP_MYSQL_LOG', false);
 
 
 $config['DATABASE']['a'] = array( //for testing database
-		'user'		=> 'myusername',
 		'host'		=> 'localhost',
-		'password'	=> 'mypassword',
-		'database'	=> 'mydatabase',
+		'database'	=> '----test----',
+		'user'		=> '----test----',
+		'password'	=> '----test----',
 );
 
 $cfg = ['db' => $config['DATABASE']['a']];
@@ -32,8 +32,10 @@ ini_set('memory_limit', '256M');
 
 //google bot check
 $config['google']['bot check']['api'] = 'https://www.google.com/recaptcha/api/siteverify';
-$config['google']['bot check']['key'] = '6LdVH2EUAAAAAD_CVXzxcvzxcBy_Kke_';
-$config['google']['bot check']['secret'] = '6LdVH2EUzvzdsTZko59-xxMP5s30WBO_Mz';
+$config['google']['bot check']['key'] = '6LdVH2EUAAAAAD_CVXDvOmRZ3IQvM60XkBy_Kke_';
+$config['google']['bot check']['secret'] = '6LdVH2EUAAAAAOuilzwTZko59-xxMP5s30WBO_Mz';
+define( '_X_GCAPTCHA', false);	//set to true when you got google captche key (v2.invisible)
+
 
 //set cookie _x_captcha to this value, will skip captcha bot detection
 $config['login']['captcha']['key'] = '7feda8c64c2ea4246c58472818d41c18cb28fe8c';
