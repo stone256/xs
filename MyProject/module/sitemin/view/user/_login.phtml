@@ -63,7 +63,7 @@ $captcha = !$rs['no_captcha'];
 						</script>
 						<button type="button" value="1" name="save" data-sitekey="<?=$rs['google_key'];?>" data-callback='onSubmit' class="g-recaptcha btn btn-lg text-center btn-secondary btn-block " id="save">Login</button>
 					<?php else: ?>
-						<button type="submit" value="1" name="save" id="save">Login</button>
+						<button type="submit" value="1" name="save" id="save" class="btn btn-lg text-center btn-secondary btn-block " >Login</button>
 
 					<?php endif; ?>
 
@@ -135,7 +135,7 @@ function reset_my_password(){
         success: function(data){
             common.mask.down();
             $("#myModal").modal('hide')
-            $('.login-page').html('<h3>Reset Password link has been sent to your email</h3><h4>Please follow the link in the email to reset your password!</h4><button onclick="window.location.reload()">Try Login</button>')
+            $('.login-page').html('<h3>Reset Password link has been sent to your email</h3><h4>Please follow the link in the email to reset your password!</h4><button onclick="window.location.reload()" class="btn btn-lg text-center btn-secondary btn-block ">Try Login</button>')
         }
     });
 }
