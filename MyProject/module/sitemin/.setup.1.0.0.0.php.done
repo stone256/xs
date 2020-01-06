@@ -10,6 +10,7 @@ SET time_zone = \"+00:00\";
 --
 -- Table structure for table `acl_menu`
 --
+DROP TABLE IF EXISTS `alc_menu`;
 CREATE TABLE `acl_menu` (
   `id` bigint(20) NOT NULL,
   `parent_id` int(11) NOT NULL DEFAULT '0',
@@ -66,6 +67,7 @@ INSERT INTO `acl_menu` (`id`, `parent_id`, `display`, `router`, `order`) VALUES
 --
 -- Table structure for table `acl_role`
 --
+DROP TABLE IF EXISTS `acl_role`;
 CREATE TABLE `acl_role` (
   `id` bigint(20) NOT NULL,
   `name` varchar(222) NOT NULL DEFAULT '',
@@ -201,6 +203,7 @@ INSERT INTO `acl_router` (`id`, `router`, `role`, `modified`) VALUES
 --
 -- Table structure for table `sitemin_crontab`
 --
+DROP TABLE IF EXISTS `sitemin_crontab`;
 CREATE TABLE `sitemin_crontab` (
   `id` bigint(20) NOT NULL,
   `minute` varchar(222) NOT NULL,
@@ -268,6 +271,7 @@ ALTER TABLE `sitemin_log`
 --
 -- Table structure for table `sitemin_message`
 --
+DROP TABLE IF EXISTS `sitemin_message`;
 CREATE TABLE `sitemin_message` (
   `id` bigint(20) NOT NULL,
   `from` bigint(20) NOT NULL,
@@ -299,6 +303,7 @@ ALTER TABLE `sitemin_message`
 --
 -- Table structure for table `sitemin_message_receiver`
 --
+DROP TABLE IF EXISTS `sitemin_message_receiver`;
 CREATE TABLE `sitemin_message_receiver` (
   `id` bigint(20) NOT NULL,
   `sitemin_message_id` bigint(20) NOT NULL,
@@ -324,6 +329,7 @@ ALTER TABLE `sitemin_message_receiver`
 --
 -- Table structure for table `sitemin_role`
 --
+DROP TABLE IF EXISTS `sitemin_role`;
 CREATE TABLE `sitemin_role` (
   `id` bigint(20) NOT NULL,
   `sitemin_id` bigint(20) NOT NULL,
@@ -440,6 +446,10 @@ INSERT INTO `var` (`name`, `value`, `note`, `date`) VALUES
 ('sitemin/testing/value', '36', 'for testing', '2018-08-06 09:26:08');
 -- --------------------------------------------------------
 
+--
+-- Table structure for table `sitemin_mail_attachment`
+--
+DROP TABLE IF EXISTS `sitemin_mail_attachment`;
 CREATE TABLE `sitemin_mail_attachment` (
   `id` bigint(20) NOT NULL,
   `mail_id` bigint(20) NOT NULL,
@@ -461,8 +471,9 @@ ALTER TABLE `sitemin_mail_attachment`
 -- --------------------------------------------------------
 
 --
--- `sitemin_mail_recipient`
+-- Table structure for table `sitemin_mail_recipient`
 --
+DROP TABLE IF EXISTS `sitemin_mail_recipient`;
 CREATE TABLE `sitemin_mail_recipient` (
   `id` bigint(20) NOT NULL,
   `mail_id` bigint(20) NOT NULL,
@@ -487,6 +498,7 @@ ALTER TABLE `sitemin_mail_recipient`
 --
 -- Table structure for table `sitemin_mail`
 --
+DROP TABLE IF EXISTS `sitemin_mail`;
 CREATE TABLE `sitemin_mail` (
   `id` bigint(20) NOT NULL,
   `sender` bigint(20) NOT NULL,
