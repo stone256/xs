@@ -20,42 +20,48 @@
 
 		 <!-- database credential-->
 		 <form action="?" id="db-form" method="post">
-		 	<input type="hidden" name="step" id="step" value="db connection" />
-			<div class="form-group">
-				<label for="host">Database Server Host Name ot IP:</label>
-				<input type="text" class="form-control" placeholder="Enter database host name or IP " value="localhost" id="host" name="host" required>
-			</div>
-			<div class="form-group">
-				<label for="database">Database Name:</label>
-				<input type="text" class="form-control" placeholder="database name" id="database" name="database">
-			</div>
-			<div class="form-group">
-				<label for="user">Database User:</label>
-				<input type="text" class="form-control" placeholder="database user" id="user" name="user">
-			</div>
-			<div class="form-group">
-				<label for="password">Database User Password:</label>
-				<input type="password" class="form-control" placeholder="database user password" id="password" name="password">
-			</div>
-				<!-- retry -->
-				<span class="floatRight re-test-db"> after fill in above database items <button type="button"  class="none btn btn-danger " onclick="test_db_connection()"> Test Connection</button></span>
+		 	<div class="form-items">
+			 	<input type="hidden" name="step" id="step" value="db connection" />
+				<div class="form-group">
+					<label for="host">Database Server Host Name ot IP:</label>
+					<input type="text" class="form-control" placeholder="Enter database host name or IP " value="localhost" id="host" name="host" required>
+				</div>
+				<div class="form-group">
+					<label for="database">Database Name:</label>
+					<input type="text" class="form-control" placeholder="database name" id="database" name="database">
+				</div>
+				<div class="form-group">
+					<label for="user">Database User:</label>
+					<input type="text" class="form-control" placeholder="database user" id="user" name="user">
+				</div>
+				<div class="form-group">
+					<label for="password">Database User Password:</label>
+					<input type="password" class="form-control" placeholder="database user password" id="password" name="password">
+				</div>
+					<!-- retry -->
+					<span class="floatRight re-test-db"> after fill in above database items <button type="button"  class="none btn btn-danger " onclick="test_db_connection()"> Test Connection</button></span>
 
-
-
-
+			</div>
 			<div class="clear"></div>
 			<div>&nbsp;</div>
 			<pre class="msg p20 mt-20 Black Hide "></pre>
 			<!-- to install after all checks ok -->
-			<span class="floatRight Hide next" > All checks OK, click <button type="button"  onclick="install()" class="btn btn-info " >here</button> to start installation, it may take a few seconds, * and all data will be cleaned </span>
+			<span class="floatRight Hide next" >
+				All checks OK,
+				 <br>to start installation click <button type="button"  onclick="install()" class="btn btn-info " >here</button>,
+				 <br> it may take a few seconds,
+				 <br>* and all data will be cleaned
+			 </span>
 		</form>
 		<div class="clear"></div>
 		<div class="form-group installed Hide">
 			<div class="jumbotron alert alert-warning">
 				<h1>Installation is done!</h1>
-
+				<div class="clear"></div>
 				<p class="fr"><b>click <a href="/sitemin/login">here</a> to login to admin</b></p>
+				<div class="clear"></div>
 				<p class="fr">Your Admin user is : "my" and the password is "123e456". After login please change it </p>
+				<div class="clear"></div>
 			</div>
 			<div class="clear"></div>
 		</div>
@@ -150,6 +156,7 @@ function test_db_connection(){
 				$('.re-test-db').show();
 			}else{
 				checked.db = 1
+				$('.form-items').fadeOut();
 				$('.msg').html("Database connection checks ok").fadeIn();
 			}
 			to_install()
