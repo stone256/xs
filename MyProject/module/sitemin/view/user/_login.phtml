@@ -1,5 +1,6 @@
 <?php
 $captcha = !$rs['no_captcha'];
+
 ?>
 <script src='https://www.google.com/recaptcha/api.js'></script>
 
@@ -63,7 +64,7 @@ $captcha = !$rs['no_captcha'];
 						</script>
 						<button type="button" value="1" name="save" data-sitekey="<?=$rs['google_key'];?>" data-callback='onSubmit' class="g-recaptcha btn btn-lg text-center btn-secondary btn-block " id="save">Login</button>
 					<?php else: ?>
-						<button type="submit" value="1" name="save" id="save" class="btn btn-lg text-center btn-secondary btn-block " >Login</button>
+						<button type="submit" value="1" name="save" id="save" class="btn btn-lg alert alert-warning text-center btn-secondary btn-block " >Login</button>
 
 					<?php endif; ?>
 

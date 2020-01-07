@@ -5,7 +5,8 @@
  *
  */
 class sitemin_loginController extends _system_defaultController {
-
+	var $captcha;
+	var $captcha_type =[0, 'google', 'local'];
 
 	function __construct(){
 		$this->q = $_REQUEST;
@@ -13,9 +14,14 @@ class sitemin_loginController extends _system_defaultController {
 		session_start();
 		//$this->return_url = defaultHelper::return_url();
 		if(_factory('sitemin_model_var')->get('sitemin/log') && $_p != '/sitemin/keepalive') _factory('sitemin_model_log')->insert();
+		$this->_captcha();
 	}
 
+	function _captcha(){
+		$captcha = _factory('sitemin_model_var')->get('sitemin/captcha');
+		$this->captcha = in_array($captcha, $this->captcha_type) ? $captcha: false;
 
+	}
 	function dashboardAction() {
 		$rs['tpl'] = 'user/_dashboard.phtml';
 		$rs['TITLE'] = 'SITEMIN DASHBOARD';
@@ -112,7 +118,7 @@ class sitemin_loginController extends _system_defaultController {
 		 $q = $this->q;
 		// die(asdfasdf);
 		 if($q['save']){
-			 if ( !_X_GCAPTCHA || $l->captcha($q)){
+			 if ( !$this->captcha || $l->captcha($q)){
 				 $q['n2048'] = $q['p1'];
 				 _factory('sitemin_model_user')->update_password($q);
 			 }
@@ -130,17 +136,19 @@ class sitemin_loginController extends _system_defaultController {
 		//if google bot check used
 		//f**k the captcha which is not able to work in old firefox: _x_captcha data.invigorgroup.com/sitemin/login
 		$rs['google_key'] = _config('google,bot check,key');
-		$rs['no_captcha'] = !_X_GCAPTCHA ;
+		$rs['no_captcha'] = !$this->captcha;
 		$rs['tpl'] = 'user/_resetpassword.phtml';
 		$rs['TITLE'] = 'SITEMIN USER';
 		return array('view'=>'/sitemin/view/index.phtml', 'data' => array('rs' => $rs));
 	}
 	function loginAction() {
 		if( !($r = defaultHelper::return_url())) $r = _X_URL.'/sitemin/dashboard';
+
+		$rs['google_key'] = _factory('sitemin_model_var')->get('sitemin/google/captcha/key');
+		$rs['no_captcha'] = !$this->captcha;
+
 		//if google bot check used
 		//f**k the captcha which is not able to work in old firefox: _x_captcha data.invigorgroup.com/sitemin/login
-		$rs['google_key'] = _config('google,bot check,key');
-		$rs['no_captcha'] = !_X_GCAPTCHA;
 		$rs['ret'] = $r;
 		$rs['tpl'] = 'user/_login.phtml';
 		$rs['TITLE'] = 'SITEMIN LOGIN';
@@ -171,7 +179,7 @@ class sitemin_loginController extends _system_defaultController {
 		$l = _factory('sitemin_model_login');
 		//google captach
 		//f* the captcha which is not able to work in old firefox: _x_captcha data.xxx.com/sitemin/login
-		if ( _X_GCAPTCHA && !$l->captcha($q)) return array('status' =>'failed', 'msg'=>'Robot check failed', 'msg_type'=>'warning' );
+		if ( $this->captcha && !$l->captcha($q)) return array('status' =>'failed', 'msg'=>'Robot check failed', 'msg_type'=>'warning' );
 		//if( !xpCaptcha::check($q['vcode']) ) $ret = array('status' =>'failed',  'msg'=>'Robot check failed, Vcode error, click on image to refresh code', 'msg_type'=>'warning' );
 		if (!$ret && !($r = $l->login($q)))   	$ret =  array('status' =>'failed', 'msg'=>'login failed, username and password are not match', 'msg_type'=>'warning' );
 		if (!$ret)  $ret =  array('status' =>'ok', 'msg'=>xpAS::get(defaultHelper::data_get('admin,login'),'permission,login'),  'msg_type'=>xpAS::get(defaultHelper::data_get('admin,login'),'user,username') );
