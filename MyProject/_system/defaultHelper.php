@@ -299,9 +299,9 @@ function _factory(){
 	$no_singleton = array_shift($args);
 	if(!$no_singleton && $objects[$name]) return $objects[$name];
 	//use if(phpversion()>7)
-	return $objects[$name] ? new $name(...$args) : $objects[$name] = new $name(...$args);
+	return $objects[$name]  = new $name(...$args[0]);
 	//else use
-	//  return $objects[$name] ? new $name($args) : $objects[$name] = new $name($args);
+	//  return  $objects[$name] = call_user_func_array([ $name, '__construct'], $args[0]);
 
 }
 function _config($name){
