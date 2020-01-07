@@ -8,11 +8,11 @@ class sitemin_loginController extends _system_defaultController {
 
 
 	function __construct(){
-		$this->captcha = _config('login,captcha,key') ? _config('login,captcha,key')  : _X_SERVER_KEY ;
 		$this->q = $_REQUEST;
+		$_p = _url();
 		session_start();
 		//$this->return_url = defaultHelper::return_url();
-		if(_X_SITEMIN_LOG === true && $_p != '/sitemin/keepalive') _factory('sitemin_model_log')->insert();
+		if(_factory('sitemin_model_var')->get('sitemin/log') && $_p != '/sitemin/keepalive') _factory('sitemin_model_log')->insert();
 	}
 
 

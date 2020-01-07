@@ -18,7 +18,7 @@ class sitemin_model_var {
 	function save($q){
 		$name = $q['name'];
 		$value = $q['value'];
-        $note = $q['note'];
+		$note = $q['note'];
 		$this->set($name, $value, $note);
 	}
 

@@ -438,12 +438,18 @@ ALTER TABLE `var`
 --
 -- Dumping data for table `var`
 --
+
 INSERT INTO `var` (`name`, `value`, `note`, `date`) VALUES
 ('sitemin/log/keeped_in_days', '30', 'log before archive', '2018-11-14 00:45:44'),
 ('sitemin/message/max_days', '60', 'message stored peroid', '2018-06-18 12:20:28'),
 ('sitemin/message/max_list_items', '12', 'message in a list page', '2018-06-18 12:20:28'),
 ('sitemin/note/max', '6', 'max note number', '2018-07-05 08:07:53'),
-('sitemin/testing/value', '36', 'for testing', '2018-08-06 09:26:08');
+('sitemin/testing/value', '36', 'for testing', '2018-08-06 09:26:08'),
+('sitemin/log', '0', 'values:\r\n0: log off; \r\n1: log on;\r\n', '2020-01-07 22:47:42'),
+('sitemin/google/captcha/api', 'https://www.google.com/recaptcha/api/siteverify', '', '2020-01-07 22:14:50'),
+('sitemin/google/captcha/key', '6LdVH2EUAAAAAD_CVXDvOmRZ3IQvM60XkBy_Kke_', '', '2020-01-07 22:15:54'),
+('sitemin/google/captcha/secret', '6LdVH2EUAAAAAOuilzwTZko59-xxMP5s30WBO_Mz', '', '2020-01-07 22:17:31'),
+('sitemin/captcha', 'off', 'values:\r\n\"off\": no captcha; \r\n\"google\": use google v2.invisible; \r\n\"local\": use simple SITEMIN generated, no need API calls;', '2020-01-07 22:26:16');
 -- --------------------------------------------------------
 
 --

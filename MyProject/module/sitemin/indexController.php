@@ -23,7 +23,7 @@ class sitemin_indexController extends _system_defaultController {
 		}
 		if(_X_CLI_CALL !== true && !$router[$_p]) xpAS::go('/sitemin/login');
 		$this->sitemin_menu = _factory('sitemin_model_acl_menu')->tree();
-		if(_X_SITEMIN_LOG === true && $_p != '/sitemin/keepalive') _factory('sitemin_model_log')->insert();
+		if(_factory('sitemin_model_var')->get('sitemin/log') && $_p != '/sitemin/keepalive') _factory('sitemin_model_log')->insert();
 	}
 
 	function statusAction(){
