@@ -7,7 +7,7 @@ class sitemin_installer_installController extends _system_defaultController{
 
         function runAction(){
                 $q = $_REQUEST;
-              
+
                 sleep(1);
                 switch($q['step']){
                         case 'file permission':

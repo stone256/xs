@@ -85,10 +85,11 @@ class sitemin_installer_install{
                 */
                 //set the database config (_config('DATABASE,a'))
                 $con = file_get_contents(_X_INSTALL_FILE5);
-                $con = preg_replace('/\s*'host'\s*\=\>\s*\'localhost\'\s*\,/ims', "'host'=>'{$q['host']}," , $con);
-                $con = preg_replace('/\s*'database'\s*\=\>\s*\'mydatabase\'\s*\,/ims', "'host'=>'{$q['database']}," , $con);
-                $con = preg_replace('/\s*'user'\s*\=\>\s*\'myusername\'\s*\,/ims', "'host'=>'{$q['user']}," , $con);
-                $con = preg_replace('/\s*'password'\s*\=\>\s*\'mypassword\'\s*\,/ims', "'host'=>'{$q['password']}," , $con);
+                //$con = preg_replace('/\s*\,/ims', "'host'=>'{$q['host']}'" , $con);
+                $con = preg_replace('/\s*\'host\'\s*\=\>\s*\'localhost\'\s*\,/ims', "'host'=>'{$q['host']}'," , $con);
+                $con = preg_replace('/\s*\'database\'\s*\=\>\s*\'mydatabase\'\s*\,/ims', "'database'=>'{$q['database']}'," , $con);
+                $con = preg_replace('/\s*\'user\'\s*\=\>\s*\'myusername\'\s*\,/ims', "'user'=>'{$q['user']}'," , $con);
+                $con = preg_replace('/\s*\'password\'\s*\=\>\s*\'mypassword\'\s*\,/ims', "'password'=>'{$q['password']}'," , $con);
                 file_put_contents(_X_INSTALL_FILE4, $con);
                 return;
         }
