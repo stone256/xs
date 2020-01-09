@@ -69,7 +69,7 @@ class sitemin_installer_install{
                 $con['X2CLI_CALL']= true;
                 $s = '<?php';
                 $s = "\n\n\n";
-                $s .= "$apache_data=\n" . var_export($con);
+                $s .= "$apache_data=\n" . var_export($con, 1);
                 $s .= "\ndefine('__X_DEBUG', true);\n\n";
                 file_put_contents(_X_INSTALL_FILE4, $s);
 
