@@ -1,49 +1,36 @@
 <?php
+/**
+ * @name 	: local config
+ * @author 	: peter<stone256@hotmail.com>
+ *
+ *  this is the place you put all your settings concern the server locally (DEV TESTING .. LIVE).
+ */
+define('__X_SERVER__', 'DEV');
+//define('__X_SERVER__', 'STAGING');
 
 
-$apache_data=
-array (
-  'REDIRECT_SERVER_ENV' => 'LOCAL_TEST',
-  'REDIRECT_STATUS' => '200',
-  'SERVER_ENV' => 'LOCAL_TEST',
-  'HTTP_HOST' => 'xs.mx19',
-  'HTTP_USER_AGENT' => 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:72.0) Gecko/20100101 Firefox/72.0',
-  'HTTP_ACCEPT' => 'application/json, text/javascript, */*; q=0.01',
-  'HTTP_ACCEPT_LANGUAGE' => 'en-US,en;q=0.5',
-  'HTTP_ACCEPT_ENCODING' => 'gzip, deflate',
-  'CONTENT_TYPE' => 'application/x-www-form-urlencoded; charset=UTF-8',
-  'HTTP_X_REQUESTED_WITH' => 'XMLHttpRequest',
-  'CONTENT_LENGTH' => '59',
-  'HTTP_ORIGIN' => 'http://xs.mx19',
-  'HTTP_CONNECTION' => 'keep-alive',
-  'HTTP_REFERER' => 'http://xs.mx19/sitemin/install',
-  'HTTP_COOKIE' => 'PHPSESSID=87dgu8n2nhvgvnc7g7d6odnh9j',
-  'PATH' => '/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin',
-  'SERVER_SIGNATURE' => '<address>Apache/2.4.38 (Debian) Server at xs.mx19 Port 80</address>
-',
-  'SERVER_SOFTWARE' => 'Apache/2.4.38 (Debian)',
-  'SERVER_NAME' => 'xs.mx19',
-  'SERVER_ADDR' => '192.168.1.51',
-  'SERVER_PORT' => '80',
-  'REMOTE_ADDR' => '192.168.1.92',
-  'DOCUMENT_ROOT' => '/var/www/html/xs/MyProject/public',
-  'REQUEST_SCHEME' => 'http',
-  'CONTEXT_PREFIX' => '',
-  'CONTEXT_DOCUMENT_ROOT' => '/var/www/html/xs/MyProject/public',
-  'SERVER_ADMIN' => 'webmaster@localhost',
-  'SCRIPT_FILENAME' => '/var/www/html/xs/MyProject/public/index.php',
-  'REMOTE_PORT' => '63829',
-  'REDIRECT_URL' => '/sitemin/install',
-  'GATEWAY_INTERFACE' => 'CGI/1.1',
-  'SERVER_PROTOCOL' => 'HTTP/1.1',
-  'REQUEST_METHOD' => 'POST',
-  'QUERY_STRING' => '',
-  'REQUEST_URI' => '/sitemin/install',
-  'SCRIPT_NAME' => '/index.php',
-  'PHP_SELF' => '/index.php',
-  'REQUEST_TIME_FLOAT' => 1578609400.206,
-  'REQUEST_TIME' => 1578609400,
-  'X2CLI_CALL' => true,
-)
-define('__X_DEBUG', true);
+//do not turn this on before your sitemin has been installed
+define('_X_SITEMIN_LOG', false);
 
+//if you use xpPdo class, set true will log query to _data/log/mysql/xxxxx
+define('_XP_MYSQL_LOG', false);
+
+
+
+$config['DATABASE']['a'] = array( //for testing database
+		'host'		=> 'localhost',
+		'database'	=> 'mydatabase',
+		'user'		=> 'myusername',
+		'password'	=> 'mypassword',
+);
+
+$cfg = ['db' => $config['DATABASE']['a']];
+
+//change with care
+define(_X_SERVER_KEY, 'mSpPzv8GyiJM9yb84YxMImlFmxoUGKmf4rDSFgsfGsdfGdsfesgvXB+UCrM5sTYZ26DSl5ADx39aErqzCa');
+define(_API_SALT, 'aSDfaW34Aw3er@Q#QRe3FQ#4rF0V1bYXBzc5TC9aErzCqRfQWRw432qrASrwerqwerq23r23afwE');
+
+//ini_set('memory_limit', '256M');
+
+//for ie P3P
+//header('P3P:CP="IDC DSP COR ADM DEVi TAIi PSA PSD IVAi IVDi CONi HIS OUR IND CNT"');

@@ -33,11 +33,12 @@ class sitemin_installer_install{
 
         function test_connection($q){
                 $q = xpAS::escape($q);
+
                 $c['db']=[
                         'user'	=> $q['user'],
                         'host'	=> $q['host'],
                         'password' => $q['password'],
-                        'database' => $q['database']
+                        'database' => addslashes($q['database']),
                 ];
                 sleep(1);
                 try{
@@ -74,14 +75,21 @@ class sitemin_installer_install{
                 $s .= "\n" . var_export($con, 1);
                 $s .= "\ndefine('__X_DEBUG', true);\n\n";
                 file_put_contents(_X_INSTALL_FILE4, $s);
-
+                /*
+                $config['DATABASE']['a'] = array( //for testing database
+                		'host'		=> 'localhost',
+                		'database'	=> 'mydatabase',
+                		'user'		=> 'myusername',
+                		'password'	=> 'mypassword',
+                */
+        );
                 //set the database config (_config('DATABASE,a'))
                 $con = file_get_contents(_X_INSTALL_FILE5);
-                $con = str_replace(_config('DATABASE,a,host'), $q['host'] , $con);
-                $con = str_replace(_config('DATABASE,a,database'), $q['database'] , $con);
-                $con = str_replace(_config('DATABASE,a,user'), $q['user'] , $con);
-                $con = str_replace(_config('DATABASE,a,password'), $q['password'] , $con);
-                file_put_contents(preg_replace('/\.sample$/ims', '', _X_INSTALL_FILE4), $con);
+                $con = preg_replace('/\s*'host'\s*\=\>\s*\'localhost\'\s*\,/ims', "'host'=>'{$q['host']}," , $con);
+                $con = preg_replace('/\s*'database'\s*\=\>\s*\'mydatabase\'\s*\,/ims', "'host'=>'{$q['database']}," , $con);
+                $con = preg_replace('/\s*'user'\s*\=\>\s*\'myusername\'\s*\,/ims', "'host'=>'{$q['user']}," , $con);
+                $con = preg_replace('/\s*'password'\s*\=\>\s*\'mypassword\'\s*\,/ims', "'host'=>'{$q['password']}," , $con);
+                file_put_contents(_X_INSTALL_FILE4, $con);
                 return;
         }
 
