@@ -81,8 +81,8 @@ class sitemin_installer_install{
                 		'database'	=> 'mydatabase',
                 		'user'		=> 'myusername',
                 		'password'	=> 'mypassword',
+                );
                 */
-        );
                 //set the database config (_config('DATABASE,a'))
                 $con = file_get_contents(_X_INSTALL_FILE5);
                 $con = preg_replace('/\s*'host'\s*\=\>\s*\'localhost\'\s*\,/ims', "'host'=>'{$q['host']}," , $con);
