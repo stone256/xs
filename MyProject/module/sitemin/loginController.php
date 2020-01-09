@@ -17,7 +17,6 @@ class sitemin_loginController extends _system_defaultController {
 		if(_factory('sitemin_model_var')->get('sitemin/log') && $_p != '/sitemin/keepalive') _factory('sitemin_model_log')->insert();
 		$this->_captcha();
 	}
-
 	function _captcha(){
 		$type = $this->captcha_type[_factory('sitemin_model_var')->get('sitemin/captcha')];
 		$type = $type ?: 'off';
@@ -25,20 +24,16 @@ class sitemin_loginController extends _system_defaultController {
 		//testing
 		//$this->captcha->test();
 	}
-
-
 	function dashboardAction() {
 		$rs['tpl'] = 'user/_dashboard.phtml';
 		$rs['TITLE'] = 'SITEMIN DASHBOARD';
 		return array('view'=>'/sitemin/view/index.phtml','data' => array('rs' => $rs));
 	}
-
 	function testAction() {
 		$rs['tpl'] = '_test.phtml';
 		$rs['TITLE'] = 'SITEMIN TEST';
 		return array('view'=>'/sitemin/view/index.phtml','data' => array('rs' => $rs));
 	}
-
 	function hashgeneratorAction() {
 		$q = $this->q;
 		$cmds = array(
@@ -61,7 +56,6 @@ class sitemin_loginController extends _system_defaultController {
 		$rs['TITLE'] = 'SITEMIN HASH GENERATOR';
 		return array('view'=>'/sitemin/view/index.phtml','data' => array('rs' => $rs));
 	}
-
 	function passwordgeneratorAction() {
 		$q = $_REQUEST;
 		if ($q['save']) {
@@ -77,7 +71,6 @@ class sitemin_loginController extends _system_defaultController {
 		$rs['TITLE'] = 'PASSWORD GENERATOR';
 		return array('view'=>'/sitemin/view/user/index.phtml','data' => array('rs' => $rs));
 	}
-
 	function csv2jsonAction() {
 		ini_set('memory_limit', '664M');
 		$q = $_REQUEST;
@@ -87,25 +80,20 @@ class sitemin_loginController extends _system_defaultController {
 
 			$name = $_FILES['csv']['tmp_name'];
 			//_dv(file_get_contents($name));
-
 			$r = xpCSV::gets("$name");
-
 			switch($q['type']){
 				case 'JSON':
 					$data = json_encode($r);
 					break;
-				case 'PHP ARRAY':
-				default:
-					$data = var_export($r, 1);
-					break;
+				case 'PHP ARRAY':		//if( !xpCaptcha::check($q['vcode']) ) $ret = array('status' =>'failed',  'msg'=>'Robot check failed, Vcode error, click on image to refresh code', 'msg_type'=>'warning' );
+
 			}
 			$rs['data'] = $data;
 		}
 		$rs['tpl'] = '_csv2json.phtml';
 		$rs['TITLE'] = 'SITEMIN CSV2JSON';
 		return array('view'=>'/sitemin/view/user/index.phtml','data' => array('rs' => $rs));
-	}
-
+	}	
 	function _short($r){
 		//return base_convert(array_sum(str_split($r)), 16, 36);
 		$ds = str_split($r);
@@ -119,37 +107,37 @@ class sitemin_loginController extends _system_defaultController {
 	function requestpasswordAction(){
 		$q = $this->q;
 	       // die(asdfasdf);
-		if ($l->captcha($q)){
+		if ($l->captcha($q))
 		 	$r = _factory('sitemin_model_login')->sendresetpasswordlink($this->q);
 			
-	}
+	}		
 	function resetpasswordAction(){
-		 $q = $this->q;
-		// die(asdfasdf);
-		 if($q['save']){
-			 if ($l->captcha($q)){
-				 $q['n2048'] = $q['p1'];
-				 _factory('sitemin_model_user')->update_password($q);
-			 }
-			 sleep(3);
-			 exit;
-		 }else{
-		 	$hash = key($q);
-		 	//check hash
-		 	$u = _factory('sitemin_model_user')->check_hash($hash);
-			if(!$u) $rs['overdue'] =1;
-			$rs['hash'] = $hash;
-			$rs['user'] = $u;;
-		}
-		//check hash
-		//if google bot check used
-		//f**k the captcha which is not able to work in old firefox: _x_captcha data.invigorgroup.com/sitemin/login
-		$rs['google_key'] = _config('google,bot check,key');
-		$rs['no_captcha'] = !$this->captcha;
-		$rs['tpl'] = 'user/_resetpassword.phtml';
-		$rs['TITLE'] = 'SITEMIN USER';
-		return array('view'=>'/sitemin/view/index.phtml', 'data' => array('rs' => $rs));
-	}
+		$q = $this->q;
+	   // die(asdfasdf);
+		if($q['save']){
+			if ($l->captcha($q)){
+				$q['n2048'] = $q['p1'];
+				_factory('sitemin_model_user')->update_password($q);
+			}
+			sleep(3);
+			exit;
+		}else{
+			$hash = key($q);
+			//check hash
+			$u = _factory('sitemin_model_user')->check_hash($hash);
+		   if(!$u) $rs['overdue'] =1;
+		   $rs['hash'] = $hash;
+		   $rs['user'] = $u;;
+	   }
+	   //check hash
+	   //if google bot check used
+	   //f**k the captcha which is not able to work in old firefox: _x_captcha data.invigorgroup.com/sitemin/login
+	   $rs['google_key'] = _config('google,bot check,key');
+	   $rs['no_captcha'] = !$this->captcha;
+	   $rs['tpl'] = 'user/_resetpassword.phtml';
+	   $rs['TITLE'] = 'SITEMIN USER';
+	   return array('view'=>'/sitemin/view/index.phtml', 'data' => array('rs' => $rs));
+   }  
 	function loginAction() {
 		if( !($r = defaultHelper::return_url())) $r = _X_URL.'/sitemin/dashboard';
 
@@ -167,11 +155,6 @@ class sitemin_loginController extends _system_defaultController {
 			sleep(1);	//slow down
 			die( json_encode($ret));
 		}
-		//if google bot check used
-		//f**k the captcha which is not able to work in old firefox: _x_captcha data.invigorgroup.com/sitemin/login
-//		$rs['google_key'] = _factory('sitemin_model_var')->get('sitemin/google/captcha/key');
-//		$rs['no_captcha'] = !$this->captcha;
-
 		$rs['captcha_html'] = $this->captcha->html();
 		$rs['ret'] = $r;
 		$rs['tpl'] = 'user/_login.phtml';
@@ -181,10 +164,9 @@ class sitemin_loginController extends _system_defaultController {
 
 	function _login($q){
 		$l = _factory('sitemin_model_login');
-		//google captach
-		//f* the captcha which is not able to work in old firefox: _x_captcha data.xxx.com/sitemin/login
+
 		if ( !$this->captcha->validate($q)) return array('status' =>'failed', 'msg'=>'Robot check failed', 'msg_type'=>'warning' );
-		//if( !xpCaptcha::check($q['vcode']) ) $ret = array('status' =>'failed',  'msg'=>'Robot check failed, Vcode error, click on image to refresh code', 'msg_type'=>'warning' );
+
 		if (!$ret && !($r = $l->login($q)))   	$ret =  array('status' =>'failed', 'msg'=>'login failed, username and password are not match', 'msg_type'=>'warning' );
 		if (!$ret)  $ret =  array('status' =>'ok', 'msg'=>xpAS::get(defaultHelper::data_get('admin,login'),'permission,login'),  'msg_type'=>xpAS::get(defaultHelper::data_get('admin,login'),'user,username') );
 		return $ret;
@@ -194,4 +176,5 @@ class sitemin_loginController extends _system_defaultController {
 		_factory('sitemin_model_login')->logout();
 		xpAS::go('/sitemin');
 	}
+
 }
