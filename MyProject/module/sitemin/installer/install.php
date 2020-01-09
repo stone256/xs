@@ -1,4 +1,10 @@
 <?php
+        define('_X_INSTALL_FILE0', _X_INSTALL_ROOT.'/.router.php');
+        define('_X_INSTALL_FILE1', _X_INSTALL_ROOT.'/.setup.1.0.0.0.php.done');
+        define('_X_INSTALL_FILE2', _X_INSTALL_ROOT.'/.setup.1.0.0.1.php.done');
+        define('_X_INSTALL_FILE3', _X_CONFIG);
+        define('_X_INSTALL_FILE4', _X_CONFIG.'/x2cli.php');
+        define('_X_INSTALL_FILE5', _X_CONFIG.'/local.php.sample');
 
 
 //model
@@ -9,6 +15,8 @@ class sitemin_installer_install{
                 _X_INSTALL_FILE1,
                 _X_INSTALL_FILE2,
                 _X_INSTALL_FILE3,
+                _X_INSTALL_FILE4,
+                _X_INSTALL_FILE5,
         ];
 
         function test_permission(){
@@ -41,13 +49,6 @@ class sitemin_installer_install{
 
                 $q = xpAS::escape($q);
 
-                /*
-                define('_X_INSTALL_FILE0', __DIR__.'/.router');
-                define('_X_INSTALL_FILE1', __DIR__.'/.setup.1.0.0.0.php.done');
-                define('_X_INSTALL_FILE2', __DIR__.'/.setup.1.0.0.1.php.done');
-                define('_X_INSTALL_FILE3', _X_CONFIG.'/local.php');
-                */
-
                 //change the files for start up
                 rename(_X_INSTALL_FILE1, preg_replace('/\.done$/ims','', _X_INSTALL_FILE1) );
                 rename(_X_INSTALL_FILE2, preg_replace('/\.done$/ims','', _X_INSTALL_FILE2) );
@@ -58,12 +59,12 @@ class sitemin_installer_install{
                 file_put_contents(_X_INSTALL_FILE0, $con);
 
                 //set the database config (_config('DATABASE,a'))
-                $con = file_get_contents(_X_INSTALL_FILE3);
+                $con = file_get_contents(_X_INSTALL_FILE5);
                 $con = str_replace(_config('DATABASE,a,host'), $q['host'] , $con);
                 $con = str_replace(_config('DATABASE,a,database'), $q['database'] , $con);
                 $con = str_replace(_config('DATABASE,a,user'), $q['user'] , $con);
                 $con = str_replace(_config('DATABASE,a,password'), $q['password'] , $con);
-                file_put_contents(_X_INSTALL_FILE3, $con);
+                file_put_contents(preg_replace('/\.sample$/ims', '', _X_INSTALL_FILE5), $con);
                 return;
         }
 
