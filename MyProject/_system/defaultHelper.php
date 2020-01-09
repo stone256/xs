@@ -260,7 +260,7 @@ function _dv($a, $die = false) {
 	if (__X_DEBUG !== true) return;
 	if(_X_CLI_CALL === true){
 		print_r($a);
-		echo "\n";
+		echo PHP_EOL;
 	}else{
 		echo "<pre>";
 		var_export($a);
