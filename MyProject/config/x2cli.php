@@ -50,6 +50,6 @@ $apache_data=array (
 		  'PHP_AUTH_PW' => 'abcd1234',
 		  'X2CLI_CALL'=>true,
 		);
-
+//		'X2CLI_CALL'=>true,
 
 define('__X_DEBUG', true);
