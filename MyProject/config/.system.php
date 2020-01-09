@@ -9,9 +9,10 @@
 error_reporting(E_ERROR);
 ini_set('display_errors', 1);
 
-// DIRECTORY_SEPARATOR
-define('DS', '/');	// for linux only
 
+// DIRECTORY_SEPARATOR
+if(!defined('DS')) define('DS', '/');	// for linux only
+if(!defined('PHP_EOL')) define('PHP_EOL', "\n");
 
 
 //'_X_START_TIME' AND '_X_INDEX' are from "index.php"
