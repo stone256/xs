@@ -81,7 +81,7 @@ class sitemin_installer_install{
                 $con = str_replace(_config('DATABASE,a,database'), $q['database'] , $con);
                 $con = str_replace(_config('DATABASE,a,user'), $q['user'] , $con);
                 $con = str_replace(_config('DATABASE,a,password'), $q['password'] , $con);
-                file_put_contents(preg_replace('/\.sample$/ims', '', _X_INSTALL_FILE5), $con);
+                file_put_contents(preg_replace('/\.sample$/ims', '', _X_INSTALL_FILE4), $con);
                 return;
         }
 
