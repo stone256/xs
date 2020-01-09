@@ -58,6 +58,15 @@ class sitemin_installer_install{
                 $con = str_replace('include "installer.php";', '#include "installer.php";', $con);
                 file_put_contents(_X_INSTALL_FILE0, $con);
 
+
+                //rebuild x2cli.php
+                $con = $_SERVER;
+                $con['X2CLI_CALL']= true;
+                $s = '<?php';
+                $s = "\n\n\n";
+                $s .= "$apache_data=\n" . var_export($con);
+                $s .= "\ndefine('__X_DEBUG', true);\n\n";
+
                 //set the database config (_config('DATABASE,a'))
                 $con = file_get_contents(_X_INSTALL_FILE5);
                 $con = str_replace(_config('DATABASE,a,host'), $q['host'] , $con);
