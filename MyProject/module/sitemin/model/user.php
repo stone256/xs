@@ -222,27 +222,23 @@ class sitemin_model_user {
 			sleep(5);
 			return;
 		}
-
+		
 		$hash = xpAS::str2hex(xpAS::roller($time.':'.uniqid()));
-
 		$u = xpTable::load($this->user_table)->updates(array('hash'=>$hash), array('email'=>$email));
-
 		$tpl = new xpTpl(array('file'=>_X_MODULE.'/sitemin/view/user/__mail_resetpassword.tpl'));
-
 		$drr = array(
-		'title' => 'SITEMIN',
-		'website' => 'p.topview.com.au',
-		'link' => _X_URL . '/sitemin/resetpassword/'.$hash,
-		'name'=> $r['username'],
-
+			'title' => 'SITEMIN',
+			'website' => 'SITEMIN',
+			'link' => _X_URL . '/sitemin/resetpassword/'.$hash,
+			'name'=> $r['username'],
 		);
 		$tpl->sets($drr);
 		//mail queuing
 		$mrr = array(
-		    'from' => 'forgot password',
-		    'to' => 'tp7cmiller@yahoo.com.au',//$r['email'],
-		    'subject' => 'Reset my login request',
-		    'body'=>$tpl->html(),
+			'from' => 'forgot password',
+			'to' => $r['email'],
+			'subject' => 'Reset my login request',
+			'body'=>$tpl->html(),
 		);
 
 		//email::send($mrr);

@@ -14,7 +14,8 @@ $captcha = !$rs['no_captcha'];
 				</div>
 			</div>
 
-				<form method="post" role="form" class="form-horizontal" id="login-form" onsubmit="return ajax_login(this);">
+		<form width="50%" method="post" role="form" class="form-horizontal" id="login-form" onsubmit="return ajax_login(this);">
+			<!-- <form method="post" role="form" class="form-horizontal" id="login-form" onsubmit="return ajax_login(this);"> -->
                     <!-- <input type="hidden" name="ret" id="ret" value="<?=$rs['ret'] ? $rs['ret'] :'/sitemin/dashboard'?>" /> -->
                     <input type="hidden" name="ret" id="ret" value="/sitemin/dashboard" />
 
@@ -26,6 +27,9 @@ $captcha = !$rs['no_captcha'];
                     <div class="input-group mb-3 form-group">
                         <input type="password" class="form-control input-lg" id="password"  name="password" required="" placeholder="Password">
                     </div>
+
+	    	<?=$rs['captcha_html'];?>
+
 
 <!--
 					<label for="vcode" ><span class="fa fa-picture-o"></span> Vcode (Click the image to get a new one)</label>
@@ -55,21 +59,10 @@ $captcha = !$rs['no_captcha'];
                         </label>
                         <a class="login pull-right" href="javascript:void(0)" onclick=" $('#myModal').modal()"  >Reset My Password ?</a>
                     </div>
-					<?php if($captcha): ?>
-						<script src="https://www.google.com/recaptcha/api.js" async defer></script>
-						<script>
-						function onSubmit(token) {
-						 $("#login-form").submit();
-						}
-						</script>
-						<button type="button" value="1" name="save" data-sitekey="<?=$rs['google_key'];?>" data-callback='onSubmit' class="g-recaptcha btn btn-lg text-center btn-secondary btn-block " id="save">Login</button>
-					<?php else: ?>
-						<button type="submit" value="1" name="save" id="save" class="btn btn-lg alert alert-warning text-center btn-secondary btn-block " >Login</button>
-
-					<?php endif; ?>
+			<button type="submit" value="1" name="save" id="save" class="btn btn-lg alert alert-warning text-center btn-secondary btn-block " >Login</button>
 
 
-				</form>
+		</form>
 
 		</div>
 	</div>
@@ -100,10 +93,12 @@ $captcha = !$rs['no_captcha'];
 
             <!-- Modal body -->
             <div class="modal-body">
-                <p><small>a link to reset password will send via your account email</small></p>
+                <p><small>A link to reset password will send via your account email</small></p>
                 <input type="email" name="rsemail" value="" id="rsemail" />
             </div>
-
+	    <div class="p20">
+		    <?=$rs['captcha_html'];?>
+	    </div>
             <!-- Modal footer -->
             <div class="modal-footer">
                 <button type="button" class="btn btn-danger" onclick="reset_my_password()">send Request</button>
@@ -146,7 +141,7 @@ function ajax_login(form){
 	common.mask.up()
 	//$('.alert').attr('class', 'alert').html('<img src="<?=_X_URL?>/media/image/ajax-loader.gif" />');
 	$.ajax({
-        url: "/sitemin/loginajax",
+        url: "",
         dataType:'json',
         data:$(form).serialize(),
         type:'post',

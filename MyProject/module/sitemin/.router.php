@@ -14,6 +14,7 @@ define('_X_SITEMIN', true);
 $routers=[
  //for test controller
 '/sitemin/test' => '/sitemin/login@test',
+'/sitemin/helper/vcode'=>'/sitemin/helper@vcode',
 
 '/sitemin/keepalive' => '/sitemin/index@keepalive',
 

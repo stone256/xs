@@ -1,5 +1,5 @@
 <?php
-class sitemin_helper_indexController  {
+class sitemin_helperController  {
 
 	function __construct(){
 		session_start();
