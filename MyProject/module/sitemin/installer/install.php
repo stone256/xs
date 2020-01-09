@@ -1,4 +1,9 @@
 <?php
+
+/**
+ * installer ver 1.0
+ */
+
         define('_X_INSTALL_FILE0', _X_INSTALL_ROOT.'/.router.php');
         define('_X_INSTALL_FILE1', _X_INSTALL_ROOT.'/.setup.1.0.0.0.php.done');
         define('_X_INSTALL_FILE2', _X_INSTALL_ROOT.'/.setup.1.0.0.1.php.done');
@@ -66,6 +71,7 @@ class sitemin_installer_install{
                 $s = "\n\n\n";
                 $s .= "$apache_data=\n" . var_export($con);
                 $s .= "\ndefine('__X_DEBUG', true);\n\n";
+                file_put_contents(_X_INSTALL_FILE4, $s);
 
                 //set the database config (_config('DATABASE,a'))
                 $con = file_get_contents(_X_INSTALL_FILE5);
