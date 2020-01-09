@@ -19,9 +19,9 @@ define('_XP_MYSQL_LOG', false);
 
 $config['DATABASE']['a'] = array( //for testing database
 		'host'		=> 'localhost',
-		'database'	=> 'xs',
-		'user'		=> 'xs',
-		'password'	=> 'xs',
+		'database'	=> 'mydatabase',
+		'user'		=> 'myusername',
+		'password'	=> 'mypassword',
 );
 
 $cfg = ['db' => $config['DATABASE']['a']];
