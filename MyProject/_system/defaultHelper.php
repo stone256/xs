@@ -217,7 +217,7 @@ function _dt($from_last=true) {
 	$last = microtime(1);
 	_dv(array('elapsed' => $last - _X_START_TIME));
 }
-function _dd($x, $die = false, $display = true, $tab = 6, $deep = 50, $level = 0) {
+function _d($x, $die = false, $display = true, $tab = 6, $deep = 50, $level = 0) {
 	//if (!(__X_DEBUG === true)) return;
 	if ($level == 0) $con = "<pre>\n{\n"; //1st start
 	$level++;
@@ -226,7 +226,7 @@ function _dd($x, $die = false, $display = true, $tab = 6, $deep = 50, $level = 0
 		foreach ($x as $k => $v) {
 			if (is_array($v)) {
 				$con.= str_pad($level, 5, '.') . str_pad('', $level * $tab, '.', STR_PAD_LEFT) . "$k=>[\n";
-				$con.= _dd($v, '', $display, $tab, $deep, $level);
+				$con.= _d($v, '', $display, $tab, $deep, $level);
 				$con.= str_pad($level, 5, '.') . str_pad('', $level * $tab, '.', STR_PAD_LEFT) . "]\n";
 			} else {
 				$con.= str_pad($level, 5, '.') . str_pad('', $level * $tab, '.', STR_PAD_LEFT) . "$k=>";
