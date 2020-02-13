@@ -407,6 +407,17 @@ additional css
 .textTransformLowerCase{text-transform:lowercase}
 .textTransformInherit{text-transform:inherit}
 
+.blinking{
+    animation:blinkingText 1.2s infinite;
+}
+@keyframes blinkingText{
+    0%{     color: #fa0; }
+    49%{    color: #fa0; }
+    60%{    color: transparent; }
+    99%{    color:transparent;  }
+    100%{   color: #ff0;    }
+}
+
 .NoWrap{ white-space: nowrap;}
 /**
  *positioning
