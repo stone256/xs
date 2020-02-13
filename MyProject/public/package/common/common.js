@@ -8,14 +8,14 @@ var common ={
 		up:function(con){
 			if(common.mask.on) return;
 			common.mask.on = true;
-
 			var w=$(window).width();
-			var h=$(window).height();
-            		con = con || '';
-			var loader = '<div style="margin-top:'+(h/2)+'px;margin-left:'+(w/2-16)+'px" class="'+(con ? '' : 'loader')+'"></div>'
-			var html = '<div id="'+common.mask.id+'" style="z-index:50000;top:0;left:0;width:'+w+'px;height:'+h+'px;position:fixed; opacity:0.7;background:#000;text-align:center" >'+loader+' <b class="blinking" style="line-height:4px;opacity:1;color:#ffff00">'+con+'</b></div>' ;
-			//var html = '<div id="'+common.mask.id+'" style="z-index:50000;top:0;left:0;width:'+w+'px;height:'+h+'px;position:fixed; opacity:0.6;background:#eee url(/media/image/ajax-loader.gif) 50% 50% no-repeat;" ></div>' ;
-
+			var h1=$(window).height();
+			var h2=$(document).height();
+			var h = Math.max(h1, h2);
+			var loader = con ? '' : '<div style="margin-top:'+(h/2)+'px;margin-left:'+(w/2-16)+'px" class="loader"></div>' ;
+			var opacity = con ? "1" : "0.7"
+			var msg = con ? '<b class="blinking" style="line-height:4px;font-weight:400;color:#fff"><p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p>'+(con || '')+'</b>' : '';
+			var html = '<div id="'+app.mask.id+'" style="z-index:500;top:0;left:0;width:'+w+'px;height:'+h+'px;position:fixed; opacity:'+opacity+';background:#444;text-align:center" >'+loader+msg+'</div>' ;
 			$('body').append(html)
 			$('#'+common.mask.id).width();
 			return true;
