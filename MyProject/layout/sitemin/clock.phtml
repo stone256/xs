@@ -1,0 +1,62 @@
+<div class="clock">
+        <span class="-group-item" id="_date"></span>
+        <span class="-group-item" >&nbsp;&nbsp;</span>
+        <span class="-group-item" id="_hours"></span>
+        <span class="-group-item" >:</span>
+        <span class="-group-item" id="_min"></span>
+        <span class="-group-item">:</span>
+        <span class="-group-item" id="_sec"></span>
+        <span class="-group-item" > </span>
+</div>
+
+<script type="text/javascript">
+    $(document).ready(function() {
+// Create two variable with the names of the months and days in an array
+        var monthNames = [ "Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec" ];
+        var dayNames= ["Sun","Mon","Tue","Wed","Thu","Fri","Sat"]
+
+// Create a newDate() object
+        var newDate = new Date();
+// Extract the current date from Date object
+        newDate.setDate(newDate.getDate());
+// Output the day, date, month and year
+        $('#_date').html(  monthNames[newDate.getMonth()]+ " " + newDate.getDate() + ' ' +dayNames[newDate.getDay()] );
+
+        setInterval( function() {
+            // Create a newDate() object and extract the seconds of the current time on the visitor's
+            var seconds = new Date().getSeconds();
+            // Add a leading zero to seconds value
+            $("#_sec").html(( seconds < 10 ? "0" : "" ) + seconds);
+        },1000);
+
+        setInterval( function() {
+            // Create a newDate() object and extract the minutes of the current time on the visitor's
+            var minutes = new Date().getMinutes();
+            // Add a leading zero to the minutes value
+            $("#_min").html(( (minutes < 10 ? "0" : "" ) + minutes) );
+        },1000);
+
+        setInterval( function() {
+            // Create a newDate() object and extract the hours of the current time on the visitor's
+            var hours = new Date().getHours();
+            // Add a leading zero to the hours value
+            $("#_hours").html((( hours < 10 ? "0" : "" ) + hours) );
+        }, 1000);
+    });
+</script>
+
+<style>
+.aaclock span{
+font-weight:200;
+color:#ffbf00;
+}
+.clock span{
+font-size:0.8em;
+margin-right:-4px;
+font-weight:900;
+}
+#_hours, #_min, #_sec{
+        border:1px dotted #8af;
+}
+
+</style>

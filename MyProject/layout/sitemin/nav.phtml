@@ -64,6 +64,17 @@ $arr =  array (
 );
 array_push($menu, $arr);
 
+$arr =  array (
+    'id' => '100002',
+    'parent_id' => '1',
+    'display' => file_get_contents(_X_LAYOUT."/sitemin/clock.phtml"),
+    'router' => '#',
+    'order' => '0',
+    'role' => 'public,',
+    'allowed' => 'allowed',
+    'css'=>'fr badge-container',
+);
+array_push($menu, $arr);
 
 ?>
 <div class="wrapper wrapper--nav clear <?=($current['password'] ? 'logged-in' : 'logged-out');?>">
