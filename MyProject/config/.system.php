@@ -51,6 +51,7 @@ define('_X_LAYOUT', _X_ROOT . '/layout');
 define('_X_URL_P', $_SERVER['HTTPS'] ? 'https://' : 'http://');
 define('_X_URI', $_SERVER['HTTP_HOST'] . _X_OFFSET);
 define('_X_URL', _X_URL_P._X_URI);
+define('_X_URL_ROUTER', preg_replace('/\/public\/*$/ims', '', _X_URL));
 define('_X_URL_REQUEST', _X_URL_P._X_URI.$_SERVER['REQUEST_URI']);
 
 

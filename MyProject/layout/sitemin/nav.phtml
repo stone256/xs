@@ -5,29 +5,33 @@
  * menu -- top nav bar
  */
 
-
-// create menu html
 function render_menu($menu, $level=0){
- 	foreach ($menu as $k=>$v){
- 		//not allowed router
- 		if($v['allowed'] !== 'allowed') continue;
+	foreach ($menu as $k=>$v){
+	       //external links : no permission required
+	       $v['allowed'] = ($ext = preg_match('/^http/ims', $v['router'])) ? 'allowed' : $v['allowed'];
+		//not allowed router
+		if($v['allowed'] !== 'allowed') continue;
 
- 		$con2 = $v['children'] ? render_menu($v['children'],$level+1): false;
+		$con2 = $v['children'] ? render_menu($v['children'],$level+1): false;
 
- 		//if no router and no child don not use
- 		if( !$v['router']  && ! $con2) continue;
+		//if no router and no child don not use
+		if( !$v['router']  && ! $con2) continue;
 
-
- 		$con1[] = '<li class="'.$v['css'].' mid_'.$v['id'].' pid_'.$v['parent_id'].' '.($v['children'] ?'has-sub up':'last').'">';
- 		$con1[] = $v['router'] ? "<a   href=\"{$v['router']}\" >{$v['display']} </a>" : "<a href='#'>{$v['display']} </a>";
- 		if($con2) $con1[] = $con2;
- 		$con1[] = "</li>";
- 	}
- 	$con = '<ul class="mlevel_'.$level.' '. ($level ? 'sub-menu close':'').'">';
- 	$con .= implode("\n", $con1);
- 	$con .= '</ul>';
- 	return $con1 ? $con : '';
+	       //external links
+	       $href = ($ext ? '' : _X_URL_ROUTER ).$v['router'];
+		$con1[] = '<li class="'.$v['css'].' mid_'.$v['id'].' pid_'.$v['parent_id'].' '.($v['children'] ?'has-sub up':'last').'">';
+		$con1[] = $v['router'] ? "<a   href=\"{$href}\" >{$v['display']} </a>" : "<a href='#'>{$v['display']} </a>";
+		if($con2) $con1[] = $con2;
+		$con1[] = "</li>";
+	}
+	$con = '<ul class="mlevel_'.$level.' '. ($level ? 'sub-menu close':'').'">';
+	$con .= implode("\n", $con1);
+	$con .= '</ul>';
+	return $con1 ? $con : '';
 }
+
+
+
 //check if logged in?
 $current = _factory('sitemin_model_login')->current();
 $menu=[];
