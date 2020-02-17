@@ -19,7 +19,8 @@ function render_menu($menu, $level=0){
 
 	       //external links
 	       $href = ($ext ? '' : _X_URL_ROUTER ).$v['router'];
-		$con1[] = '<li class="'.$v['css'].' mid_'.$v['id'].' pid_'.$v['parent_id'].' '.($v['children'] ?'has-sub up':'last').'">';
+	       $target = $ext ? 'target="_blank"' : '';
+	       $con1[] = '<li class="'.$v['css'].' mid_'.$v['id'].' pid_'.$v['parent_id'].' '.($v['children'] ?'has-sub up':'last').'">';
 		$con1[] = $v['router'] ? "<a   href=\"{$href}\" >{$v['display']} </a>" : "<a href='#'>{$v['display']} </a>";
 		if($con2) $con1[] = $con2;
 		$con1[] = "</li>";
