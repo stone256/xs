@@ -197,8 +197,9 @@ function allowDrop_hide(e) {
 }
 
 function drag(ev) {
-	$('#id').val(ev.target.id.match(/\d+/));
-	ev.dataTransfer.setData("text", ev.target.id);
+	var id = ev.target.id || ev.target.parentElement.id	//link before the span
+	$('#id').val(id.match(/\d+/));
+	ev.dataTransfer.setData("text", id);
 }
 
 function drop(ev, el) {
