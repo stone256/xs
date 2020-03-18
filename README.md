@@ -1,4 +1,8 @@
-WHAT IS
+!!! THIS PROJECT NOW HAS BEEN MOVED TO /CS !!! -2020-01-01
+=========
+Modules are interchangable.
+
+What Is
 =======
 xs framework is simple and fast php framework with minimum code. Idea for if you do not want write tons of code
 
